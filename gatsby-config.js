@@ -4,8 +4,8 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Contentful Starter',
-    description: 'Official Contentful Gatsby Starter',
+    title: 'Ateneo Management Information Systems Association',
+    description: 'Ateneo MISA',
   },
   plugins: [
     'gatsby-plugin-postcss',
