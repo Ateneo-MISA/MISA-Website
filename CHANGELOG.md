@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#14](https://github.com/Ateneo-MISA/MISA-Website/issues/14) about us(feature): fix hexagon image sizing
 - [KF] [#12](https://github.com/Ateneo-MISA/MISA-Website/issues/12) about us(feature): add hero frame and mission/vision frame
 - [KF] [#9](https://github.com/Ateneo-MISA/MISA-Website/issues/9) app(feature): add tailwind css
 - [KF] [#2](https://github.com/Ateneo-MISA/MISA-Website/issues/2) home page(feature): add navbar

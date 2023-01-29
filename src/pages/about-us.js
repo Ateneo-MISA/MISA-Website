@@ -35,14 +35,16 @@ const AboutUs = () => {
           <button className="items-center bg-misaTeal text-white py-2 px-4 text-xl rounded-lg m-auto text-center mb-28">
             See Our Clusters
           </button>
-          <StaticImage
-            className="block lg:hidden"
-            src="../../static/images/misahexagons.png"
-          />
+          <div className="block lg:hidden">
+            <StaticImage
+              className="w-4/6"
+              src="../../static/images/misahexagons.png"
+            />
+          </div>
         </div>
-        <div className="w-full lg:w-1/2 mb-4">
+        <div className="w-full lg:w-1/2 mb-4 hidden lg:block text-right">
           <StaticImage
-            className="hidden lg:block"
+            className="w-4/6 text-right"
             src="../../static/images/misahexagons.png"
           />
         </div>
