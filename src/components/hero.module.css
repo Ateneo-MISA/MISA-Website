@@ -1,10 +1,18 @@
-.hero {
-  align-items: flex-end;
+.heroContent {
+  padding-top: 7%;
+  color: #FFFFFF;
+}
+
+.flexrow {
   display: flex;
-  margin: 0 auto;
-  max-width: var(--size-max-width);
-  min-height: 200px;
-  padding: 0 0 var(--size-gutter);
+  flex-direction: row;
+  padding-top: 5%;
+}
+
+.hero {
+  background-image: url('/images/hero-background2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   position: relative;
 }
 
@@ -13,11 +21,17 @@
     Ensure golden ratio for the hero size while limiting it to some extend to
     the viewport width
   */
-  height: 61.8vh;
+  /* height: 61.8vh;
   max-height: 560px;
-  width: 100%;
+  width: 100%; */
+
+  /* width: 26.615vw; */
+  width: 28vw;
+  margin-left: 10%;
 }
 
+
+/* 
 .details {
   background: var(--background);
   left: 0;
@@ -39,33 +53,45 @@
   font-size: var(--text-lead);
   font-weight: var(--semibold);
   margin: 0;
-}
+} */
 
-@media (min-width: 480px) {
+/* @media (min-width: 480px) {
   .details {
     padding-top: var(--space-3xl);
   }
-}
+} */
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .hero {
     padding-top: var(--size-gutter);
   }
 
-  .details {
+  .image {
+    height: 61.8vh;
+    max-height: 560px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .flexrow {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  p { 
+    margin: 0;
+  }
+
+  /* .details {
     max-width: 44rem;
     padding: var(--space-3xl) var(--size-gutter) 0;
-  }
+  } */
 }
 
-@media (min-width: 1024px) {
-  .image {
-    margin-left: auto;
-    width: 85%;
-  }
-
+/* @media (min-width: 1024px) {
   .details {
     left: var(--size-gutter);
     padding: var(--space-3xl) var(--size-gutter) 0 0;
   }
-}
+} */
