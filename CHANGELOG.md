@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [MF] [#23](https://github.com/Ateneo-MISA/MISA-Website/issues/23) home page(feature): fix wrong font
 - [KF] [#16](https://github.com/Ateneo-MISA/MISA-Website/issues/16) specific event(feature): add initial frames, add tagline, description, and testimonials contentful integration
 - [KF] [#14](https://github.com/Ateneo-MISA/MISA-Website/issues/14) about us(feature): fix hexagon image sizing
 - [KF] [#12](https://github.com/Ateneo-MISA/MISA-Website/issues/12) about us(feature): add hero frame and mission/vision frame
