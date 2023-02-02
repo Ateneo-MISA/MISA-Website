@@ -5,14 +5,18 @@ import * as styles from './hero.module.css'
 
 const Hero = () => (
   <div className={`${styles.hero} font-abc`}>
-    <div className={`flex flex-col md:flex-row lg:flex-row pt-20 lg:ml-20 pb-20 lg:pb-10`}>
-      <div className='flex-initial justify-center'>
+    <div
+      className={`flex flex-col md:flex-row lg:flex-row pt-20 lg:ml-20 pb-20 lg:pb-10`}
+    >
+      <div className="flex-initial justify-center">
         <StaticImage
           className={`${styles.image} lg:mx-20`}
           src="../../static/images/b.png"
         />
       </div>
-      <div className={`${styles.heroContent} flex-1 text-center md:text-left lg:text-left lg:w-1/2 mx-5`}>
+      <div
+        className={`${styles.heroContent} flex-1 text-center md:text-left lg:text-left lg:w-1/2 mx-5`}
+      >
         <p className="italic text-lg md:text-xl lg:text-xl">
           Ateneo Management Information Systems Association
         </p>

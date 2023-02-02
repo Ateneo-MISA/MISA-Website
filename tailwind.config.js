@@ -18,6 +18,7 @@ module.exports = {
     },
     fontFamily: {
       abc: ['Montserrat', 'sans-serif'],
+      montserrat: ['Montserrat'],
     },
   },
   plugins: [],
