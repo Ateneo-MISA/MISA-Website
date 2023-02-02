@@ -103,4 +103,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     }
   }
+
+  const hexaCardPage = path.resolve('./src/templates/hexa-card.js')
+
+  createPage({
+    path: `/partnerships/hexa-card`,
+    component: hexaCardPage,
+  })
 }
