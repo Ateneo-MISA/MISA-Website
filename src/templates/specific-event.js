@@ -1,5 +1,7 @@
 import React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
+import BackgroundImage from 'gatsby-background-image'
+import { convertToBgImage } from 'gbimage-bridge'
 
 import Layout from '../components/layout'
 
@@ -7,10 +9,34 @@ const SpecificEvent = ({ pageContext }) => {
   const { specificEventData } = pageContext
   console.log(specificEventData)
 
+  // const image = getImage(specificEventData.gatsbyImage)
+  // console.log(image)
+  // console.log(specificEventData.gatsbyImage)
+  const bgImage = convertToBgImage(specificEventData.hero.gatsbyImage)
+
   return (
     <Layout>
       {/* Hero Image Frame */}
-      <GatsbyImage image={specificEventData.hero.gatsbyImage} />
+      <BackgroundImage
+        className="w-full h-104"
+        {...bgImage}
+        preserveStackingContext
+      >
+        <div className="font-abc pt-28 pr-0 lg:pr-24 text-center lg:text-right">
+          <h1
+            className={`font-extrabold text-5xl text-white ${
+              !specificEventData.activeRegistration ? 'pb-72' : ''
+            }`}
+          >
+            {specificEventData.title}
+          </h1>
+          {specificEventData.activeRegistration ? (
+            <button className="border-2 border-solid border-white text-xl px-4 py-2 text-white rounded mt-10 mb-48">
+              Register Now
+            </button>
+          ) : null}
+        </div>
+      </BackgroundImage>
 
       {/* Tagline and Description Frame */}
       <div className="pl-24 pt-28">
