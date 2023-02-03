@@ -7,6 +7,7 @@ Changelog Format
 -->
 
 - [MF] [#23](https://github.com/Ateneo-MISA/MISA-Website/issues/23) home page(feature): fix wrong font
+- [KF] [#20](https://github.com/Ateneo-MISA/MISA-Website/issues/20) hexa card(feature): add hexa card page and hero frame
 - [KF] [#18](https://github.com/Ateneo-MISA/MISA-Website/issues/18) specific event(feature): add hero image and active registration button contentful integration
 - [KF] [#16](https://github.com/Ateneo-MISA/MISA-Website/issues/16) specific event(feature): add initial frames, add tagline, description, and testimonials contentful integration
 - [KF] [#14](https://github.com/Ateneo-MISA/MISA-Website/issues/14) about us(feature): fix hexagon image sizing
