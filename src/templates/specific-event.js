@@ -1,8 +1,13 @@
 import React from 'react'
 import BackgroundImage from 'gatsby-background-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { convertToBgImage } from 'gbimage-bridge'
 
 import Layout from '../components/layout'
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper'
+import 'swiper/css'
 
 const SpecificEvent = ({ pageContext }) => {
   const { specificEventData } = pageContext
@@ -45,10 +50,41 @@ const SpecificEvent = ({ pageContext }) => {
       </div>
 
       {/* Highlights Frame */}
-      <div className="pt-9 pl-24 bg-[#D9E8EC]">
-        <h1 className="font-abc text-4xl text-misaTeal font-extrabold">
+      <div className="pt-9 bg-[#D9E8EC]">
+        <h1 className="font-abc text-4xl text-misaTeal font-extrabold pl-0 lg:pl-24 text-center lg:text-left">
           Highlights
         </h1>
+        <Swiper
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          breakpoints={{
+            1024: {
+              slidesPerView: '2',
+            },
+            1536: {
+              slidesPerView: '3',
+            },
+          }}
+          speed={200}
+          className="mt-7"
+          slidesPerView="1"
+          loop
+          modules={[Autoplay]}
+        >
+          {specificEventData.highlights.map((highlight) => {
+            return (
+              <SwiperSlide>
+                <GatsbyImage
+                  className="w-full h-auto"
+                  alt=""
+                  image={highlight.gatsbyImage}
+                />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
       </div>
 
       {/* Testimonials Frame */}
