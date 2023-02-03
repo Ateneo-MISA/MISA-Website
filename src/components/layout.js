@@ -13,7 +13,7 @@ class Template extends React.Component {
       <>
         <Seo />
         <Navigation />
-        <main>{children}</main>
+        <main className="font-montserrat">{children}</main>
         <Footer />
       </>
     )

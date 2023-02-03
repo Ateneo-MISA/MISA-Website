@@ -1,5 +1,4 @@
 import React from 'react'
-import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import BackgroundImage from 'gatsby-background-image'
 import { convertToBgImage } from 'gbimage-bridge'
 
@@ -7,11 +6,6 @@ import Layout from '../components/layout'
 
 const SpecificEvent = ({ pageContext }) => {
   const { specificEventData } = pageContext
-  console.log(specificEventData)
-
-  // const image = getImage(specificEventData.gatsbyImage)
-  // console.log(image)
-  // console.log(specificEventData.gatsbyImage)
   const bgImage = convertToBgImage(specificEventData.hero.gatsbyImage)
 
   return (
