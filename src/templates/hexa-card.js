@@ -2,8 +2,13 @@ import React from 'react'
 
 import Layout from '../components/layout'
 import { StaticImage } from 'gatsby-plugin-image'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import moment from 'moment'
 
-const HexaCard = () => {
+const HexaCard = ({ pageContext }) => {
+  const hexaCardData = pageContext.hexaCardData
+  
+
   return (
     <Layout>
       {/* Hero Frame */}
@@ -29,11 +34,36 @@ const HexaCard = () => {
 
       {/* HEXA Card Partners Frame */}
       <div className="font-abc">
-        <div className="ml-24">
+        <div className="text-center md:text-left lg:text-left md:ml-24 lg:ml-24">
           <h1 className="text-5xl font-extrabold mt-20">
             <span className="text-misaTeal">HEXA Card</span> Partners
           </h1>
         </div>
+      </div>
+
+      <div className="flex flex-col min-[1160px]:flex-row items-center lg:justify-around">
+        {hexaCardData.map((partner) => {
+          return (
+            <div className="bg-[url('../../static/images/hexacard.png')] bg-cover bg-no-repeat w-[496px] h-[233px] py-10 pl-8 pr-14 md:m-5 lg:m-10 scale-75 md:scale-100 lg:scale-[110%] lg:hover:scale-[115%] text-white">
+              <div className="flex flex-row ">
+                <div className="flex-none w-1/3 mt-2 mr-5">
+                  <GatsbyImage
+                    image={partner.partnerLogo.gatsbyImage}
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-extrabold">
+                    {partner.partnerName}
+                  </h3>
+                  <p className="text-base overflow-clip h-[100px]">{partner.benefits}</p>
+                  <p className="text-base">
+                    {moment(partner.startDate).format('MMM D, YYYY')} -- {moment(partner.endDate).format('MMM D, YYYY')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </Layout>
   )
