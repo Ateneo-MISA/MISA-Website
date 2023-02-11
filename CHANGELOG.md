@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#33](https://github.com/Ateneo-MISA/MISA-Website/issues/33) hexa card(feature): add options for hexa card filters
 - [KF] [#31](https://github.com/Ateneo-MISA/MISA-Website/issues/31) app(feature): fix file structure
 - [MF] [#29](https://github.com/Ateneo-MISA/MISA-Website/issues/29) hexa card(feature): add hexa card
 - [KF] [#27](https://github.com/Ateneo-MISA/MISA-Website/issues/27) specific event(feature): add highlights frame and contentful integration

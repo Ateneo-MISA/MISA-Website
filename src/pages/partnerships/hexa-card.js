@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 
 import Layout from '../../components/layout'
@@ -7,7 +7,32 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import moment from 'moment'
 
 const HexaCard = ({ data }) => {
+  const [selected, setSelected] = useState('All')
+
   const hexaCardData = data.allContentfulHexaCard.nodes
+  let finalHexaCardData = []
+  for (let i = 0; i < hexaCardData.length; i++) {
+    let categories = []
+    for (let j = 0; j < hexaCardData[i].category.length; j++) {
+      categories.push(hexaCardData[i].category[j].name)
+    }
+    finalHexaCardData.push({
+      ...hexaCardData[i],
+      categories,
+    })
+  }
+
+  const filteredData = finalHexaCardData.filter((hexaCardPartner) => {
+    return selected === 'All'
+      ? true
+      : hexaCardPartner?.categories?.includes(selected)
+  })
+
+  const categoryData = data.allContentfulCategory.nodes
+  let finalCategoryData = ['All']
+  for (let i = 0; i < categoryData.length; i++) {
+    finalCategoryData.push(categoryData[i].name)
+  }
 
   return (
     <Layout>
@@ -34,15 +59,37 @@ const HexaCard = ({ data }) => {
 
       {/* HEXA Card Partners Frame */}
       <div className="font-abc">
-        <div className="text-center md:text-left lg:text-left md:ml-24 lg:ml-24">
+        <div className="text-left mx-12 md:mx-24">
           <h1 className="text-5xl font-extrabold mt-20">
             <span className="text-misaTeal">HEXA Card</span> Partners
           </h1>
         </div>
       </div>
 
+      {/* Options */}
+      <div className="flex gap-4 my-4 flex-wrap text-center mx-12 md:mx-24">
+        {finalCategoryData.map((header, index) => {
+          return (
+            <div
+              className={`${
+                selected === header
+                  ? 'bg-[#2096A1] text-white'
+                  : 'text-[#2096A1] bg-[#D9E8EC]'
+              } py-2 px-4 rounded-xl hover:cursor-pointer hover:bg-[#2096A1] hover:text-white duration-200`}
+              onClick={() => setSelected(header)}
+              key={index}
+            >
+              {header}
+            </div>
+          )
+        })}
+      </div>
+      {filteredData?.length == 0 && (
+        <div className="pl-24 ">No partners of such category</div>
+      )}
+
       <div className="flex flex-col min-[1160px]:flex-row items-center lg:justify-around">
-        {hexaCardData.map((partner) => {
+        {filteredData.map((partner) => {
           return (
             <div className="bg-[url('../../static/images/hexacard.png')] bg-cover bg-no-repeat w-[496px] h-[233px] py-10 pl-8 pr-14 md:m-5 lg:m-10 scale-75 md:scale-100 lg:scale-[110%] lg:hover:scale-[115%] text-white">
               <div className="flex flex-row ">
@@ -57,7 +104,7 @@ const HexaCard = ({ data }) => {
                     {partner.benefits}
                   </p>
                   <p className="text-base">
-                    {moment(partner.startDate).format('MMM D, YYYY')} --{' '}
+                    {moment(partner.startDate).format('MMM D, YYYY')} -{' '}
                     {moment(partner.endDate).format('MMM D, YYYY')}
                   </p>
                 </div>
@@ -74,8 +121,16 @@ export default HexaCard
 
 export const pageQuery = graphql`
   query MyQuery {
+    allContentfulCategory {
+      nodes {
+        name
+      }
+    }
     allContentfulHexaCard {
       nodes {
+        category {
+          name
+        }
         benefits
         partnerName
         partnerLogo {
