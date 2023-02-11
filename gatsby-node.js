@@ -115,8 +115,57 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const hexaCardPage = path.resolve('./src/templates/hexa-card.js')
 
+  // query MyQuery {
+  //   allContentfulHexaCard {
+  //     nodes {
+  //       benefits
+  //       endDate
+  //       startDate
+  //       partnerName
+  //     }
+  //   }
+  // }
+
+  const hexaCardResult = await graphql(`
+    query MyQuery {
+      allContentfulHexaCard {
+        nodes {
+          benefits
+          partnerName
+          partnerLogo {
+            gatsbyImage(
+              aspectRatio: 1.5
+              backgroundColor: ""
+              breakpoints: 10
+              cropFocus: CENTER
+              fit: COVER
+              formats: AUTO
+              height: 130
+              layout: FIXED
+              outputPixelDensities: 1.5
+              placeholder: DOMINANT_COLOR
+              quality: 10
+              sizes: ""
+              width: 130
+            )
+            file {
+              url
+            }
+          }
+          startDate
+          endDate
+        }
+      }
+    }
+  `)
+
+  const hexaCardPartner = hexaCardResult.data.allContentfulHexaCard.nodes
+
   createPage({
     path: `/partnerships/hexa-card`,
     component: hexaCardPage,
+    context: {
+      hexaCardData: hexaCardPartner,
+    },
   })
 }
