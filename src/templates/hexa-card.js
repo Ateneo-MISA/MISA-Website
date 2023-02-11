@@ -41,10 +41,6 @@ const HexaCard = ({ pageContext }) => {
         </div>
       </div>
 
-      {console.log(hexaCardData)}
-
-      {console.log(hexaCardData[0].partnerLogo.file)}
-
       <div className="flex flex-col min-[1160px]:flex-row items-center lg:justify-around">
         {hexaCardData.map((partner) => {
           return (
