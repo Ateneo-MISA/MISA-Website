@@ -3,6 +3,8 @@ import React from 'react'
 import Layout from '../components/layout'
 import { StaticImage } from 'gatsby-plugin-image'
 
+import Button from '../components/Elements/button'
+
 const AboutUs = () => {
   let dateToday = new Date().getFullYear()
   let currentMisaYear = dateToday - 1994
@@ -32,9 +34,10 @@ const AboutUs = () => {
             </span>
           </p>
 
-          <button className="items-center bg-misaTeal text-white py-2 px-4 text-xl rounded-lg m-auto text-center mb-28">
+          <Button variant="primary" className="items-center text-center mb-28">
             See Our Clusters
-          </button>
+          </Button>
+
           <div className="block lg:hidden">
             <StaticImage
               className="w-4/6"

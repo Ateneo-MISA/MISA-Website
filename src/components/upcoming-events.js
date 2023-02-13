@@ -2,18 +2,15 @@ import React from 'react'
 import { useState } from 'react'
 import moment from 'moment'
 
-function UpcomingEvents({ events }) {
+import FilterBar from './Elements/filterBar'
+
+function UpcomingEvents({ clusters, events }) {
   const [selected, setSelected] = useState('All')
-  const departmentHeaders = [
-    'All',
-    'OET',
-    'OSG',
-    'COMMS',
-    'eServices',
-    'Events',
-    'HR',
-    'Marketing',
-  ]
+
+  let departmentHeaders = ['All']
+  for (let i = 0; i < clusters.length; i++) {
+    departmentHeaders.push(clusters[i].name)
+  }
 
   // display current month and filter events by month
   const currentDate = new Date()
@@ -110,23 +107,11 @@ function UpcomingEvents({ events }) {
           <span className="text-[#2097A2]">{currentMonthName}</span> Events
         </div>
       </h2>
-      <div className="flex gap-4 my-4 flex-wrap">
-        {departmentHeaders.map((header, index) => {
-          return (
-            <div
-              className={`${
-                selected === header
-                  ? 'bg-[#2096A1] text-white'
-                  : 'text-[#2096A1] bg-[#D9E8EC]'
-              } py-2 px-4 rounded-xl hover:cursor-pointer hover:bg-[#2096A1] hover:text-white duration-200`}
-              onClick={() => setSelected(header)}
-              key={index}
-            >
-              {header}
-            </div>
-          )
-        })}
-      </div>
+      <FilterBar
+        options={departmentHeaders}
+        setSelected={setSelected}
+        selected={selected}
+      />
       {!checkIfEmpty.includes(1) && <div>No events</div>}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
         {filteredData?.map((day, index) => {

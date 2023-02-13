@@ -6,6 +6,9 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import moment from 'moment'
 
+import Button from '../../components/Elements/button'
+import FilterBar from '../../components/Elements/filterBar'
+
 const HexaCard = ({ data }) => {
   const [selected, setSelected] = useState('All')
 
@@ -51,9 +54,9 @@ const HexaCard = ({ data }) => {
             offers exclusive to members of MISA! So what are you waiting for?
             Meet our partners now!
           </p>
-          <button className="items-center bg-misaTeal text-white py-2 px-4 text-xl rounded-lg m-auto text-center mb-36">
+          <Button variant="primary" className="items-center text-center mb-36">
             Learn More
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -67,24 +70,14 @@ const HexaCard = ({ data }) => {
       </div>
 
       {/* Options */}
-      <div className="flex gap-4 my-4 flex-wrap text-center mx-12 md:mx-24">
-        {finalCategoryData.map((header, index) => {
-          return (
-            <div
-              className={`${
-                selected === header
-                  ? 'bg-[#2096A1] text-white'
-                  : 'text-[#2096A1] bg-[#D9E8EC]'
-              } py-2 px-4 rounded-xl hover:cursor-pointer hover:bg-[#2096A1] hover:text-white duration-200`}
-              onClick={() => setSelected(header)}
-              key={index}
-            >
-              {header}
-            </div>
-          )
-        })}
-      </div>
-      {filteredData?.length == 0 && (
+      <FilterBar
+        className="mx-12 md:mx-24"
+        options={finalCategoryData}
+        setSelected={setSelected}
+        selected={selected}
+      />
+
+      {filteredData?.length === 0 && (
         <div className="text-center mt-9">No partners of such category</div>
       )}
 
@@ -94,7 +87,10 @@ const HexaCard = ({ data }) => {
             <div className="bg-[url('../../static/images/hexacard.png')] bg-cover bg-no-repeat w-[596px] h-[280px] py-10 pl-8 pr-14 md:m-5 lg:m-10 max-[557px]:ml-0 max-[500px]:scale-[56%] scale-75 md:scale-100 lg:scale-[110%] lg:hover:scale-[115%] text-white">
               <div className="flex flex-row ">
                 <div className="flex-none w-1/3 ml-6 mt-8">
-                  <GatsbyImage className='scale-[120%]' image={partner.partnerLogo.gatsbyImage} />
+                  <GatsbyImage
+                    className="scale-[120%]"
+                    image={partner.partnerLogo.gatsbyImage}
+                  />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-extrabold">

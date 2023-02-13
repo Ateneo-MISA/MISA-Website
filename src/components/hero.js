@@ -3,6 +3,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 import * as styles from './hero.module.css'
 
+import Button from './Elements/button'
+
 const Hero = () => (
   <div className={`${styles.hero} font-abc`}>
     <div
@@ -23,15 +25,10 @@ const Hero = () => (
         <h2 className="text-4xl lg:text-5xl font-extrabold w-full lg:w-4/5">
           We build tomorrow through Business Technology
         </h2>
-        <button
-          className="bg-[#D9E8EC] text-[#2097A2] py-2.5 px-5 rounded-md mt-6 mr-6"
-          type="button"
-        >
+        <Button className="mt-6 mr-6" variant="secondary">
           Work with us!
-        </button>
-        <button className="border-2 rounded-md py-2.5 px-5" type="button">
-          Events
-        </button>
+        </Button>
+        <Button variant="tertiary">Events</Button>
       </div>
     </div>
   </div>

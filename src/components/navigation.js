@@ -4,6 +4,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
+import Button from './Elements/button'
+
 const Navigation = () => {
   const handleBurgerClick = () => {
     let navbarItems = document.getElementById('navbarItems')
@@ -18,7 +20,7 @@ const Navigation = () => {
 
   return (
     <nav
-      className="lg:h-16 shadow-md bg-white lg:flex lg:items-center lg:justify-between transition-all ease-in duration-200"
+      className="text-abc lg:h-16 shadow-md bg-white lg:flex lg:items-center lg:justify-between transition-all ease-in duration-200"
       role="navigation"
       aria-label="Main"
     >
@@ -41,9 +43,9 @@ const Navigation = () => {
         id="navbarItems"
         className="hidden lg:flex lg:items-center font-abc text-navbarBlack transition-all ease-in duration-200"
       >
-        <li className="mx-4 lg:mr-12 my-4 text-base text-center w-full text-center whitespace-nowrap">
+        <li className="text-abc mx-4 lg:mr-12 my-4 text-base text-center w-full text-center whitespace-nowrap">
           <Link
-            className="hover:text-misaTeal duration-200"
+            className="hover:text-misaTeal duration-200 text-abc"
             to="/about-us"
             activeClassName="text-misaTeal"
           >
