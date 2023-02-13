@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import 'swiper/css'
 
+import Button from '../components/Elements/button'
+
 const SpecificEvent = ({ pageContext }) => {
   const { specificEventData } = pageContext
   const bgImage = convertToBgImage(specificEventData.hero.gatsbyImage)
@@ -24,15 +26,16 @@ const SpecificEvent = ({ pageContext }) => {
         <div className="font-abc pt-28 pr-0 lg:pr-24 text-center lg:text-right">
           <h1
             className={`font-extrabold text-5xl text-white ${
-              !specificEventData.activeRegistration ? 'pb-72' : ''
+              specificEventData.activeRegistration ? '' : 'pb-96'
             }`}
           >
             {specificEventData.title}
           </h1>
+
           {specificEventData.activeRegistration ? (
-            <button className="border-2 border-solid border-white text-xl px-4 py-2 text-white rounded mt-10 mb-48">
+            <Button variant="tertiary" className="mt-9 mb-48">
               Register Now
-            </button>
+            </Button>
           ) : null}
         </div>
       </BackgroundImage>
@@ -92,40 +95,22 @@ const SpecificEvent = ({ pageContext }) => {
         <h1 className="font-abc text-3xl sm:text-4xl font-extrabold mb-6 text-center lg:text-left">
           Testimonials
         </h1>
-        <div className="flex-none lg:flex">
-          <div className="w-full lg:w-1/3 mr-16 text-center lg:text-left">
-            <p className="mb-6 text-xl">
-              {specificEventData.testimonials[0].body.body}
-            </p>
-            <h1 className="text-xl font-extrabold">
-              {specificEventData.testimonials[0].fullName}
-            </h1>
-            <h1 className="text-xl font-extrabold mb-16 lg:mb-0">
-              {specificEventData.testimonials[0].eventAndYear}
-            </h1>
-          </div>
-          <div className="w-full lg:w-1/3 mr-16 text-center lg:text-left">
-            <p className="mb-6 text-xl">
-              {specificEventData.testimonials[1].body.body}
-            </p>
-            <h1 className="text-xl font-extrabold">
-              {specificEventData.testimonials[1].fullName}
-            </h1>
-            <h1 className="text-xl font-extrabold mb-16 lg:mb-0">
-              {specificEventData.testimonials[1].eventAndYear}
-            </h1>
-          </div>
-          <div className="w-full lg:w-1/3 mr-16 text-center lg:text-left">
-            <p className="mb-6 text-xl">
-              {specificEventData.testimonials[2].body.body}
-            </p>
-            <h1 className="text-xl font-extrabold">
-              {specificEventData.testimonials[2].fullName}
-            </h1>
-            <h1 className="text-xl font-extrabold">
-              {specificEventData.testimonials[2].eventAndYear}
-            </h1>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12 text-[#282828]">
+          {specificEventData.testimonials.map((testimonial) => {
+            return (
+              <div>
+                <p className="mb-6 text-xl text-justify italic">
+                  {testimonial.body.body}
+                </p>
+                <h1 className="text-2xl font-extrabold">
+                  {testimonial.fullName}
+                </h1>
+                <h1 className="text-2xl font-extrabold mb-16 lg:mb-0">
+                  {testimonial.eventAndYear}
+                </h1>
+              </div>
+            )
+          })}
         </div>
       </div>
     </Layout>

@@ -9,11 +9,12 @@ import UpcomingEvents from '../components/upcoming-events'
 class RootIndex extends React.Component {
   render() {
     const events = get(this, 'props.data.allContentfulEvent.nodes')
+    const clusters = get(this, 'props.data.allContentfulCluster.nodes')
 
     return (
       <Layout location={this.props.location}>
         <Hero />
-        <UpcomingEvents events={events} />
+        <UpcomingEvents events={events} clusters={clusters} />
       </Layout>
     )
   }
@@ -34,6 +35,11 @@ export const pageQuery = graphql`
         clusters {
           name
         }
+      }
+    }
+    allContentfulCluster {
+      nodes {
+        name
       }
     }
   }
