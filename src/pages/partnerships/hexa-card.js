@@ -37,9 +37,9 @@ const HexaCard = ({ data }) => {
   return (
     <Layout>
       {/* Hero Frame */}
-      <div className="bg-navbarBlack flex-none 2xl:flex">
+      <div className="bg-navbarBlack flex-none 2xl:flex text-center">
         <StaticImage
-          className="pl-24 pr-24 pt-48 w-full 2xl:w-2/3"
+          className="px-32 ml-0 mt-12 lg:mt-0 lg:ml-32 pt-48 w-1/2 2xl:w-2/3"
           src="../../../static/images/hexacardhero.png"
         />
         <div className="font-abc mr-0 2xl:mr-28 mt-4 2xl:mt-36 text-center 2xl:text-left px-24 2xl:px-0">
@@ -85,22 +85,22 @@ const HexaCard = ({ data }) => {
         })}
       </div>
       {filteredData?.length == 0 && (
-        <div className="pl-24 ">No partners of such category</div>
+        <div className="text-center mt-9">No partners of such category</div>
       )}
 
-      <div className="flex flex-col min-[1160px]:flex-row items-center lg:justify-around">
+      <div className="flex sm:flex-wrap flex-col min-[1160px]:flex-row items-center lg:justify-around">
         {filteredData.map((partner) => {
           return (
-            <div className="bg-[url('../../static/images/hexacard.png')] bg-cover bg-no-repeat w-[496px] h-[233px] py-10 pl-8 pr-14 md:m-5 lg:m-10 scale-75 md:scale-100 lg:scale-[110%] lg:hover:scale-[115%] text-white">
+            <div className="bg-[url('../../static/images/hexacard.png')] bg-cover bg-no-repeat w-[596px] h-[280px] py-10 pl-8 pr-14 md:m-5 lg:m-10 max-[557px]:ml-0 max-[500px]:scale-[56%] scale-75 md:scale-100 lg:scale-[110%] lg:hover:scale-[115%] text-white">
               <div className="flex flex-row ">
-                <div className="flex-none w-1/3 mt-2 mr-5">
-                  <GatsbyImage image={partner.partnerLogo.gatsbyImage} />
+                <div className="flex-none w-1/3 ml-6 mt-8">
+                  <GatsbyImage className='scale-[120%]' image={partner.partnerLogo.gatsbyImage} />
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-extrabold">
                     {partner.partnerName}
                   </h3>
-                  <p className="text-base overflow-clip h-[100px]">
+                  <p className="text-base overflow-clip h-[140px]">
                     {partner.benefits}
                   </p>
                   <p className="text-base">
