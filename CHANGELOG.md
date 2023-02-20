@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#41](https://github.com/Ateneo-MISA/MISA-Website/issues/41) voting(feature): add initial logic
 - [MF] [#39](https://github.com/Ateneo-MISA/MISA-Website/issues/39) about us(feature): add core values
 - [KF] [#37](https://github.com/Ateneo-MISA/MISA-Website/issues/37) app(feature): add universal components
 - [MF] [#35](https://github.com/Ateneo-MISA/MISA-Website/issues/35) hexa card(feature): fix hexa card design
