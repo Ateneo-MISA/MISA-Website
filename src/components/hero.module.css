@@ -1,6 +1,6 @@
 .heroContent {
   padding-top: 7%;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .flexrow {
@@ -29,7 +29,6 @@
   width: 28vw;
   margin-left: 10%;
 }
-
 
 /* 
 .details {
@@ -68,7 +67,7 @@
 
   .image {
     height: 61.8vh;
-    max-height: 560px;
+    max-height: 450px;
     width: 100%;
     margin: 0;
   }
@@ -79,7 +78,7 @@
     text-align: center;
   }
 
-  p { 
+  p {
     margin: 0;
   }
 

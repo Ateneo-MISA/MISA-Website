@@ -12,8 +12,9 @@ const Hero = () => (
     >
       <div className="flex-initial justify-center">
         <StaticImage
+          quality={100}
           className={`${styles.image} lg:mx-20`}
-          src="../../static/images/b.png"
+          src="../../static/images/misabot.png"
         />
       </div>
       <div
