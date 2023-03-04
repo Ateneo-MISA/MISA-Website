@@ -4,8 +4,6 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-import Button from './Elements/button'
-
 const Navigation = () => {
   const handleBurgerClick = () => {
     let navbarItems = document.getElementById('navbarItems')
@@ -27,9 +25,9 @@ const Navigation = () => {
       <div className="flex items-center justify-between">
         <Link to="/">
           <StaticImage
-            className="mx-6 my-6 ml-8"
-            src="../../static/images/misanavbarlogo.png"
-            width={185}
+            className="mx-6 my-6 ml-8 w-[75%]"
+            src="../../static/images/navbarlogo.png"
+            quality={100}
           />
         </Link>
         <FontAwesomeIcon

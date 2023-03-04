@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import moment from 'moment'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import FilterBar from './Elements/filterBar'
 
@@ -96,106 +97,118 @@ function UpcomingEvents({ clusters, events }) {
   // a department has no events at all
   // if none, it will display "No events"
   const checkIfEmpty = filteredData.map((data) => {
+    console.log(data)
     return data.events.length
   })
 
   return (
-    <div className="mx-12 md:mx-24">
-      <h2 className="text-4xl font-extrabold mt-24">
-        Upcoming{' '}
-        <div>
-          <span className="text-[#2097A2]">{currentMonthName}</span> Events
-        </div>
-      </h2>
-      <FilterBar
-        options={departmentHeaders}
-        setSelected={setSelected}
-        selected={selected}
+    <div className="relative overflow-hidden pb-28">
+      <StaticImage
+        quality={100}
+        className="absolute right-[-50px] bottom-[-20px] w-[20%]"
+        src="../../static/images/eventshexagons.png"
       />
-      {!checkIfEmpty.includes(1) && <div>No events</div>}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
-        {filteredData?.map((day, index) => {
-          const { date, events } = day
-          const weekday = [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-          ]
-          const d = new Date(Date.parse(date))
 
-          // display nothing if there are no events for this date
-          if (events.length === 0) return null
+      <div className="mx-12 md:mx-24">
+        <h2 className="text-4xl font-extrabold mt-24">
+          Upcoming{' '}
+          <div>
+            <span className="text-[#2097A2]">{currentMonthName}</span> Events
+          </div>
+        </h2>
+        <FilterBar
+          options={departmentHeaders}
+          setSelected={setSelected}
+          selected={selected}
+        />
+        {checkIfEmpty < 1 && <div>No events</div>}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
+          {filteredData?.map((day, index) => {
+            const { date, events } = day
+            const weekday = [
+              'Sunday',
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+            ]
+            const d = new Date(Date.parse(date))
 
-          return (
-            <div key={index}>
-              <div className="flex justify-between items-center border-b-4 border-[#279DA7] pb-2">
-                <p className="text-[#2096A1] font-bold text-4xl">
-                  {d.getDate()}
-                </p>
-                <p className="font-thin">{weekday[d.getDay()]}</p>
-              </div>
-              {events?.map((event, index) => {
-                const { title, location, finalClusters, link } = event
+            // display nothing if there are no events for this date
+            if (events.length === 0) return null
 
-                let { startTime, endTime } = event
-                let time
-                let startTimeTester = moment(startTime).format('h:mm a')
-                let endTimeTester = moment(endTime).format('h:mm a')
+            return (
+              <div key={index}>
+                <div className="flex justify-between items-center border-b-4 border-[#279DA7] pb-2">
+                  <p className="text-[#2096A1] font-bold text-4xl">
+                    {d.getDate()}
+                  </p>
+                  <p className="font-thin">{weekday[d.getDay()]}</p>
+                </div>
+                {events?.map((event, index) => {
+                  const { title, location, finalClusters, link } = event
 
-                if (
-                  (startTimeTester.includes('am') &&
-                    endTimeTester.includes('am')) ||
-                  (startTimeTester.includes('pm') &&
-                    endTimeTester.includes('pm'))
-                ) {
-                  time = `${moment(startTime).format('h:mm')} - ${moment(
-                    endTime
-                  ).format('h:mm a')}`
-                } else {
-                  time = `${startTimeTester} - ${endTimeTester}`
-                }
+                  let { startTime, endTime } = event
+                  let time
+                  let startTimeTester = moment(startTime).format('h:mm a')
+                  let endTimeTester = moment(endTime).format('h:mm a')
 
-                return (
-                  <div
-                    className="grid grid-cols-[2fr_1fr] my-4 relative"
-                    key={index}
-                  >
-                    <div className="grid gap-2">
-                      <h3>{title}</h3>
-                      <div className="text-[#4995A0]">
-                        <p>{location}</p>
-                        <p className="font-thin">{time}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        {finalClusters.map((department, index) => {
-                          return (
-                            <div
-                              className="font-thin rounded-xl border-[#2097A2] text-[#2097A2] border-[1px] max-w-max py-1 px-3"
-                              key={index}
-                            >
-                              {department}
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                    <a
-                      href={link}
-                      target="_blank"
-                      className="w-8 h-8 absolute right-0 hover:scale-125 duration-150"
+                  if (
+                    (startTimeTester.includes('am') &&
+                      endTimeTester.includes('am')) ||
+                    (startTimeTester.includes('pm') &&
+                      endTimeTester.includes('pm'))
+                  ) {
+                    time = `${moment(startTime).format('h:mm')} - ${moment(
+                      endTime
+                    ).format('h:mm a')}`
+                  } else {
+                    time = `${startTimeTester} - ${endTimeTester}`
+                  }
+
+                  return (
+                    <div
+                      className="grid grid-cols-[2fr_1fr] my-4 relative"
+                      key={index}
                     >
-                      <img src="/external-link.svg" alt={`Link to ${title}`} />
-                    </a>
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
+                      <div className="grid gap-2">
+                        <h3>{title}</h3>
+                        <div className="text-[#4995A0]">
+                          <p>{location}</p>
+                          <p className="font-thin">{time}</p>
+                        </div>
+                        <div className="flex gap-2">
+                          {finalClusters.map((department, index) => {
+                            return (
+                              <div
+                                className="font-thin rounded-xl border-[#2097A2] text-[#2097A2] border-[1px] max-w-max py-1 px-3"
+                                key={index}
+                              >
+                                {department}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                      <a
+                        href={link}
+                        target="_blank"
+                        className="w-8 h-8 absolute right-0 hover:scale-125 duration-150"
+                      >
+                        <img
+                          src="/external-link.svg"
+                          alt={`Link to ${title}`}
+                        />
+                      </a>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

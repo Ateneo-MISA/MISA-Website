@@ -13,30 +13,39 @@ const AboutUs = () => {
     <Layout>
       {/* first frame */}
       <div className="flex-none lg:flex pl-24 pt-24 bg-navbarBlack font-abc">
-        <div className="mr-0 lg:mr-36 text-white w-full lg:w-1/2 pr-24 lg:pr-0 items-center text-center lg:text-left pb-28">
-          <h1 className="text-5xl mb-6 font-extrabold">
-            Who <span className="text-misaAlternateTeal">MISA</span> is
-          </h1>
-          <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
-            We are the{' '}
-            <span className="text-misaAlternateTeal">
-              Management Information Systems Association (MISA)
-            </span>
-            , the Ateneo Loyola Schools’ premier information management
-            organization which serves as a home for MIS majors and like-minded
-            IT enthusiasts.
-          </p>
-          <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
-            Founded in 1994, it is now on its {currentMisaYear}th year of
-            pursuing its main advocacy –{' '}
-            <span className="text-misaAlternateTeal">
-              social transformation through information management.
-            </span>
-          </p>
+        <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-center lg:text-left pb-28 relative">
+          <StaticImage
+            className="hidden lg:block absolute right-[-100px] bottom-[-15px] w-[40%]"
+            src="../../static/images/misahexagons.png"
+          />
+          <div className="w-full lg:w-2/3">
+            <h1 className="text-5xl mb-6 font-extrabold">
+              Who <span className="text-misaAlternateTeal">MISA</span> is
+            </h1>
+            <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
+              We are the{' '}
+              <span className="text-misaAlternateTeal">
+                Management Information Systems Association (MISA)
+              </span>
+              , the Ateneo Loyola Schools’ premier information management
+              organization which serves as a home for MIS majors and like-minded
+              IT enthusiasts.
+            </p>
+            <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
+              Founded in 1994, it is now on its {currentMisaYear}th year of
+              pursuing its main advocacy –{' '}
+              <span className="text-misaAlternateTeal">
+                social transformation through information management.
+              </span>
+            </p>
 
-          <Button variant="primary" className="items-center text-center mb-28">
-            See Our Clusters
-          </Button>
+            <Button
+              variant="primary"
+              className="items-center text-center mb-28"
+            >
+              See Our Clusters
+            </Button>
+          </div>
 
           <div className="block lg:hidden">
             <StaticImage
@@ -45,40 +54,40 @@ const AboutUs = () => {
             />
           </div>
         </div>
-        <div className="w-full lg:w-1/2 mb-4 hidden lg:block text-right">
-          <StaticImage
-            className="w-4/6 text-right"
-            src="../../static/images/misahexagons.png"
-          />
-        </div>
       </div>
 
       {/* second frame */}
       <div className="flex-none lg:flex py-24 px-20 font-abc">
         <div className="mr-20 w-full lg:w-1/2 sm:w-full text-center">
-          <h1 className="text-5xl text-black font-extrabold">Vision</h1>
+          <h1 className="text-5xl text-black font-extrabold mb-14">Vision</h1>
           <StaticImage
-            width={240}
-            height={190}
-            src="../../static/images/misabinocular.png"
+            className="w-1/2 lg:w-1/4 mb-5"
+            quality={100}
+            src="../../static/images/misavision.png"
           />
-          <p className="text-[#282828] italic">
-            We aim to inform, form, and to transform the society through
-            proactive engagement in projects utilizing information technology as
-            a tool towards effective information management.
+          <p className="text-[#282828] italic text-xl">
+            We aim to{' '}
+            <span className="font-bold">inform, form, and to transform</span>{' '}
+            the society through proactive engagement in projects utilizing
+            information technology as a tool towards effective information
+            management.
           </p>
         </div>
         <div className="w-full lg:w-1/2 mt-48 lg:mt-0 text-center items-center">
-          <h1 className="text-5xl text-black font-extrabold">Mission</h1>
+          <h1 className="text-5xl text-black font-extrabold mb-14">Mission</h1>
           <StaticImage
-            width={240}
-            height={190}
-            src="../../static/images/misamountain.png"
+            className="w-full lg:w-1/2 mb-5"
+            quality={100}
+            src="../../static/images/misamission.png"
           />
-          <p className="text-[#282828] italic ">
-            We aim to become the leading student-organization of information
-            management professionals leveraging our skills on information
-            technology for our pursuit of excellence and nation building.
+          <p className="text-[#282828] italic text-xl">
+            We aim to become the{' '}
+            <span className="font-bold">
+              leading student-organization of information management
+              professionals
+            </span>{' '}
+            leveraging our skills on information technology for our pursuit of
+            excellence and nation building.
           </p>
         </div>
       </div>
@@ -137,9 +146,12 @@ const AboutUs = () => {
 
         <div className="flex justify-center py-10">
           <p className="w-2/3 text-center text-xl">
-            We provide a fun learning environment for our members to help them
-            fully realize their potential as individuals and as catalysts of
-            change through information management and information technology.
+            We provide a fun learning environment for our members to help them{' '}
+            <span className="font-bold text-misaTeal">
+              fully realize their potential as individuals and as catalysts of
+              change
+            </span>{' '}
+            through information management and information technology.
           </p>
         </div>
       </div>
