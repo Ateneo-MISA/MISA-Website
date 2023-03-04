@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import { VoteContext } from '../../pages/vote'
+import React from 'react'
 
 import Button from '../Elements/button'
 
