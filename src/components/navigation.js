@@ -25,7 +25,7 @@ const Navigation = () => {
       <div className="flex items-center justify-between">
         <Link to="/">
           <StaticImage
-            className="mx-6 my-6 ml-8 w-[75%]"
+            className="mx-6 my-6 ml-8 w-[143px] h-[25px]"
             src="../../static/images/navbarlogo.png"
             quality={100}
           />

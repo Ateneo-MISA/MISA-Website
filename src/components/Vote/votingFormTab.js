@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import RadioInput from '../Elements/radioInput'
 import Button from '../Elements/button'
 
 const VotingFormTab = ({ voteState, voteDispatch, positionsData }) => {
