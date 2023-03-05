@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Button from '../Elements/button'
+import Button from '../Elements/Button'
 
 const VotingFormTab = ({ voteState, voteDispatch, positionsData }) => {
   let candidates = voteState?.candidatesData

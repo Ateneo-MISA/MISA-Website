@@ -3,7 +3,7 @@ import React from 'react'
 import EligibilityTab from './EligiblityTab'
 import VotingFormTab from './VotingFormTab'
 import SubmitTab from './SubmitTab'
-import FinishTab from './finishTab'
+import FinishTab from './FinishTab'
 
 const ActiveTab = ({ activeTab, voteState, voteDispatch, positionsData }) => {
   switch (activeTab) {

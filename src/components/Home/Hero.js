@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 import * as styles from './utils/hero.module.css'
 
-import Button from '../Elements/button'
+import Button from '../Elements/Button'
 
 const Hero = () => (
   <div className={`${styles.hero} font-abc`}>
