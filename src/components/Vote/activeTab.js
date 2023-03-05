@@ -1,8 +1,8 @@
 import React from 'react'
 
-import EligibilityTab from './eligibilityTab'
-import VotingFormTab from './votingFormTab'
-import SubmitTab from './submitTab'
+import EligibilityTab from './EligiblityTab'
+import VotingFormTab from './VotingFormTab'
+import SubmitTab from './SubmitTab'
 import FinishTab from './finishTab'
 
 const ActiveTab = ({ activeTab, voteState, voteDispatch, positionsData }) => {

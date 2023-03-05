@@ -3,7 +3,7 @@ import { useState } from 'react'
 import moment from 'moment'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import FilterBar from './Elements/filterBar'
+import FilterBar from '../Elements/filterBar'
 
 function UpcomingEvents({ clusters, events }) {
   const [selected, setSelected] = useState('All')
@@ -106,7 +106,7 @@ function UpcomingEvents({ clusters, events }) {
       <StaticImage
         quality={100}
         className="absolute right-[-50px] bottom-[-20px] w-[20%]"
-        src="../../static/images/eventshexagons.png"
+        src="../../../static/images/eventshexagons.png"
       />
 
       <div className="mx-12 md:mx-24">

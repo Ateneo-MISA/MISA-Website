@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer } from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/layout'
+import Layout from '../components/Layout/index'
 import { getRecords } from '../services/airtable'
 
-import ActiveTab from '../components/Vote/activeTab'
-import { VoteReducer, initialState } from '../components/Vote/voteReducer'
+import ActiveTab from '../components/Vote/ActiveTab'
+import { VoteReducer, initialState } from '../context/voteReducer'
 
 // const VoteContext = React.createContext()
 

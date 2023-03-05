@@ -1,9 +1,9 @@
 import React from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import * as styles from './hero.module.css'
+import * as styles from './utils/hero.module.css'
 
-import Button from './Elements/button'
+import Button from '../Elements/button'
 
 const Hero = () => (
   <div className={`${styles.hero} font-abc`}>
@@ -14,7 +14,7 @@ const Hero = () => (
         <StaticImage
           quality={100}
           className={`${styles.image} m-w-[445.27px] m-h-[446.35px]  lg:mx-20`}
-          src="../../static/images/misabot.png"
+          src="../../../static/images/misabot.png"
         />
       </div>
       <div

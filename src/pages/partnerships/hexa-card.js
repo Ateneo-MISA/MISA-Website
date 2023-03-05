@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../../components/layout'
+import Layout from '../../components/Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import moment from 'moment'
