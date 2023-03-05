@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-import Button from '../Elements/button'
+import Button from '../Elements/Button'
 
 import { createRecord, updateRecord } from '../../services/airtable'
 

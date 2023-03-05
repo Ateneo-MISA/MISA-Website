@@ -3,7 +3,7 @@ import React from 'react'
 import Layout from '../components/Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import Button from '../components/Elements/button'
+import Button from '../components/Elements/Button'
 
 const AboutUs = () => {
   let dateToday = new Date().getFullYear()

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import moment from 'moment'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import FilterBar from '../Elements/filterBar'
+import FilterBar from '../Elements/FilterBar'
 
 function UpcomingEvents({ clusters, events }) {
   const [selected, setSelected] = useState('All')

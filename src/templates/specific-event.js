@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper'
 import 'swiper/css'
 
-import Button from '../components/Elements/button'
+import Button from '../components/Elements/Button'
 
 const SpecificEvent = ({ pageContext }) => {
   const { specificEventData } = pageContext

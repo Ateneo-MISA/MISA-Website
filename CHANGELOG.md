@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#50](https://github.com/Ateneo-MISA/MISA-Website/issues/50) app(feature): fix file imports
 - [KF] [#48](https://github.com/Ateneo-MISA/MISA-Website/issues/48) home page(feature): fix styling for navbar and upcoming events
 - [KF] [#47](https://github.com/Ateneo-MISA/MISA-Website/issues/47) app(feature): reorganize file structure and naming
 - [KF] [#45](https://github.com/Ateneo-MISA/MISA-Website/issues/45) app(feature): fix image resolutions
