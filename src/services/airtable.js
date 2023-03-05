@@ -1,7 +1,7 @@
 import Airtable from 'airtable'
 
-const API_KEY = process.env.AIRTABLE_API_KEY
-const VOTING_BASE_ID = process.env.AIRTABLE_VOTING_BASE_ID
+const API_KEY = process.env.GATSBY_AIRTABLE_API_KEY
+const VOTING_BASE_ID = process.env.GATSBY_AIRTABLE_VOTING_BASE_ID
 
 // To define a new Base, find Base ID in Airtable API page of that Base
 let votingBase = new Airtable({

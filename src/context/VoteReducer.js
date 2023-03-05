@@ -20,7 +20,6 @@ const votingForm = {
 
 export let initialState = {
   activeTab: 'Eligibility',
-  votersData: [],
 }
 
 console.log('test')

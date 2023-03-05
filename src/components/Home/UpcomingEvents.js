@@ -97,7 +97,6 @@ function UpcomingEvents({ clusters, events }) {
   // a department has no events at all
   // if none, it will display "No events"
   const checkIfEmpty = filteredData.map((data) => {
-    console.log(data)
     return data.events.length
   })
 
