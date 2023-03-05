@@ -10,10 +10,10 @@ const Hero = () => (
     <div
       className={`flex flex-col md:flex-row lg:flex-row pt-20 lg:ml-20 pb-20 lg:pb-10`}
     >
-      <div className="flex-initial justify-center">
+      <div className="flex-initial justify-center text-center">
         <StaticImage
           quality={100}
-          className={`${styles.image} m-w-[445.27px] m-h-[446.35px]  lg:mx-20`}
+          className={`${styles.image} max-w-[445.27px] max-h-[446.35px] lg:mx-20 text-center`}
           src="../../../static/images/misabot.png"
         />
       </div>
