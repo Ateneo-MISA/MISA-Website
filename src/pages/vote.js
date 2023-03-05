@@ -5,7 +5,7 @@ import Layout from '../components/Layout/index'
 import { getRecords } from '../services/airtable'
 
 import ActiveTab from '../components/Vote/ActiveTab'
-import { VoteReducer, initialState } from '../context/voteReducer'
+import { VoteReducer, initialState } from '../context/VoteReducer'
 
 // const VoteContext = React.createContext()
 

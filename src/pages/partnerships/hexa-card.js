@@ -6,8 +6,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import moment from 'moment'
 
-import Button from '../../components/Elements/button'
-import FilterBar from '../../components/Elements/filterBar'
+import Button from '../../components/Elements/Button'
+import FilterBar from '../../components/Elements/FilterBar'
 
 const HexaCard = ({ data }) => {
   const [selected, setSelected] = useState('All')
