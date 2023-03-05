@@ -9,7 +9,7 @@ const Button = ({ children, disabled, variant, className, onClick }) => {
           : variant === 'secondary'
           ? 'bg-[#D9E8EC] text-[#2097A2] hover:bg-white hover:text-[#2097A2]'
           : variant === 'tertiary'
-          ? 'border-2 text-white hover:bg-[#D9E8EC] hover:text-black'
+          ? 'border-2 border-[#FFFFFF] text-white hover:bg-[#FFFFFF] hover:text-black'
           : ''
       } ${
         disabled

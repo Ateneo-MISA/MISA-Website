@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#48](https://github.com/Ateneo-MISA/MISA-Website/issues/48) home page(feature): fix styling for navbar and upcoming events
 - [KF] [#45](https://github.com/Ateneo-MISA/MISA-Website/issues/45) app(feature): fix image resolutions
 - [KF] [#43](https://github.com/Ateneo-MISA/MISA-Website/issues/43) app(feature): apply ui feedback 230304
 - [KF] [#41](https://github.com/Ateneo-MISA/MISA-Website/issues/41) voting(feature): add initial logic

@@ -41,7 +41,7 @@ const Navigation = () => {
         id="navbarItems"
         className="hidden lg:flex lg:items-center font-abc text-navbarBlack transition-all ease-in duration-200"
       >
-        <li className="text-abc mx-4 lg:mr-12 my-4 text-base text-center w-full text-center whitespace-nowrap">
+        <li className="font-light text-abc lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
           <Link
             className="hover:text-misaTeal duration-200 text-abc"
             to="/about-us"
@@ -50,7 +50,7 @@ const Navigation = () => {
             About Us
           </Link>
         </li>
-        <li className="mx-4 mr-12 my-4 text-base w-full text-center whitespace-nowrap">
+        <li className="font-light lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
           <Link
             className="hover:text-misaTeal duration-200"
             to="/events"
@@ -59,7 +59,7 @@ const Navigation = () => {
             Events
           </Link>
         </li>
-        <li className="mx-4 mr-12 my-4 w-full text-base text-center whitespace-nowrap">
+        <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
           <Link
             className="hover:text-misaTeal duration-200"
             to="/partnerships"
@@ -68,7 +68,7 @@ const Navigation = () => {
             Partnerships
           </Link>
         </li>
-        <li className="mx-4 mr-12 my-4 w-full text-base text-center whitespace-nowrap">
+        <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
           <Link
             className="hover:text-misaTeal duration-200"
             to="/services"
@@ -78,7 +78,7 @@ const Navigation = () => {
           </Link>
         </li>
 
-        <li className="mx-4 mr-12 my-4 w-full text-base text-center whitespace-nowrap">
+        <li className="lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
           <Link to="/contact-us" activeClassName="text-misaTeal">
             <button className="mx-4 my-4 h-11 w-40 bg-misaTeal rounded-xl text-white hover:bg-misaAlternateTeal duration-200">
               Contact Us
