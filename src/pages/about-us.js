@@ -15,7 +15,7 @@ const AboutUs = () => {
       <div className="flex-none lg:flex pl-24 pt-24 bg-navbarBlack font-abc">
         <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-center lg:text-left pb-28 relative">
           <StaticImage
-            className="hidden lg:block absolute right-[-100px] bottom-[-15px] w-[40%]"
+            className="hidden lg:block absolute right-[-100px] bottom-[-10px] md:w-[40%] lg:w-[30%] xl:w-1/4 2xl:w-[19%]"
             src="../../static/images/misahexagons.png"
           />
           <div className="w-full lg:w-2/3">
