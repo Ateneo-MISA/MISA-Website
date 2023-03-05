@@ -2,9 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 
-import Layout from '../components/layout'
-import Hero from '../components/hero'
-import UpcomingEvents from '../components/upcoming-events'
+import Layout from '../components/Layout/index'
+import Hero from '../components/Home/Hero'
+import UpcomingEvents from '../components/Home/UpcomingEvents'
 
 class RootIndex extends React.Component {
   render() {
