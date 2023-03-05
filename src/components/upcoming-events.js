@@ -121,8 +121,8 @@ function UpcomingEvents({ clusters, events }) {
           setSelected={setSelected}
           selected={selected}
         />
-        {checkIfEmpty < 1 && <div>No events</div>}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
+        {checkIfEmpty < 1 && <div className="mt-16">No events</div>}
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
           {filteredData?.map((day, index) => {
             const { date, events } = day
             const weekday = [
@@ -145,7 +145,7 @@ function UpcomingEvents({ clusters, events }) {
                   <p className="text-[#2096A1] font-bold text-4xl">
                     {d.getDate()}
                   </p>
-                  <p className="font-thin">{weekday[d.getDay()]}</p>
+                  <p className="text-[#282828]">{weekday[d.getDay()]}</p>
                 </div>
                 {events?.map((event, index) => {
                   const { title, location, finalClusters, link } = event
@@ -174,16 +174,18 @@ function UpcomingEvents({ clusters, events }) {
                       key={index}
                     >
                       <div className="grid gap-2">
-                        <h3>{title}</h3>
+                        <h3 className="font-semibold text-[#282828]">
+                          {title}
+                        </h3>
                         <div className="text-[#4995A0]">
-                          <p>{location}</p>
-                          <p className="font-thin">{time}</p>
+                          <p className="font-semibold">{location}</p>
+                          <p>{time}</p>
                         </div>
                         <div className="flex gap-2">
                           {finalClusters.map((department, index) => {
                             return (
                               <div
-                                className="font-thin rounded-xl border-[#2097A2] text-[#2097A2] border-[1px] max-w-max py-1 px-3"
+                                className="font-light rounded-xl border-[#2097A2] text-[#2097A2] border-[1px] max-w-max py-1 px-3"
                                 key={index}
                               >
                                 {department}
