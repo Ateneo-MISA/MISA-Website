@@ -22,8 +22,6 @@ export let initialState = {
   activeTab: 'Eligibility',
 }
 
-console.log('test')
-
 export const VoteReducer = (state, action) => {
   switch (action.type) {
     case tabs.SET_ACTIVE_TAB:
