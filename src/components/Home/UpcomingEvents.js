@@ -96,12 +96,20 @@ function UpcomingEvents({ clusters, events }) {
   // this function is used to determine if
   // a department has no events at all
   // if none, it will display "No events"
-  const checkIfEmpty = filteredData.map((data) => {
-    return data.events.length
-  })
+  const checkIfEmpty = () => {
+    let emptyChecker = true
+    for (let i = 0; i < filteredData?.length; i++) {
+      if (filteredData[i]?.events?.length > 0) {
+        emptyChecker = false
+        break
+      }
+    }
+
+    return emptyChecker
+  }
 
   return (
-    <div className="relative overflow-hidden pb-28">
+    <div className="relative overflow-hidden pb-96">
       <StaticImage
         quality={100}
         className="absolute right-[-50px] bottom-[-20px] w-[20%]"
@@ -120,7 +128,7 @@ function UpcomingEvents({ clusters, events }) {
           setSelected={setSelected}
           selected={selected}
         />
-        {checkIfEmpty < 1 && <div className="mt-16">No events</div>}
+        {checkIfEmpty() && <div className="mt-16">No events</div>}
         <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-8 lg:gap-x-16 gap-y-12">
           {filteredData?.map((day, index) => {
             const { date, events } = day
