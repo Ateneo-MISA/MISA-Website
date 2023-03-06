@@ -5,7 +5,15 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 import FilterBar from '../Elements/FilterBar'
 
-function UpcomingEvents({ clusters, events }) {
+import useContentfulEvents from './hooks/useContentfulEvents'
+import useContentfulClusters from './hooks/useContentfulClusters'
+
+function UpcomingEvents() {
+  let events = useContentfulEvents()
+  let clusters = useContentfulClusters().sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
+
   const [selected, setSelected] = useState('All')
 
   let departmentHeaders = ['All']

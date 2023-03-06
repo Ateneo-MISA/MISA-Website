@@ -1,18 +1,19 @@
 import React, { useEffect, useReducer } from 'react'
-import { graphql } from 'gatsby'
 
-import Layout from '../components/Layout/index'
-import { getRecords } from '../services/airtable'
+import Layout from '../Layout/index'
+import { getRecords } from '../../services/airtable'
 
-import ActiveTab from '../components/Vote/ActiveTab'
-import { VoteReducer, initialState } from '../context/VoteReducer'
+import ActiveTab from './ActiveTab'
+import { VoteReducer, initialState } from '../../context/VoteReducer'
+
+import useContentfulElectionPositions from './hooks/useContentfulElectionPositions'
 
 // const VoteContext = React.createContext()
 
-const Vote = ({ data }) => {
-  const [voteState, voteDispatch] = useReducer(VoteReducer, initialState)
+const Vote = () => {
+  let positionsData = useContentfulElectionPositions()
 
-  const positionsData = data.allContentfulElectionPositions.nodes
+  const [voteState, voteDispatch] = useReducer(VoteReducer, initialState)
 
   const getData = async () => {
     let votersData = await getRecords({
@@ -58,14 +59,3 @@ const Vote = ({ data }) => {
 }
 
 export default Vote
-
-export const voteQuery = graphql`
-  query VoteQuery {
-    allContentfulElectionPositions {
-      nodes {
-        title
-        activeOnWebsite
-      }
-    }
-  }
-`

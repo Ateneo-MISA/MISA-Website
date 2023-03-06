@@ -4,7 +4,29 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
+import useContentfulWebsitePages from '../../hooks/useContentfulWebsitePages'
+
 const Navigation = () => {
+  let isAboutUsActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'About Us'
+  })[0]?.activeOnWebsite
+
+  let isEventsActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Events'
+  })[0]?.activeOnWebsite
+
+  let isPartnershipsActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Partnerships'
+  })[0]?.activeOnWebsite
+
+  let isServicesActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Services'
+  })[0]?.activeOnWebsite
+
+  let isContactUsActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Contact Us'
+  })[0]?.activeOnWebsite
+
   const handleBurgerClick = () => {
     let navbarItems = document.getElementById('navbarItems')
     if (navbarItems.classList.contains('hidden')) {
@@ -41,50 +63,63 @@ const Navigation = () => {
         id="navbarItems"
         className="hidden lg:flex lg:items-center font-abc text-navbarBlack transition-all ease-in duration-200"
       >
-        <li className="font-light text-abc lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
-          <Link
-            className="hover:text-misaTeal duration-200 text-abc"
-            to="/about-us"
-            activeClassName="text-misaTeal"
-          >
-            About Us
-          </Link>
-        </li>
-        <li className="font-light lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
-          <Link
-            className="hover:text-misaTeal duration-200"
-            to="/events"
-            activeClassName="text-misaTeal"
-          >
-            Events
-          </Link>
-        </li>
-        <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
-          <Link
-            className="hover:text-misaTeal duration-200"
-            to="/partnerships"
-            activeClassName="text-misaTeal"
-          >
-            Partnerships
-          </Link>
-        </li>
-        <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
-          <Link
-            className="hover:text-misaTeal duration-200"
-            to="/services"
-            activeClassName="text-misaTeal"
-          >
-            Services
-          </Link>
-        </li>
+        {isAboutUsActive ? (
+          <li className="font-light text-abc lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
+            <Link
+              className="hover:text-misaTeal duration-200 text-abc"
+              to="/about-us"
+              activeClassName="text-misaTeal"
+            >
+              About Us
+            </Link>
+          </li>
+        ) : null}
 
-        <li className="lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
-          <Link to="/contact-us" activeClassName="text-misaTeal">
-            <button className="mx-4 my-4 h-11 w-40 bg-misaTeal rounded-xl text-white hover:bg-misaAlternateTeal duration-200">
-              Contact Us
-            </button>
-          </Link>
-        </li>
+        {isEventsActive ? (
+          <li className="font-light lg:mx-12 my-4 text-base w-full text-center whitespace-nowrap">
+            <Link
+              className="hover:text-misaTeal duration-200"
+              to="/events"
+              activeClassName="text-misaTeal"
+            >
+              Events
+            </Link>
+          </li>
+        ) : null}
+
+        {isPartnershipsActive ? (
+          <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
+            <Link
+              className="hover:text-misaTeal duration-200"
+              to="/partnerships"
+              activeClassName="text-misaTeal"
+            >
+              Partnerships
+            </Link>
+          </li>
+        ) : null}
+
+        {isServicesActive ? (
+          <li className="font-light lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
+            <Link
+              className="hover:text-misaTeal duration-200"
+              to="/services"
+              activeClassName="text-misaTeal"
+            >
+              Services
+            </Link>
+          </li>
+        ) : null}
+
+        {isContactUsActive ? (
+          <li className="lg:mx-12 my-4 w-full text-base text-center whitespace-nowrap">
+            <Link to="/contact-us" activeClassName="text-misaTeal">
+              <button className="mx-4 my-4 h-11 w-40 bg-misaTeal rounded-xl text-white hover:bg-misaAlternateTeal duration-200">
+                Contact Us
+              </button>
+            </Link>
+          </li>
+        ) : null}
       </ul>
     </nav>
   )
