@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '../components/Layout/index'
+import Layout from '../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import Button from '../components/Elements/Button'
+import Button from '../Elements/Button'
 
 const AboutUs = () => {
   let dateToday = new Date().getFullYear()
@@ -16,7 +16,7 @@ const AboutUs = () => {
         <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-center lg:text-left pb-28 relative">
           <StaticImage
             className="hidden lg:block absolute right-[-100px] bottom-[-10px] md:w-[40%] lg:w-[30%] xl:w-1/4 2xl:w-[19%]"
-            src="../../static/images/misahexagons.png"
+            src="../../../static/images/misahexagons.png"
           />
           <div className="w-full lg:w-2/3">
             <h1 className="text-5xl mb-6 font-extrabold">
@@ -50,7 +50,7 @@ const AboutUs = () => {
           <div className="block lg:hidden">
             <StaticImage
               className="w-4/6"
-              src="../../static/images/misahexagons.png"
+              src="../../../static/images/misahexagons.png"
             />
           </div>
         </div>
@@ -63,7 +63,7 @@ const AboutUs = () => {
           <StaticImage
             className="w-1/2 lg:w-1/4 mb-5"
             quality={100}
-            src="../../static/images/misavision.png"
+            src="../../../static/images/misavision.png"
           />
           <p className="text-[#282828] italic text-xl">
             We aim to{' '}
@@ -78,7 +78,7 @@ const AboutUs = () => {
           <StaticImage
             className="w-full lg:w-1/2 mb-5"
             quality={100}
-            src="../../static/images/misamission.png"
+            src="../../../static/images/misamission.png"
           />
           <p className="text-[#282828] italic text-xl">
             We aim to become the{' '}

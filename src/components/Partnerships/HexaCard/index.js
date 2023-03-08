@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
 
-import Layout from '../../components/Layout/index'
+import Layout from '../../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import moment from 'moment'
 
-import Button from '../../components/Elements/Button'
-import FilterBar from '../../components/Elements/FilterBar'
+import Button from '../../Elements/Button'
+import FilterBar from '../../Elements/FilterBar'
+
+import useContentfulCategories from './hooks/useContentfulCategories'
+import useContentfulHexaCards from './hooks/useContentfulHexaCards'
 
 const HexaCard = ({ data }) => {
   const [selected, setSelected] = useState('All')
 
-  const hexaCardData = data.allContentfulHexaCard.nodes
+  let hexaCardData = useContentfulHexaCards()
+
   let finalHexaCardData = []
   for (let i = 0; i < hexaCardData.length; i++) {
     let categories = []
@@ -31,7 +34,9 @@ const HexaCard = ({ data }) => {
       : hexaCardPartner?.categories?.includes(selected)
   })
 
-  const categoryData = data.allContentfulCategory.nodes
+  let categoryData = useContentfulCategories().sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
   let finalCategoryData = ['All']
   for (let i = 0; i < categoryData.length; i++) {
     finalCategoryData.push(categoryData[i].name)
@@ -43,7 +48,7 @@ const HexaCard = ({ data }) => {
       <div className="bg-navbarBlack flex-none 2xl:flex text-center">
         <StaticImage
           className="px-32 ml-0 mt-12 lg:mt-0 lg:ml-32 pt-48 w-1/2 2xl:w-2/3"
-          src="../../../static/images/hexacardhero.png"
+          src="../../../../static/images/hexacardhero.png"
         />
         <div className="font-abc mr-0 2xl:mr-28 mt-4 2xl:mt-36 text-center 2xl:text-left px-24 2xl:px-0">
           <h1 className="text-5xl font-extrabold text-white mb-6">
@@ -114,44 +119,3 @@ const HexaCard = ({ data }) => {
 }
 
 export default HexaCard
-
-export const pageQuery = graphql`
-  query MyQuery {
-    allContentfulCategory {
-      nodes {
-        name
-      }
-    }
-    allContentfulHexaCard {
-      nodes {
-        category {
-          name
-        }
-        benefits
-        partnerName
-        partnerLogo {
-          gatsbyImage(
-            aspectRatio: 1.5
-            backgroundColor: ""
-            breakpoints: 10
-            cropFocus: CENTER
-            fit: COVER
-            formats: AUTO
-            height: 130
-            layout: FIXED
-            outputPixelDensities: 1.5
-            placeholder: DOMINANT_COLOR
-            quality: 10
-            sizes: ""
-            width: 130
-          )
-          file {
-            url
-          }
-        }
-        startDate
-        endDate
-      }
-    }
-  }
-`
