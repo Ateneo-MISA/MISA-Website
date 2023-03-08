@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
-import { graphql } from 'gatsby'
+import { navigate } from 'gatsby'
 
 import Layout from '../components/Layout/index'
 import { getRecords } from '../services/airtable'
@@ -7,12 +7,14 @@ import { getRecords } from '../services/airtable'
 import ActiveTab from '../components/Vote/ActiveTab'
 import { VoteReducer, initialState } from '../context/VoteReducer'
 
+import useContentfulElectionPositions from '../components/Vote/hooks/useContentfulElectionPositions'
+
 // const VoteContext = React.createContext()
 
-const Vote = ({ data }) => {
-  const [voteState, voteDispatch] = useReducer(VoteReducer, initialState)
+const Vote = () => {
+  let positionsData = useContentfulElectionPositions()
 
-  const positionsData = data.allContentfulElectionPositions.nodes
+  const [voteState, voteDispatch] = useReducer(VoteReducer, initialState)
 
   const getData = async () => {
     let votersData = await getRecords({
@@ -33,39 +35,29 @@ const Vote = ({ data }) => {
     getData()
   }, [])
 
-  return (
-    <Layout>
-      {/* <VoteContext.Provider value={{ voteState, voteDispatch }}> */}
-      {voteState?.votersData ? (
-        <div className="font-abc mt-20">
-          <div className="flex text-center justify-around mb-8">
-            <p className="bg-misaTeal">1 Check Eligbility</p>
-            <p className="ml-4">2 Vote</p>
-            <p className="ml-4">3 Submit</p>
-          </div>
+  return navigate('/')
+  // return (
+  //   <Layout>
+  //     {/* <VoteContext.Provider value={{ voteState, voteDispatch }}> */}
+  //     {voteState?.votersData ? (
+  //       <div className="font-abc mt-20">
+  //         <div className="flex text-center justify-around mb-8">
+  //           <p className="bg-misaTeal">1 Check Eligbility</p>
+  //           <p className="ml-4">2 Vote</p>
+  //           <p className="ml-4">3 Submit</p>
+  //         </div>
 
-          <ActiveTab
-            activeTab={voteState?.activeTab}
-            voteState={voteState}
-            voteDispatch={voteDispatch}
-            positionsData={positionsData}
-          />
-        </div>
-      ) : null}
-      {/* </VoteContext.Provider> */}
-    </Layout>
-  )
+  //         <ActiveTab
+  //           activeTab={voteState?.activeTab}
+  //           voteState={voteState}
+  //           voteDispatch={voteDispatch}
+  //           positionsData={positionsData}
+  //         />
+  //       </div>
+  //     ) : null}
+  //     {/* </VoteContext.Provider> */}
+  //   </Layout>
+  // )
 }
 
 export default Vote
-
-export const voteQuery = graphql`
-  query VoteQuery {
-    allContentfulElectionPositions {
-      nodes {
-        title
-        activeOnWebsite
-      }
-    }
-  }
-`

@@ -1,4 +1,5 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 import BackgroundImage from 'gatsby-background-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { convertToBgImage } from 'gbimage-bridge'
@@ -11,11 +12,17 @@ import 'swiper/css'
 
 import Button from '../components/Elements/Button'
 
+import useContentfulWebsitePages from '../hooks/useContentfulWebsitePages'
+
 const SpecificEvent = ({ pageContext }) => {
+  let isActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Specific Events'
+  })[0]?.activeOnWebsite
+
   const { specificEventData } = pageContext
   const bgImage = convertToBgImage(specificEventData.hero.gatsbyImage)
 
-  return (
+  return isActive ? (
     <Layout>
       {/* Hero Image Frame */}
       <BackgroundImage
@@ -114,6 +121,8 @@ const SpecificEvent = ({ pageContext }) => {
         </div>
       </div>
     </Layout>
+  ) : (
+    navigate('/')
   )
 }
 

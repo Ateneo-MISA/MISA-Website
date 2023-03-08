@@ -1,15 +1,22 @@
 import React from 'react'
+import { navigate } from 'gatsby'
 
 import Layout from '../components/Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 
 import Button from '../components/Elements/Button'
 
+import useContentfulWebsitePages from '../hooks/useContentfulWebsitePages'
+
 const AboutUs = () => {
+  let isActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'About Us'
+  })[0]?.activeOnWebsite
+
   let dateToday = new Date().getFullYear()
   let currentMisaYear = dateToday - 1994
 
-  return (
+  return isActive ? (
     <Layout>
       {/* first frame */}
       <div className="flex-none lg:flex pl-24 pt-24 bg-navbarBlack font-abc">
@@ -158,6 +165,8 @@ const AboutUs = () => {
 
       <style></style>
     </Layout>
+  ) : (
+    navigate('/')
   )
 }
 
