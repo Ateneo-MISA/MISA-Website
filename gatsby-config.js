@@ -2,6 +2,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const environment = process.env.GATSBY_ENV
+
 module.exports = {
   siteMetadata: {
     title: 'Ateneo Management Information Systems Association',
@@ -19,6 +21,7 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
         host: process.env.CONTENTFUL_HOST,
+        environment: environment === 'production' ? 'master' : 'staging',
       },
     },
   ],
