@@ -33,5 +33,6 @@ Changelog Format
 - [KF] [#9](https://github.com/Ateneo-MISA/MISA-Website/issues/9) app(feature): add tailwind css
 - [KF MD] [#5](https://github.com/Ateneo-MISA/MISA-Website/issues/5) home page(feature): add events frame
 - [MF] [#4](https://github.com/Ateneo-MISA/MISA-Website/issues/4) home page(feature): add hero
+- [AL] [#3](https://github.com/Ateneo-MISA/MISA-Website/issues/3) home page(feature): add footer
 - [KF] [#2](https://github.com/Ateneo-MISA/MISA-Website/issues/2) home page(feature): add navbar
 - [KF] [#1](https://github.com/Ateneo-MISA/MISA-Website/issues/1) app(feature): add initial project files
