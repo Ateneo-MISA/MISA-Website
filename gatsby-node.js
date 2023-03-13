@@ -98,6 +98,32 @@ exports.createPages = async ({ graphql, actions }) => {
               })
             }
           }
+
+          const candidateTemplate = path.resolve('./src/templates/Candidate.js')
+          const candidates = [
+            {
+              name: 'Maverick Tinio',
+              position: 'President Candidate',
+            },
+            {
+              name: 'Maverick Tinio',
+              position: 'President Candidate',
+            },
+          ]
+
+          candidates.map((candidate) => {
+            const { name } = candidate
+            const slug = name
+              .replace(/([a-z])([A-Z])/g, '$1-$2')
+              .replace(/[\s_]+/g, '-')
+              .toLowerCase()
+
+            createPage({
+              path: `/elections/${slug}`,
+              component: candidateTemplate,
+              context: candidate,
+            })
+          })
         }
       } else {
         if (allActivePages[i]?.innerFolderName) {
