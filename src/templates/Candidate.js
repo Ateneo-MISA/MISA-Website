@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { StaticImage } from 'gatsby-plugin-image'
+import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 
 import Layout from '../components/Layout/index'
 
 export default function CandidateTemplate({ pageContext }) {
-  const { name, position } = pageContext
+  const { candidate } = pageContext
+  const { name, position, vision, image } = candidate
   const platforms = [
     {
       title:
@@ -44,27 +45,19 @@ export default function CandidateTemplate({ pageContext }) {
           </svg>
         </Link>
         <div className="bg-gray-400 relative">
-          <StaticImage
-            quality={100}
+          <GatsbyImage
             className={`text-center h-full w-full object-cover`}
-            src={'../../../static/images/mav.png'}
-            //   src={image}
+            image={image.gatsbyImage}
           />
         </div>
         <div className="flex flex-col justify-end gap-8 p-16 text-white">
           <div>
-            <span className="italic font-thin">{position}</span>
+            <span className="italic font-thin">{position} candidate</span>
             <h3 className="font-bold text-5xl">{name}</h3>
           </div>
           <div>
             <span className="uppercase font-bold text-2xl">Vision</span>
-            <p>
-              {' '}
-              To achieve my vision for the organization, I would like to focus
-              on the following: 1) Information Management Advocacy, 2) Increased
-              Transparency and 3) Proper Documentation and Clear Definition of
-              Roles and Protocols.
-            </p>
+            <p>{vision.vision}</p>
           </div>
         </div>
       </div>

@@ -27,49 +27,33 @@ exports.createPages = async ({ graphql, actions }) => {
     if (allActivePages[i]?.activeOnWebsite) {
       // checks if template based, meaning multiple pages generated per
       if (allActivePages[i]?.templateBased) {
-        if (allActivePages[i]?.name === 'Specific Events') {
-          const specificEventTemplate = path.resolve(
-            './src/templates/SpecificEvent.js'
-          )
-          const specificEventsResult = await graphql(`
+        if (allActivePages[i]?.name === 'Election Candidates') {
+          const candidateTemplate = path.resolve('./src/templates/Candidate.js')
+          const candidatesResult = await graphql(`
             {
-              allContentfulMainEvents {
+              allContentfulElectionCandidates {
                 nodes {
-                  title
-                  hero {
+                  name
+                  position
+                  vision {
+                    vision
+                  }
+                  image {
                     gatsbyImage(
-                      layout: FULL_WIDTH
-                      placeholder: BLURRED
-                      width: 1280
+                      aspectRatio: 1.5
+                      backgroundColor: ""
+                      breakpoints: 10
+                      cropFocus: CENTER
+                      fit: COVER
+                      formats: AUTO
+                      height: 130
+                      layout: FIXED
+                      outputPixelDensities: 1.5
+                      placeholder: DOMINANT_COLOR
+                      quality: 10
+                      sizes: ""
+                      width: 130
                     )
-                    resize(height: 630, width: 1200) {
-                      src
-                    }
-                    file {
-                      url
-                    }
-                  }
-                  tagline
-                  description {
-                    description
-                  }
-                  testimonials {
-                    fullName
-                    eventAndYear
-                    body {
-                      body
-                    }
-                  }
-                  activeRegistration
-                  highlights {
-                    gatsbyImage(
-                      layout: FULL_WIDTH
-                      placeholder: BLURRED
-                      width: 1280
-                    )
-                    resize(height: 630, width: 1200) {
-                      src
-                    }
                     file {
                       url
                     }
@@ -79,37 +63,8 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           `)
 
-          const specificEvents =
-            specificEventsResult.data.allContentfulMainEvents.nodes
-
-          if (specificEvents.length > 0) {
-            for (let i = 0; i < specificEvents.length; i++) {
-              let pageURL = specificEvents[i].title
-                .replace(/([a-z])([A-Z])/g, '$1-$2')
-                .replace(/[\s_]+/g, '-')
-                .toLowerCase()
-
-              createPage({
-                path: `/events/${pageURL}`,
-                component: specificEventTemplate,
-                context: {
-                  specificEventData: specificEvents[i],
-                },
-              })
-            }
-          }
-
-          const candidateTemplate = path.resolve('./src/templates/Candidate.js')
-          const candidates = [
-            {
-              name: 'Maverick Tinio',
-              position: 'President Candidate',
-            },
-            {
-              name: 'Maverick Tinio',
-              position: 'President Candidate',
-            },
-          ]
+          const candidates =
+            candidatesResult.data.allContentfulElectionCandidates.nodes
 
           candidates.map((candidate) => {
             const { name } = candidate
@@ -121,9 +76,81 @@ exports.createPages = async ({ graphql, actions }) => {
             createPage({
               path: `/elections/${slug}`,
               component: candidateTemplate,
-              context: candidate,
+              context: { candidate },
             })
           })
+        }
+      }
+      if (allActivePages[i]?.name === 'Specific Events') {
+        const specificEventTemplate = path.resolve(
+          './src/templates/SpecificEvent.js'
+        )
+        const specificEventsResult = await graphql(`
+          {
+            allContentfulMainEvents {
+              nodes {
+                title
+                hero {
+                  gatsbyImage(
+                    layout: FULL_WIDTH
+                    placeholder: BLURRED
+                    width: 1280
+                  )
+                  resize(height: 630, width: 1200) {
+                    src
+                  }
+                  file {
+                    url
+                  }
+                }
+                tagline
+                description {
+                  description
+                }
+                testimonials {
+                  fullName
+                  eventAndYear
+                  body {
+                    body
+                  }
+                }
+                activeRegistration
+                highlights {
+                  gatsbyImage(
+                    layout: FULL_WIDTH
+                    placeholder: BLURRED
+                    width: 1280
+                  )
+                  resize(height: 630, width: 1200) {
+                    src
+                  }
+                  file {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        `)
+
+        const specificEvents =
+          specificEventsResult.data.allContentfulMainEvents.nodes
+
+        if (specificEvents.length > 0) {
+          for (let i = 0; i < specificEvents.length; i++) {
+            let pageURL = specificEvents[i].title
+              .replace(/([a-z])([A-Z])/g, '$1-$2')
+              .replace(/[\s_]+/g, '-')
+              .toLowerCase()
+
+            createPage({
+              path: `/events/${pageURL}`,
+              component: specificEventTemplate,
+              context: {
+                specificEventData: specificEvents[i],
+              },
+            })
+          }
         }
       } else {
         if (allActivePages[i]?.innerFolderName) {
