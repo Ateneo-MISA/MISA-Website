@@ -20,7 +20,7 @@ const Footer = () => {
           height={200}
         />
         <div>
-          <p className="font-extrabold text-[29px] font-montserrat">Want to work with us?</p>
+          <p className="font-extrabold text-3xl font-montserrat">Want to work with us?</p>
           {isContactUsActive ? (
             <Link to="/contact-us">
               <div className="flex justify-start gap-x-3">
@@ -42,7 +42,7 @@ const Footer = () => {
               height={30}
             />
           </div>
-          <p className="italic text-[22px] text-[#949494] text-center font-montserrat">Building tomorrow through business technology</p>
+          <p className="italic text-xl text-[#949494] text-center font-montserrat">Building tomorrow through business technology</p>
           <div className="flex justify-center gap-x-10 my-5">
             <Link to="https://www.facebook.com/Ateneo.MISA" className="hover:scale-125 duration-150">
               <StaticImage src="../../../static/images/facebooklogo.png" quality={100} height={30}></StaticImage>
@@ -68,7 +68,7 @@ const Footer = () => {
               <StaticImage src="../../../static/images/emaillogo.png" quality={100} height={30}></StaticImage>
             </Link>
           </div>
-          <p className="font-light text-[18px] text-[#949494] text-center font-montserrat">© 2022 Ateneo Management Information Systems Association - [Team Name]</p>
+          <p className="font-light text-lg text-[#949494] text-center font-montserrat">© 2022 Ateneo Management Information Systems Association - [Team Name]</p>
         </div>
       </div>
     </footer>
