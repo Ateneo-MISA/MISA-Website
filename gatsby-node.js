@@ -58,6 +58,9 @@ exports.createPages = async ({ graphql, actions }) => {
                       url
                     }
                   }
+                  platforms {
+                    raw
+                  }
                 }
               }
             }

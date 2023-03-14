@@ -4,32 +4,25 @@ import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 
 import Layout from '../components/Layout/index'
 
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { BLOCKS } from '@contentful/rich-text-types'
+
 export default function CandidateTemplate({ pageContext }) {
   const { candidate } = pageContext
-  const { name, position, vision, image } = candidate
-  const platforms = [
-    {
-      title:
-        'Amet pariatur consequat consequat officia enim fugiat velit minim quis laborum sit elit mollit est culpa.',
-      description:
-        'Et ad enim veniam fugiat labore anim non non aliqua sit quis id. Labore irure duis exercitation mollit ea commodo aliquip. Velit Lorem minim deserunt duis. Ad laboris adipisicing eiusmod officia incididunt veniam exercitation. In ex ad amet nisi magna eu tempor mollit magna laborum do ad sit occaecat. Anim eiusmod esse cupidatat cupidatat excepteur.',
+  const { name, position, vision, image, platforms } = candidate
+  const options = {
+    renderNode: {
+      [BLOCKS.UL_LIST]: (node, children) => {
+        return <ul className="list-disc ml-4">{children}</ul>
+      },
+      [BLOCKS.OL_LIST]: (node, children) => {
+        return <ol className="list-decimal ml-4">{children}</ol>
+      },
     },
-    {
-      title:
-        'Amet pariatur consequat consequat officia enim fugiat velit minim quis laborum sit elit mollit est culpa.',
-      description:
-        'Et ad enim veniam fugiat labore anim non non aliqua sit quis id. Labore irure duis exercitation mollit ea commodo aliquip. Velit Lorem minim deserunt duis. Ad laboris adipisicing eiusmod officia incididunt veniam exercitation. In ex ad amet nisi magna eu tempor mollit magna laborum do ad sit occaecat. Anim eiusmod esse cupidatat cupidatat excepteur.',
-    },
-    {
-      title:
-        'Amet pariatur consequat consequat officia enim fugiat velit minim quis laborum sit elit mollit est culpa.',
-      description:
-        'Et ad enim veniam fugiat labore anim non non aliqua sit quis id. Labore irure duis exercitation mollit ea commodo aliquip. Velit Lorem minim deserunt duis. Ad laboris adipisicing eiusmod officia incididunt veniam exercitation. In ex ad amet nisi magna eu tempor mollit magna laborum do ad sit occaecat. Anim eiusmod esse cupidatat cupidatat excepteur.',
-    },
-  ]
+  }
   return (
     <Layout>
-      <div className="bg-misaTeal h-[60vh] grid grid-cols-[1fr_2fr] relative px-16 overflow-hidden">
+      <div className="bg-misaTeal h-[60vh] grid grid-cols-[1fr_2fr] relative px-16 overflow-hidden relative">
         <Link to="/elections" className="absolute left-4 top-12 text-white">
           <svg
             width="24"
@@ -60,21 +53,16 @@ export default function CandidateTemplate({ pageContext }) {
             <p>{vision.vision}</p>
           </div>
         </div>
+        <StaticImage
+          quality={100}
+          className={`max-w-[320px] absolute -top-14 -right-8 rotate-180`}
+          src="../../../static/images/eventshexagons.png"
+        />
       </div>
       <div className="bg-white p-16">
         <h2 className="text-misaTeal text-5xl font-extrabold">Platforms</h2>
-        <div className="grid gap-6 py-8">
-          {platforms.map((platform, index) => {
-            const { title, description } = platform
-            return (
-              <div key={index}>
-                <span className="font-bold">
-                  {index + 1}. {title}
-                </span>
-                <p>{description}</p>
-              </div>
-            )
-          })}
+        <div className="py-8 grid gap-4">
+          {renderRichText(platforms, options)}
         </div>
       </div>
       {/* <p>{platform}</p> */}
