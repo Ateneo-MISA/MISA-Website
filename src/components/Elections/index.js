@@ -29,7 +29,11 @@ const Elections = () => {
           </div>
           <div className="flex gap-6">
             <Button variant={'primary'}>How to Vote?</Button>
-            <Button variant={'secondary'}>Check Candidates</Button>
+            <Button
+              className={`border-[1px] border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white`}
+            >
+              Check Candidates
+            </Button>
           </div>
         </div>
         <StaticImage
@@ -135,7 +139,11 @@ const Elections = () => {
                     <span className="italic font-thin">{position}</span>
                   </div>
                   <Link to={`/elections/${slug}`}>
-                    <Button variant={'secondary'}>View Platform</Button>
+                    <Button
+                      className={`border-[1px] border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white`}
+                    >
+                      View Platform
+                    </Button>
                   </Link>
                 </div>
               </div>
