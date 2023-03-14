@@ -11,7 +11,7 @@ const Elections = () => {
 
   return (
     <Layout>
-      <div className="bg-navbarBlack h-96 text-white p-16">
+      <div className="bg-navbarBlack h-96 text-white p-16 relative overflow-hidden">
         <div className="w-1/2">
           <h1 className="text-4xl font-bold">
             <span className="text-misaTeal">MISA</span>lalan 2023
@@ -32,6 +32,11 @@ const Elections = () => {
             <Button variant={'secondary'}>Check Candidates</Button>
           </div>
         </div>
+        <StaticImage
+          quality={100}
+          className={`max-w-[460px] absolute bottom-0 right-0`}
+          src="../../../static/images/ballothexagon.png"
+        />
       </div>
       <div className="p-12">
         <div className="bg-[#DCE7EB] rounded-xl h-[60vh] p-12 pb-36 flex flex-col justify-around relative">
@@ -94,7 +99,7 @@ const Elections = () => {
             <div className="relative">
               <StaticImage
                 quality={100}
-                className={`max-w-[120px] max-h-[120x] text-center`}
+                className={`max-w-[120px] text-center`}
                 src="../../../static/images/misabot-side.png"
               />
             </div>
@@ -138,99 +143,50 @@ const Elections = () => {
           })}
         </div>
       </div>
-      <div className="bg-misaTeal py-12">
+      <div className="bg-misaTeal py-12 relative overflow-hidden">
         <div className="text-white text-center pb-8">
           <h2 className="text-4xl font-bold">Ready to Vote?</h2>
           <span className="font-thin italic">
             Follow these three steps to participate in the MISAlalan 2023!
           </span>
         </div>
-        <div className="flex items-center justify-center px-64">
+        <div className="flex items-center justify-center px-40">
           <div className="grid text-center items-center justify-center justify-items-center text-white w-96 gap-8 h-48">
             <p className="text-4xl font-bold">1</p>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline-block w-20 h-20"
-            >
-              <path
-                d="M7 8C7 7.44772 7.44772 7 8 7H16C16.5523 7 17 7.44772 17 8C17 8.55228 16.5523 9 16 9H8C7.44772 9 7 8.55228 7 8Z"
-                fill="currentColor"
-              />
-              <path
-                d="M12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16Z"
-                fill="currentColor"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM18 5H6C5.44772 5 5 5.44772 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V6C19 5.44772 18.5523 5 18 5Z"
-                fill="currentColor"
-              />
-            </svg>
+            <StaticImage
+              quality={100}
+              className={`max-w-[100px] text-center`}
+              src="../../../static/images/id-icon.png"
+            />
             <p className="font-thin italic">
               Prepare ID Number Check Eligibility
             </p>
           </div>
-          <hr className="w-96 border-4 -mx-16" />
+          <hr className="w-48 border-4 -mx-16" />
           <div className="grid text-center items-center justify-center justify-items-center text-white w-96 gap-8 h-48">
             <p className="text-4xl font-bold">2</p>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline-block w-20 h-20"
-            >
-              <path
-                d="M7 8C7 7.44772 7.44772 7 8 7H16C16.5523 7 17 7.44772 17 8C17 8.55228 16.5523 9 16 9H8C7.44772 9 7 8.55228 7 8Z"
-                fill="currentColor"
-              />
-              <path
-                d="M12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16Z"
-                fill="currentColor"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM18 5H6C5.44772 5 5 5.44772 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V6C19 5.44772 18.5523 5 18 5Z"
-                fill="currentColor"
-              />
-            </svg>
+            <StaticImage
+              quality={100}
+              className={`max-w-[100px] text-center`}
+              src="../../../static/images/vote-icon.png"
+            />
             <p className="font-thin italic">Vote for favored candidate</p>
           </div>
-          <hr className="w-96 border-4 -mx-16" />
+          <hr className="w-48 border-4 -mx-16" />
           <div className="grid text-center items-center justify-center justify-items-center text-white w-96 gap-8 h-48">
             <p className="text-4xl font-bold">3</p>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline-block w-20 h-20"
-            >
-              <path
-                d="M7 8C7 7.44772 7.44772 7 8 7H16C16.5523 7 17 7.44772 17 8C17 8.55228 16.5523 9 16 9H8C7.44772 9 7 8.55228 7 8Z"
-                fill="currentColor"
-              />
-              <path
-                d="M12 16C13.1046 16 14 15.1046 14 14C14 12.8954 13.1046 12 12 12C10.8954 12 10 12.8954 10 14C10 15.1046 10.8954 16 12 16Z"
-                fill="currentColor"
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M6 3C4.34315 3 3 4.34315 3 6V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V6C21 4.34315 19.6569 3 18 3H6ZM18 5H6C5.44772 5 5 5.44772 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V6C19 5.44772 18.5523 5 18 5Z"
-                fill="currentColor"
-              />
-            </svg>
+            <StaticImage
+              quality={100}
+              className={`max-w-[100px] text-center`}
+              src="../../../static/images/ballot-icon.png"
+            />
             <p className="font-thin italic">Submit Ballot</p>
           </div>
+          <StaticImage
+            quality={100}
+            className={`max-w-[320px] absolute -bottom-16 -right-8`}
+            src="../../../static/images/eventshexagons.png"
+          />
         </div>
         <div className="text-center py-4 pt-16">
           <Button variant={'secondary'}>Check Eligibility</Button>
