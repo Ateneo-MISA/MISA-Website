@@ -124,9 +124,9 @@ const Elections = () => {
                 key={index}
               >
                 <div className="relative">
-                  <GatsbyImage
+                  <img
+                    src={image.file.url}
                     className={`text-center h-full w-full object-cover`}
-                    image={image.gatsbyImage}
                   />
                 </div>
                 <div className="flex flex-col p-8 gap-8 justify-between">

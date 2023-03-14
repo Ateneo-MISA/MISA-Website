@@ -39,21 +39,6 @@ exports.createPages = async ({ graphql, actions }) => {
                     vision
                   }
                   image {
-                    gatsbyImage(
-                      aspectRatio: 1.5
-                      backgroundColor: ""
-                      breakpoints: 10
-                      cropFocus: CENTER
-                      fit: COVER
-                      formats: AUTO
-                      height: 130
-                      layout: FIXED
-                      outputPixelDensities: 1.5
-                      placeholder: DOMINANT_COLOR
-                      quality: 10
-                      sizes: ""
-                      width: 130
-                    )
                     file {
                       url
                     }

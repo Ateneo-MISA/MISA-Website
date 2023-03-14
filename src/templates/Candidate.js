@@ -22,7 +22,7 @@ export default function CandidateTemplate({ pageContext }) {
   }
   return (
     <Layout>
-      <div className="bg-misaTeal h-[60vh] grid grid-cols-[1fr_2fr] relative px-16 overflow-hidden relative">
+      <div className="bg-misaTeal h-[60vh] grid grid-cols-[1fr_2fr] relative px-16 overflow-hidden">
         <Link to="/elections" className="absolute left-4 top-12 text-white">
           <svg
             width="24"
@@ -38,9 +38,9 @@ export default function CandidateTemplate({ pageContext }) {
           </svg>
         </Link>
         <div className="bg-gray-400 relative">
-          <GatsbyImage
+          <img
+            src={image.file.url}
             className={`text-center h-full w-full object-cover`}
-            image={image.gatsbyImage}
           />
         </div>
         <div className="flex flex-col justify-end gap-8 p-16 text-white">
