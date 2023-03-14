@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Layout from '../Layout'
 import Button from '../Elements/Button'
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
@@ -9,7 +10,7 @@ const Elections = () => {
   const candidates = useElectionCandidates()
 
   return (
-    <>
+    <Layout>
       <div className="bg-navbarBlack h-96 text-white p-16">
         <div className="w-1/2">
           <h1 className="text-4xl font-bold">
@@ -33,51 +34,70 @@ const Elections = () => {
         </div>
       </div>
       <div className="p-12">
-        <div className="bg-[#DCE7EB] rounded-xl h-[60vh] p-12 flex flex-col justify-around relative">
-          <h2 className="text-misaTeal text-4xl font-bold text-center">
+        <div className="bg-[#DCE7EB] rounded-xl h-[60vh] p-12 pb-36 flex flex-col justify-around relative">
+          <h2 className="text-misaTeal text-5xl font-bold text-center">
             MISAlalan 2023 Timeline
           </h2>
-          <ol class="border-l border-misaTeal md:flex md:justify-center md:gap-6 md:border-l-0 md:border-t-[16px] -mx-12 w-3/4">
-            <li>
-              <div class="w-48"></div>
-            </li>
-            <li>
-              <div class="flex-start flex items-center pt-2 md:block md:pt-0">
-                <div class="-ml-[5px] mr-3 h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0 md:-mt-[28px]"></div>
-                <p class="mt-2 text-sm text-misaTeal">01.07.2021</p>
-              </div>
-              <div class="mt-2 ml-4 pb-5 md:ml-0">
-                <h4 class="mb-1.5 text-xl font-semibold">Title of section 1</h4>
-              </div>
-            </li>
-            <li>
-              <div class="flex-start flex items-center pt-2 md:block md:pt-0">
-                <div class="-ml-[5px] mr-3 h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0 md:-mt-[28px]"></div>
-                <p class="mt-2 text-sm text-misaTeal">13.09.2021</p>
-              </div>
-              <div class="mt-2 ml-4 pb-5 md:ml-0">
-                <h4 class="mb-1.5 text-xl font-semibold">Title of section 2</h4>
-              </div>
-            </li>
-            <li>
-              <div class="flex-start flex items-center pt-2 md:block md:pt-0">
-                <div class="-ml-[5px] mr-3 h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0 md:-mt-[28px]"></div>
-                <p class="mt-2 text-sm text-misaTeal">25.11.2021</p>
-              </div>
-              <div class="mt-2 ml-4 pb-5 md:ml-0">
-                <h4 class="mb-1.5 text-xl font-semibold">Title of section 3</h4>
-              </div>
-            </li>
+          <ol class="border-l border-misaTeal grid grid-cols-[1fr_2fr_2fr_2fr_1fr] md:gap-6 md:border-l-0 md:border-t-[16px] -mx-12 w-3/4 relative">
+            <li>{/* adds empty space */}</li>
+            <div className="relative text-center">
+              <li className="absolute flex flex-col gap-12 items-center -top-7 right-0">
+                <div class="h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
+                <h4 class="text-xl font-bold absolute -top-20">
+                  Application Deadline
+                </h4>
+                <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
+                  Mar 8, 8PM
+                </p>
+              </li>
+            </div>
+            <div className="relative text-center">
+              <li className="absolute flex flex-col gap-12 items-center -top-7 right-0">
+                <div class="h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
+                <h4 class="text-xl font-bold absolute -top-20">
+                  Campaign Period
+                </h4>
+                <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
+                  Mar 20 - 24
+                </p>
+              </li>
+            </div>
+            <div className="relative text-center">
+              <li className="absolute flex flex-col gap-12 items-center -top-7 right-0">
+                <div class="h-[40px] w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
+                <h4 class="text-xl font-bold absolute -top-20">
+                  Miting de Avance
+                </h4>
+                <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
+                  Mar 29, 2PM
+                </p>
+              </li>
+            </div>
+            <div className="relative text-right">
+              <li className="absolute flex flex-col gap-12 items-end -top-7 -right-14">
+                <StaticImage
+                  className={`max-w-[64px] text-center`}
+                  src="../../../static/images/bot-hand.png"
+                />
+                <h4 class="text-xl font-bold absolute -top-12">Elections</h4>
+                <StaticImage
+                  className={`text-center absolute -right-24 w-[240px]`}
+                  src="../../../static/images/ballot-box.png"
+                />
+              </li>
+            </div>
           </ol>
-          <div className="absolute right-0 flex items-center">
+          <div className="absolute bottom-24 right-0 flex items-center">
             <p className="flex flex-col text-right font-bold">
               Results? <span className="text-misaTeal">soon.</span>
             </p>
-            <StaticImage
-              quality={100}
-              className={`max-w-[120px] max-h-[120x] text-center`}
-              src="../../../static/images/misabot-side.png"
-            />
+            <div className="relative">
+              <StaticImage
+                quality={100}
+                className={`max-w-[120px] max-h-[120x] text-center`}
+                src="../../../static/images/misabot-side.png"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -104,7 +124,7 @@ const Elections = () => {
                     image={image.gatsbyImage}
                   />
                 </div>
-                <div className="flex flex-col p-8 justify-between">
+                <div className="flex flex-col p-8 gap-8 justify-between">
                   <div className="text-misaTeal">
                     <h3 className="font-bold text-2xl">{name}</h3>
                     <span className="italic font-thin">{position}</span>
@@ -216,7 +236,7 @@ const Elections = () => {
           <Button variant={'secondary'}>Check Eligibility</Button>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 
