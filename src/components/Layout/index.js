@@ -5,6 +5,7 @@ import '../../../static/styles/global.css'
 import Seo from './SEO'
 import Navigation from './Navbar'
 import Footer from './Footer'
+import Announcement from './Announcement'
 class Template extends React.Component {
   render() {
     const { children } = this.props
@@ -12,6 +13,7 @@ class Template extends React.Component {
     return (
       <>
         <Seo />
+        <Announcement />
         <Navigation />
         <main className="font-montserrat">{children}</main>
         <Footer />

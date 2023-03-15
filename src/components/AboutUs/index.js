@@ -13,13 +13,13 @@ const AboutUs = () => {
     <Layout>
       {/* first frame */}
       <div className="flex-none lg:flex pl-24 pt-24 bg-navbarBlack font-abc">
-        <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-center lg:text-left pb-28 relative">
+        <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-left pb-28 relative">
           <StaticImage
-            className="hidden lg:block absolute right-[-100px] bottom-[-10px] md:w-[40%] lg:w-[30%] xl:w-1/4 2xl:w-[19%]"
+            className="absolute right-[-100px] bottom-[-100px] max-w-[275px] md:max-w-[320px] lg:max-w-[460px]"
             src="../../../static/images/misahexagons.png"
           />
           <div className="w-full lg:w-2/3">
-            <h1 className="text-5xl mb-6 font-extrabold">
+            <h1 className="text-5xl mb-6 font-extrabold text-center lg:text-left">
               Who <span className="text-misaAlternateTeal">MISA</span> is
             </h1>
             <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
@@ -39,20 +39,21 @@ const AboutUs = () => {
               </span>
             </p>
 
-            <Button
+            {/* uncomment when clusters are done */}
+            {/* <Button
               variant="primary"
               className="items-center text-center mb-28"
             >
               See Our Clusters
-            </Button>
+            </Button> */}
           </div>
-
+          {/* 
           <div className="block lg:hidden">
             <StaticImage
               className="w-4/6"
               src="../../../static/images/misahexagons.png"
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
