@@ -29,7 +29,18 @@ const Elections = () => {
     a.name.localeCompare(b.name)
   )
 
-  let filteredData = candidates.filter((candidate) => {
+  let finalCandidatesList = []
+  for (let i = 0; i < electionPositions?.length; i++) {
+    let candidatesFiltered = candidates.filter((candidate) => {
+      return candidate?.position?.title === electionPositions[i]?.title
+    })
+
+    for (let j = 0; j < candidatesFiltered?.length; j++) {
+      finalCandidatesList.push(candidatesFiltered[j])
+    }
+  }
+
+  let filteredData = finalCandidatesList.filter((candidate) => {
     return selected === 'All' ? true : candidate?.position?.title === selected
   })
 
