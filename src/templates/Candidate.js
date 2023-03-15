@@ -22,8 +22,11 @@ export default function CandidateTemplate({ pageContext }) {
   }
   return (
     <Layout>
-      <div className="bg-misaTeal h-[60vh] grid grid-cols-[1fr_2fr] relative px-16 overflow-hidden">
-        <Link to="/elections" className="absolute left-4 top-12 text-white">
+      <div className="bg-misaTeal min-h-[60vh] grid md:grid-cols-2 lg:grid-cols-[1fr_2fr] relative p-8 lg:px-16 md:py-0 overflow-hidden">
+        <Link
+          to="/elections"
+          className="absolute left-8 md:left-4 top-4 md:top-12 text-white"
+        >
           <svg
             width="24"
             height="24"
@@ -37,13 +40,13 @@ export default function CandidateTemplate({ pageContext }) {
             />
           </svg>
         </Link>
-        <div className="bg-gray-400 relative">
+        <div className="mt-8 md:mt-0 h-96 md:h-auto relative z-20">
           <img
             src={image.file.url}
-            className={`text-center h-full w-full object-cover`}
+            className={`h-full w-full object-cover object-top rounded-xl md:rounded-none`}
           />
         </div>
-        <div className="flex flex-col justify-end gap-8 p-16 text-white">
+        <div className="flex flex-col justify-end gap-8 py-8 p-0 md:p-10 lg:p-12 p-16 text-white">
           <div>
             <span className="italic font-thin">{position} candidate</span>
             <h3 className="font-bold text-5xl">{name}</h3>
@@ -55,11 +58,11 @@ export default function CandidateTemplate({ pageContext }) {
         </div>
         <StaticImage
           quality={100}
-          className={`max-w-[320px] absolute -top-14 -right-8 rotate-180`}
+          className={`max-w-[320px] absolute -top-14 -right-8 md:rotate-180 opacity-20 lg:opacity-100`}
           src="../../../static/images/eventshexagons.png"
         />
       </div>
-      <div className="bg-white p-16">
+      <div className="bg-white p-8 lg:px-16">
         <h2 className="text-misaTeal text-5xl font-extrabold">Platforms</h2>
         <div className="py-8 grid gap-4">
           {renderRichText(platforms, options)}
