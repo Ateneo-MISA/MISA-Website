@@ -9,7 +9,7 @@ import { BLOCKS } from '@contentful/rich-text-types'
 
 export default function CandidateTemplate({ pageContext }) {
   const { candidate } = pageContext
-  const { name, position, vision, image, platforms, portfolio } = candidate
+  const { name, position, vision, image, platforms, portfolioDrive } = candidate
   const options = {
     renderNode: {
       [BLOCKS.UL_LIST]: (node, children) => {
@@ -45,10 +45,10 @@ export default function CandidateTemplate({ pageContext }) {
             src={image.file.url}
             className={`h-full w-full object-cover object-top rounded-xl md:rounded-none`}
           />
-          {portfolio && (
+          {portfolioDrive && (
             <div className="absolute bottom-0 rounded-b-xl p-2 bg-[rgba(0,0,0,.5)] w-full text-white">
               <a
-                href={portfolio.file.url}
+                href={portfolioDrive}
                 target="_blank"
                 className="flex gap-2 justify-center"
               >

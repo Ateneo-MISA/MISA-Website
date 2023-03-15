@@ -56,7 +56,7 @@ const Elections = () => {
               We're excited to introduce the candidates for the Editorial Board
               election. These individuals have demonstrated their commitment to
               our community, and we're eager to see what they can bring to the
-              table. us.
+              table.
             </p>
             <p>
               Take some time to learn about each candidate's platform and vision
