@@ -46,7 +46,7 @@ export default function CandidateTemplate({ pageContext }) {
             className={`h-full w-full object-cover object-top rounded-xl md:rounded-none`}
           />
         </div>
-        <div className="flex flex-col justify-end gap-8 py-8 p-0 md:p-10 lg:p-12 p-16 text-white">
+        <div className="flex flex-col justify-end gap-8 py-8 p-0 md:p-10 lg:p-12 text-white">
           <div>
             <span className="italic font-thin">
               {position?.title} candidate

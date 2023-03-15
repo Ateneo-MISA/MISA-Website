@@ -53,13 +53,17 @@ const Elections = () => {
           </h1>
           <div className="grid gap-6 italic font-normal text-xl py-8 text-[#D9E8EC]">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-              tempor pellentesque semper. Vivamus in ipsum ac nulla viverra
-              tincidunt. Etiam non vestibulum justo, ac euismod nunc.{' '}
+              We're excited to introduce the candidates for the Editorial Board
+              election. These individuals have demonstrated their commitment to
+              our community, and we're eager to see what they can bring to the
+              table. us.
             </p>
             <p>
-              Nulla tempor aliquam massa, ac interdum nulla dignissim eget.
-              Mauris a arcu nec metus sagittis congue feugiat ut nisl
+              Take some time to learn about each candidate's platform and vision
+              for the future of our community. Your vote matters and can help
+              shape the direction of our organization. Get ready to cast your
+              vote and help us build a stronger and more vibrant community for
+              all.
             </p>
           </div>
           <div className="flex flex-col md:flex-row gap-6">
@@ -82,11 +86,11 @@ const Elections = () => {
         />
       </div>
       <div className="p-8 lg:p-12">
-        <div className="bg-[#DCE7EB] rounded-xl h-[90vh] md:h-[80vh] p-8 md:p-12 md:pb-36 flex flex-col justify-around relative">
+        <div className="bg-[#DCE7EB] rounded-xl h-full md:h-[80vh] p-8 md:p-12 md:pb-36 flex flex-col justify-around relative">
           <h2 className="text-misaTeal text-3xl sm:text-4xl md:text-5xl font-bold text-center">
             MISAlalan 2023 Timeline
           </h2>
-          <ol class="border-misaTeal mt-8 md:mt-0 flex flex-col gap-8 sm:gap-16 md:grid md:grid-cols-[1fr_2fr_2fr_2fr_1fr] h-full border-l-[8px] md:h-auto md:gap-6 md:border-l-0 md:border-t-[16px] -mx-8 md:-mx-12 !w-full md:w-3/4 md:relative">
+          <ol class="border-misaTeal mt-8 md:mt-0 flex flex-col gap-8 sm:gap-16 md:grid md:grid-cols-[1fr_2fr_2fr_2fr_1fr] h-full border-l-[8px] md:h-auto md:gap-6 md:border-l-0 md:border-t-[16px] -mx-8 md:-mx-12 !w-full md:w-3/4 md:relative mb-12 sm:mb-0">
             <li className="hidden md:block">{/* adds empty space */}</li>
             <div className="relative md:text-center">
               <li className="md:absolute flex flex-col gap-4 md:gap-12 items-start md:items-center ml-8 md:ml-0 -top-7 right-0">
@@ -121,7 +125,7 @@ const Elections = () => {
                 </p>
               </li>
             </div>
-            <div className="relative text-right flex-grow">
+            <div className="hidden md:block relative text-right flex-grow">
               <li className="md:absolute flex md:flex-col gap-4 md:gap-12 items-center md:items-end -top-7 -right-14">
                 <StaticImage
                   className={`max-w-[64px] text-center`}
@@ -134,6 +138,17 @@ const Elections = () => {
                   className={`text-center bottom-0 md:bottom-auto absolute md:-right-14 lg:-right-20 w-[160px] lg:w-[200px]`}
                   src="../../../static/images/ballot-box.png"
                 />
+              </li>
+            </div>
+            <div className="relative md:hidden md:text-center">
+              <li className="md:absolute flex flex-col gap-4 md:gap-12 items-start md:items-center ml-8 md:ml-0 -top-7 right-0">
+                <div class="absolute -left-2 md:relative h-[20px] w-[20px] md:h-[40px] md:w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
+                <h4 class="text-xl font-bold md:absolute md:-top-20">
+                  Elections
+                </h4>
+                <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
+                  Mar 31 - Apr 12
+                </p>
               </li>
             </div>
           </ol>
