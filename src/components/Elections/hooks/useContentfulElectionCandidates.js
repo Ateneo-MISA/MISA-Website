@@ -5,7 +5,9 @@ const ALL_CONTENTFUL_ELECTION_CANDIDATES = graphql`
     allContentfulElectionCandidates {
       nodes {
         name
-        position
+        position {
+          title
+        }
         image {
           gatsbyImage(
             aspectRatio: 1.5

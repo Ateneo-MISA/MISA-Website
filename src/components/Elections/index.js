@@ -1,17 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Layout from '../Layout'
 import Button from '../Elements/Button'
 import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import useElectionCandidates from './hooks/useContentfulElectionCandidates'
+import useContentfulWebsitePages from '../../hooks/useContentfulWebsitePages'
+import useContentfulElectionPositions from './hooks/useContentfulElectionPositions'
+
+import FilterBar from '../Elements/FilterBar'
 
 const Elections = () => {
-  const candidates = useElectionCandidates()
+  let electionPositions = useContentfulElectionPositions().sort((a, b) => {
+    return a?.orderOnWebsite - b?.orderOnWebsite
+  })
+
+  const [selected, setSelected] = useState('All')
+  let headers = ['All']
+  for (let i = 0; i < electionPositions.length; i++) {
+    headers.push(electionPositions[i].title)
+  }
+
+  let isVoteActive = useContentfulWebsitePages().filter((page) => {
+    return page?.name === 'Vote'
+  })[0]?.activeOnWebsite
+
+  const candidates = useElectionCandidates().sort((a, b) =>
+    a.name.localeCompare(b.name)
+  )
+
+  let filteredData = candidates.filter((candidate) => {
+    return selected === 'All' ? true : candidate?.position?.title === selected
+  })
 
   return (
     <Layout>
-      <div className="bg-navbarBlack min-h-96 text-white p-8 pt-12 pb-24 md:p-16 relative overflow-hidden">
+      <div className="bg-navbarBlack min-h-96 text-white p-8 pt-12 pb-24 md:p-16 relative overflow-hidden font-abc">
         <div className="md:w-2/3">
           <h1 className="text-4xl font-bold">
             <span className="text-misaTeal">MISA</span>lalan 2023
@@ -28,12 +52,16 @@ const Elections = () => {
             </p>
           </div>
           <div className="flex flex-col md:flex-row gap-6">
-            <Button variant={'primary'}>How to Vote?</Button>
-            <Button
-              className={`border-[1px] border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white`}
-            >
-              Check Candidates
-            </Button>
+            <a href="#howtovote">
+              <Button variant={'primary'}>How to Vote?</Button>
+            </a>
+            <a href="#candidates">
+              <Button
+                className={`border-[1px] border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white`}
+              >
+                Check Candidates
+              </Button>
+            </a>
           </div>
         </div>
         <StaticImage
@@ -112,12 +140,19 @@ const Elections = () => {
           </div>
         </div>
       </div>
-      <div className="p-8">
+      <div id="candidates" className="p-8">
         <h2 className="text-misaTeal text-4xl font-bold text-center pb-8">
           Candidates for Executive Board
         </h2>
+
+        <FilterBar
+          options={headers}
+          setSelected={setSelected}
+          selected={selected}
+        />
+
         <div className="grid md:grid-cols-2 gap-8">
-          {candidates.map((candidate, index) => {
+          {filteredData.map((candidate, index) => {
             const { image, name, position } = candidate
             const slug = name
               .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -131,14 +166,14 @@ const Elections = () => {
               >
                 <div className="relative h-96 md:h-auto">
                   <img
-                    src={image.file.url}
+                    src={image ? image.file.url : null}
                     className={`text-center h-full w-full object-cover object-top`}
                   />
                 </div>
                 <div className="flex flex-col p-8 gap-8 justify-between">
-                  <div className="text-misaTeal">
-                    <h3 className="font-bold text-2xl">{name}</h3>
-                    <span className="italic font-thin">{position}</span>
+                  <div>
+                    <h3 className="font-bold text-2xl text-misaTeal">{name}</h3>
+                    <span className="italic">{position?.title}</span>
                   </div>
                   <Link to={`/elections/${slug}`}>
                     <Button
@@ -153,7 +188,10 @@ const Elections = () => {
           })}
         </div>
       </div>
-      <div className="bg-misaTeal py-12 px-8 relative overflow-hidden">
+      <div
+        id="howtovote"
+        className="bg-misaTeal py-12 px-8 relative overflow-hidden"
+      >
         <div className="text-white text-center pb-8">
           <h2 className="text-4xl font-bold">Ready to Vote?</h2>
           <span className="font-thin italic">
@@ -199,7 +237,9 @@ const Elections = () => {
           />
         </div>
         <div className="text-center py-4 pt-16">
-          <Button variant={'secondary'}>Check Eligibility</Button>
+          <Button disabled={isVoteActive ? false : true} variant={'secondary'}>
+            {isVoteActive ? `Check Eligibility` : 'Coming soon!'}
+          </Button>
         </div>
       </div>
     </Layout>

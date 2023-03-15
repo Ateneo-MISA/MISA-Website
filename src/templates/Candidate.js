@@ -48,7 +48,9 @@ export default function CandidateTemplate({ pageContext }) {
         </div>
         <div className="flex flex-col justify-end gap-8 py-8 p-0 md:p-10 lg:p-12 p-16 text-white">
           <div>
-            <span className="italic font-thin">{position} candidate</span>
+            <span className="italic font-thin">
+              {position?.title} candidate
+            </span>
             <h3 className="font-bold text-5xl">{name}</h3>
           </div>
           <div>

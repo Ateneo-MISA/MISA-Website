@@ -39,12 +39,13 @@ const AboutUs = () => {
               </span>
             </p>
 
-            <Button
+            {/* uncomment when clusters are done */}
+            {/* <Button
               variant="primary"
               className="items-center text-center mb-28"
             >
               See Our Clusters
-            </Button>
+            </Button> */}
           </div>
 
           <div className="block lg:hidden">

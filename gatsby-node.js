@@ -34,7 +34,9 @@ exports.createPages = async ({ graphql, actions }) => {
               allContentfulElectionCandidates {
                 nodes {
                   name
-                  position
+                  position {
+                    title
+                  }
                   vision {
                     vision
                   }
