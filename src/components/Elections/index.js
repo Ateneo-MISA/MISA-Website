@@ -51,7 +51,7 @@ const Elections = () => {
           <h1 className="text-4xl font-bold">
             <span className="text-misaTeal">MISA</span>lalan 2023
           </h1>
-          <div className="grid gap-6 italic font-thin py-8">
+          <div className="grid gap-6 italic font-normal text-xl py-8 text-[#D9E8EC]">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
               tempor pellentesque semper. Vivamus in ipsum ac nulla viverra
@@ -205,7 +205,7 @@ const Elections = () => {
       >
         <div className="text-white text-center pb-8">
           <h2 className="text-4xl font-bold">Ready to Vote?</h2>
-          <span className="font-thin italic">
+          <span className="font-normal text-xl italic">
             Follow these three steps to participate in the MISAlalan 2023!
           </span>
         </div>
@@ -217,7 +217,7 @@ const Elections = () => {
               className={`max-w-[60px] md:max-w-[100px] text-center`}
               src="../../../static/images/id-icon.png"
             />
-            <p className="font-thin italic">
+            <p className="font-normal text-xl italic">
               Prepare ID Number Check Eligibility
             </p>
           </div>
@@ -229,7 +229,9 @@ const Elections = () => {
               className={`max-w-[60px] md:max-w-[100px] text-center`}
               src="../../../static/images/vote-icon.png"
             />
-            <p className="font-thin italic">Vote for favored candidate</p>
+            <p className="font-normal text-xl  italic">
+              Vote for favored candidate
+            </p>
           </div>
           <hr className="w-48 border-4 -mx-16 hidden md:block" />
           <div className="grid text-center items-center justify-center justify-items-center text-white w-96 gap-2 md:gap-8 md:h-48">
@@ -239,7 +241,7 @@ const Elections = () => {
               className={`max-w-[60px] md:max-w-[100px] text-center`}
               src="../../../static/images/ballot-icon.png"
             />
-            <p className="font-thin italic">Submit Ballot</p>
+            <p className="font-normal text-xl italic">Submit Ballot</p>
           </div>
           <StaticImage
             quality={100}
