@@ -48,6 +48,11 @@ exports.createPages = async ({ graphql, actions }) => {
                   platforms {
                     raw
                   }
+                  portfolio {
+                    file {
+                      url
+                    }
+                  }
                 }
               }
             }

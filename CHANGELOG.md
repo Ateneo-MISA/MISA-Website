@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [MD] [#72](https://github.com/Ateneo-MISA/MISA-Website/issues/72) vote(feature): add portfolio for candidates
 - [MD] [#69](https://github.com/Ateneo-MISA/MISA-Website/issues/69) vote(feature): add elections and candidates pages
 - [KF] [#64](https://github.com/Ateneo-MISA/MISA-Website/issues/64) app(feature): add environment to config
 - [KF] [#61](https://github.com/Ateneo-MISA/MISA-Website/issues/61) app(feature): add and reorganize contentful queries
