@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import Layout from '../Layout'
 import Button from '../Elements/Button'
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import useElectionCandidates from './hooks/useContentfulElectionCandidates'
 import useContentfulWebsitePages from '../../hooks/useContentfulWebsitePages'
@@ -154,7 +154,7 @@ const Elections = () => {
           </ol>
           <div className="absolute bottom-0 md:bottom-32 lg:bottom-24 right-0 flex items-center gap-2 sm:gap-0">
             <p className="flex flex-col text-right font-bold">
-              Results? <span className="text-misaTeal">soon.</span>
+              Results? <span className="text-misaTeal">April 14.</span>
             </p>
             <div className="relative">
               <StaticImage
@@ -193,6 +193,7 @@ const Elections = () => {
                 <div className="relative h-96 md:h-auto">
                   <img
                     src={image ? image.file.url : null}
+                    alt="candidateImage"
                     className={`text-center h-full w-full object-cover object-top`}
                   />
                 </div>
@@ -266,7 +267,11 @@ const Elections = () => {
         </div>
         <div className="text-center py-4 pt-16">
           <Button disabled={isVoteActive ? false : true} variant={'secondary'}>
-            {isVoteActive ? `Check Eligibility` : 'Coming soon!'}
+            {isVoteActive ? (
+              <Link to="/vote">Check Eligibility</Link>
+            ) : (
+              'Coming soon!'
+            )}
           </Button>
         </div>
       </div>

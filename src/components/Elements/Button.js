@@ -1,6 +1,7 @@
 import React from 'react'
+import Loader from './Loader'
 
-const Button = ({ children, disabled, variant, className, onClick }) => {
+const Button = ({ children, disabled, variant, className, onClick, loading }) => {
   return (
     <button
       className={`text-xl text-abc py-2.5 px-5 rounded-md hover:cursor-pointer duration-200 ${className} ${
@@ -19,7 +20,7 @@ const Button = ({ children, disabled, variant, className, onClick }) => {
       disabled={disabled}
       onClick={onClick}
     >
-      {children}
+      {loading ? <Loader width={'50px'} /> : children}
     </button>
   )
 }

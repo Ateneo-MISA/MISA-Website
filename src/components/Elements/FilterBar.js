@@ -12,6 +12,9 @@ const FilterBar = ({ className, options, setSelected, selected }) => {
                 : 'text-[#2096A1] bg-[#D9E8EC]'
             } font-medium py-2 px-4 rounded-xl hover:cursor-pointer hover:bg-[#2096A1] hover:text-white duration-200`}
             onClick={() => setSelected(option)}
+            onKeyDown={() => setSelected(option)}
+            role="button"
+            tabIndex={0}
             key={index}
           >
             {option}

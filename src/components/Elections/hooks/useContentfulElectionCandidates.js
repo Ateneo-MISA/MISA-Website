@@ -5,6 +5,7 @@ const ALL_CONTENTFUL_ELECTION_CANDIDATES = graphql`
     allContentfulElectionCandidates {
       nodes {
         name
+        airtableRecordId
         position {
           title
         }
