@@ -234,7 +234,7 @@ const Elections = () => {
               src="../../../static/images/id-icon.png"
             />
             <p className="font-normal text-xl italic">
-              Prepare ID Number Check Eligibility
+              Prepare ID number and OBF email to check eligibility
             </p>
           </div>
           <hr className="w-48 border-4 -mx-16 hidden md:block" />
@@ -271,7 +271,13 @@ const Elections = () => {
               <Button variant="secondary">Check Eligibility</Button>
             </Link>
           ) : (
+<<<<<<< HEAD
             <Button variant="secondary" disabled={true}></Button>
+=======
+            <Button variant="secondary" disabled={true}>
+              Coming soon!
+            </Button>
+>>>>>>> da207da (vote(feature): add coming soon text in button)
           )}
         </div>
       </div>
