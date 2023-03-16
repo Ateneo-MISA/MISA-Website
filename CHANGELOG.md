@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#76](https://github.com/Ateneo-MISA/MISA-Website/issues/76) vote(feature): fix hero text
 - [MD] [#72](https://github.com/Ateneo-MISA/MISA-Website/issues/72) vote(feature): add portfolio for candidates
 - [MD] [#69](https://github.com/Ateneo-MISA/MISA-Website/issues/69) vote(feature): add elections and candidates pages
 - [KF] [#64](https://github.com/Ateneo-MISA/MISA-Website/issues/64) app(feature): add environment to config

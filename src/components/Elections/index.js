@@ -53,7 +53,7 @@ const Elections = () => {
           </h1>
           <div className="grid gap-6 italic font-normal text-xl py-8 text-[#D9E8EC]">
             <p>
-              We're excited to introduce the candidates for the Editorial Board
+              We're excited to introduce the candidates for the Executive Board
               election. These individuals have demonstrated their commitment to
               our community, and we're eager to see what they can bring to the
               table.
