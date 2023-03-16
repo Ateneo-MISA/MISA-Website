@@ -1,7 +1,17 @@
 import React from 'react'
 import Loader from './Loader'
 
-const Button = ({ children, disabled, variant, className, onClick, loading }) => {
+const Button = ({
+  children,
+  disabled,
+  variant,
+  className,
+  onClick,
+  loading,
+}) => {
+  if (loading) {
+    disabled = true
+  }
   return (
     <button
       className={`text-xl text-abc py-2.5 px-5 rounded-md hover:cursor-pointer duration-200 ${className} ${
@@ -10,17 +20,17 @@ const Button = ({ children, disabled, variant, className, onClick, loading }) =>
           : variant === 'secondary'
           ? 'bg-[#D9E8EC] text-[#2097A2] hover:bg-white hover:text-[#2097A2]'
           : variant === 'tertiary'
-          ? 'border-2 border-[#FFFFFF] text-white hover:bg-[#FFFFFF] hover:text-black'
+          ? 'border-2 border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-black'
           : ''
       } ${
         disabled
           ? 'bg-[#E5E5E5] text-[#6B7279] hover:bg-[#E5E5E5] hover:text-[#6B7279] hover:cursor-default'
           : ''
       }`}
-      disabled={disabled}
+      disabled={loading || disabled}
       onClick={onClick}
     >
-      {loading ? <Loader width={'50px'} /> : children}
+      {loading ? <Loader variant="primary" width={'20px'} /> : children}
     </button>
   )
 }
