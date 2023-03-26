@@ -9,6 +9,10 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
     voteDispatch({ type: 'SET_VOTER_ID_NUMBER', payload: event.target.value })
   }
 
+  const handleVoterEmailChange = (event) => {
+    voteDispatch({ type: 'SET_VOTER_EMAIL', payload: event.target.value })
+  }
+
   const handleCheckForEligibility = () => {
     voteDispatch({ type: 'SET_HAS_CLICKED_ELIGIBILITY_BUTTON', payload: true })
     voteDispatch({ type: 'SET_VOTER_HAS_VOTED', payload: null })
@@ -16,8 +20,12 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
 
     for (let i = 0; i < votersData?.length; i++) {
       let idNumberChecker = votersData[i]?.IDNumber
+      let emailChecker = votersData[i]?.Email
 
-      if (idNumberChecker === voteState?.voterIDNumber) {
+      if (
+        idNumberChecker === voteState?.voterIDNumber &&
+        emailChecker === voteState?.voterEmail
+      ) {
         if (votersData[i]?.HasAlreadyVoted) {
           voteDispatch({ type: 'SET_VOTER_HAS_VOTED', payload: true })
           break
@@ -43,49 +51,66 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
   }
 
   return (
-    <div className="text-center">
-      <h2 className="text-5xl">Form: Check Eligbility</h2>
-      <p className="my-4">
-        please enter your id number to check if you are eligible for voting
+    <div className="mx-12 md:mx-24">
+      <h2 className="text-5xl font-extrabold text-misaTeal mt-12 text-center">
+        Check Eligibility
+      </h2>
+      <p className="my-4 italic text-center">
+        Please enter your ID number and OBF email to check if you are eligible
+        for voting.
       </p>
-      <form>
+
+      <div className="flex flex-col min-[1000px]:flex-row justify-center items-center md:text-center mt-12">
         <input
-          className="w-1/2 box-border p-4 border-4 my-4"
+          className="box-border border-[3px] rounded-[20px] px-6 py-8 my-5 text-xl mr-5 w-full min-[1000px]:w-1/4"
           type="text"
+          placeholder="ID Number"
           onChange={handleVoterIDChange}
           value={voteState?.voterIDNumber}
-        ></input>
-      </form>
-      <Button
-        className="mb-4"
-        variant="primary"
-        onClick={handleCheckForEligibility}
-        disabled={!voteState?.voterIDNumber}
-      >
-        Check Eligbility
-      </Button>
-
-      {voteState?.hasClickedEligibilityButton ? (
-        voteState?.voterHasVoted ? (
-          <p>
-            You have already voted. Please check your email for the
-            confirmation. If this is not the case, please contact us at misa.com
-          </p>
-        ) : voteState?.voterIsEligible ? (
-          <p>Congratulations! You are eligible for voting. Please proceed.</p>
-        ) : (
-          <p>
-            Sorry, but you are not eligible for voting. If you think this is a
-            mistake, please contact us at misa.com
-          </p>
-        )
-      ) : null}
-
-      {voteState?.voterIsEligible ? (
-        <Button variant="primary" onClick={handleProceedToVotingForm}>
-          Next
+        />
+        <input
+          className="w-full min-[1000px]:w-1/2 box-border border-[3px] rounded-[20px] px-6 py-8 my-5 text-xl mr-5"
+          type="text"
+          placeholder="OBF Email"
+          onChange={handleVoterEmailChange}
+          value={voteState?.voterEmail}
+        />
+        <Button
+          className="rounded-[20px] px-6 py-8 my-5"
+          variant="primary"
+          onClick={handleCheckForEligibility}
+          disabled={!voteState?.voterIDNumber || !voteState?.voterEmail}
+        >
+          CHECK
         </Button>
-      ) : null}
+      </div>
+      <div className="text-center min-[1000px]:text-left min-[1000px]:pl-24">
+        {voteState?.hasClickedEligibilityButton ? (
+          voteState?.voterHasVoted ? (
+            <p className="text-[#FF0000]">
+              Sorry, you can only vote once. If you think this is a mistake,
+              please contact the AdHoc Committee
+            </p>
+          ) : voteState?.voterIsEligible ? (
+            <p className="text-[#2097A2]">
+              You are eligible! Please click on the button below
+            </p>
+          ) : (
+            <p className="text-[#FF0000]">
+              Sorry, ite seems that you're not eligible to vote. If you think
+              this is a mistake, please contact the AdHoc Committee
+            </p>
+          )
+        ) : null}
+      </div>
+
+      <div className="flex w-full mt-20 pb-40 justify-center">
+        {voteState?.voterIsEligible ? (
+          <Button variant="primary" onClick={handleProceedToVotingForm}>
+            Next
+          </Button>
+        ) : null}
+      </div>
     </div>
   )
 }
