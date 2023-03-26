@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Button from '../Elements/Button'
 import useContentfulElectionCandidates from '../../components/Elections/hooks/useContentfulElectionCandidates'
@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBan } from '@fortawesome/free-solid-svg-icons'
 
 const VotingFormTab = ({ voteState, voteDispatch }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   let positions = useContentfulElectionPositions()
     ?.filter((position) => {
       return position?.activeOnWebsite
@@ -60,7 +64,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
       <h2 className="text-5xl text-center font-extrabold text-misaTeal mt-12">
         Vote
       </h2>
-      <p className="my-4 text-center italic text-xl">
+      <p className="my-4 text-center italic text-xl mx-4">
         Please choose the candidates that you would like to vote for.
       </p>
       <form className="px-12 lg:px-24">
@@ -82,7 +86,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                   return (
                     <div
                       role="button"
-                      className={`flex flex-row group ease-in duration-150 items-center mt-5 py-0 rounded-xl ${
+                      className={`flex flex-row group ease-in duration-100 items-center mt-5 py-0 rounded-xl ${
                         voteState[positionNameInState] ===
                         candidate?.airtableRecordId
                           ? 'bg-[#2097A2] text-white border-[#2097A2]'
@@ -107,11 +111,11 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                       <img
                         src={candidate?.image?.file?.url}
                         alt="candidateImage"
-                        className="absolute w-[135px] h-[135px] rounded-md rounded-r-none"
+                        className="absolute w-[137px] h-[135px] rounded-md rounded-r-none"
                       />
 
                       <div
-                        className={`flex border-2 border-l-0 w-full h-[135px] rounded-xl ease-in duration-150 ${
+                        className={`flex border-2 border-l-0 w-full h-[135px] rounded-xl ease-in duration-100 ${
                           voteState[positionNameInState] ===
                           candidate?.airtableRecordId
                             ? 'border-[#2097A2]'
@@ -119,7 +123,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                         } `}
                       >
                         <p
-                          className={`flex items-center pl-36 sm:pl-44 italic px-5 text-xl duration-150 ease-in`}
+                          className={`flex items-center pl-36 sm:pl-44 italic px-5 text-xl duration-100 ease-in`}
                         >
                           {candidate?.name}
                         </p>
@@ -129,7 +133,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                 })}
 
                 <div
-                  className={`flex flex-row mt-5 items-centers group ease-in duration-150 border-solid border-2 rounded-xl ${
+                  className={`flex flex-row mt-5 items-centers group ease-in duration-100 border-solid border-2 rounded-xl ${
                     voteState[positionNameInState] ===
                     getAbstainRecordID(positionNameInState)
                       ? 'bg-[#2097A2] text-white border-[#2097A2]'
@@ -153,7 +157,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                   tabIndex={0}
                 >
                   <div
-                    className={`flex items-center px-6 py-6 ease-in duration-150 w-[135px] h-[135px] justify-center rounded-lg rounded-r-none ${
+                    className={`flex items-center px-6 py-6 ease-in duration-100 w-[135px] h-[135px] justify-center rounded-lg rounded-r-none ${
                       voteState[positionNameInState] ===
                       getAbstainRecordID(positionNameInState)
                         ? 'bg-[#2097A2]'
@@ -162,12 +166,12 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                   >
                     <FontAwesomeIcon
                       icon={faBan}
-                      className="w-[60px] h-[60px] rounded-md"
+                      className="w-[80px] h-[60px] rounded-md"
                     />
                   </div>
 
                   <p
-                    className={`flex items-center italic py-5 px-10 text-xl h-[135px] duration-150 ease-in ${
+                    className={`flex items-center italic py-5 px-3 sm:px-10 text-xl h-[135px] duration-100 ease-in ${
                       voteState[positionNameInState] ===
                       getAbstainRecordID(positionNameInState)
                         ? ''
@@ -190,8 +194,8 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
               payload: 'Eligibility',
             })
           }
-          className="mr-20 bg-white border-2 border-[#2097A2]"
-          variant="secondary"
+          className="mr-20"
+          variant="tertiary"
         >
           Back
         </Button>

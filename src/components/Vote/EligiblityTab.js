@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Button from '../Elements/Button'
 
 const EligibilityTab = ({ voteState, voteDispatch }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const votersData = voteState?.votersData
 
   const handleVoterIDChange = (event) => {
@@ -55,7 +59,7 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
       <h2 className="text-5xl font-extrabold text-misaTeal mt-12 text-center">
         Check Eligibility
       </h2>
-      <p className="my-4 italic text-center">
+      <p className="my-4 italic text-center text-xl">
         Please enter your ID number and OBF email to check if you are eligible
         for voting.
       </p>
@@ -67,6 +71,7 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
           placeholder="ID Number"
           onChange={handleVoterIDChange}
           value={voteState?.voterIDNumber}
+          disabled={voteState?.voterIsEligible}
         />
         <input
           className="w-full min-[1000px]:w-1/2 box-border border-[3px] rounded-[20px] px-6 py-8 my-5 text-xl mr-5"
@@ -74,17 +79,22 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
           placeholder="OBF Email"
           onChange={handleVoterEmailChange}
           value={voteState?.voterEmail}
+          disabled={voteState?.voterIsEligible}
         />
         <Button
           className="rounded-[20px] px-6 py-8 my-5"
           variant="primary"
           onClick={handleCheckForEligibility}
-          disabled={!voteState?.voterIDNumber || !voteState?.voterEmail}
+          disabled={
+            !voteState?.voterIDNumber ||
+            !voteState?.voterEmail ||
+            voteState?.voterIsEligible
+          }
         >
           CHECK
         </Button>
       </div>
-      <div className="text-center min-[1000px]:text-left min-[1000px]:pl-24">
+      <div className="text-center">
         {voteState?.hasClickedEligibilityButton ? (
           voteState?.voterHasVoted ? (
             <p className="text-[#FF0000]">
@@ -93,12 +103,13 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
             </p>
           ) : voteState?.voterIsEligible ? (
             <p className="text-[#2097A2]">
-              You are eligible! Please click on the button below
+              Congratulations! You are eligible for voting. Please click on the
+              button below to begin voting.
             </p>
           ) : (
             <p className="text-[#FF0000]">
-              Sorry, ite seems that you're not eligible to vote. If you think
-              this is a mistake, please contact the AdHoc Committee
+              Sorry, it seems that you're not eligible to vote. If you think
+              this is a mistake, please contact the AdHoc Committee.
             </p>
           )
         ) : null}

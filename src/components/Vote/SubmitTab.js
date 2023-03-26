@@ -74,11 +74,11 @@ const SubmitTab = ({ voteState, voteDispatch }) => {
       <h2 className="text-5xl font-extrabold text-misaTeal mt-10 text-center">
         Submit Ballot
       </h2>
-      <p className="my-4 text-center">
-        Please ensure all these details are correct
+      <p className="my-4 text-center text-xl">
+        Please ensure all these details are correct.
       </p>
 
-      <div className="flex flex-col gap-12 sm:gap-4 sm:flex-row items-center text-center justify-center my-10">
+      <div className="flex flex-col gap-12 sm:gap-4 sm:flex-row items-center text-center justify-center my-10 text-xl">
         <div className="w-full sm:w-1/3">
           <p className="italic text-misaTeal">Name</p>
           <p className="mt-4 italic">{voteState?.currentVoterData?.Name}</p>
@@ -121,7 +121,7 @@ const SubmitTab = ({ voteState, voteDispatch }) => {
                   >
                     <FontAwesomeIcon
                       icon={faBan}
-                      className="w-[60px] h-[60px] rounded-md"
+                      className="w-[80px] h-[60px] rounded-md"
                     />
                   </div>
                   {candidates.map((candidate) => {
@@ -161,8 +161,8 @@ const SubmitTab = ({ voteState, voteDispatch }) => {
               payload: 'VotingForm',
             })
           }
-          className="mr-20 bg-white border-2 border-[#31ADAF]"
-          variant="secondary"
+          className="mr-20"
+          variant="tertiary"
         >
           Back
         </Button>

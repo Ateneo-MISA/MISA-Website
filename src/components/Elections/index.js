@@ -266,13 +266,13 @@ const Elections = () => {
           />
         </div>
         <div className="text-center py-4 pt-16">
-          <Button disabled={isVoteActive ? false : true} variant={'secondary'}>
-            {isVoteActive ? (
-              <Link to="/vote">Check Eligibility</Link>
-            ) : (
-              'Coming soon!'
-            )}
-          </Button>
+          {isVoteActive ? (
+            <Link to="/vote">
+              <Button variant="secondary">Check Eligibility</Button>
+            </Link>
+          ) : (
+            <Button variant="secondary" disabled={true}></Button>
+          )}
         </div>
       </div>
     </Layout>
