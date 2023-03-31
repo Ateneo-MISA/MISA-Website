@@ -212,6 +212,7 @@ function UpcomingEvents() {
                       <a
                         href={link}
                         target="_blank"
+                        rel="noreferrer"
                         className="w-8 h-8 absolute right-0 hover:scale-125 duration-150"
                       >
                         <img

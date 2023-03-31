@@ -6,20 +6,17 @@ import Seo from './SEO'
 import Navigation from './Navbar'
 import Footer from './Footer'
 import Announcement from './Announcement'
-class Template extends React.Component {
-  render() {
-    const { children } = this.props
 
-    return (
-      <>
-        <Seo />
-        <Announcement />
-        <Navigation />
-        <main className="font-montserrat">{children}</main>
-        <Footer />
-      </>
-    )
-  }
+const Template = (children) => {
+  return (
+    <div className="min-h-screen">
+      <Seo />
+      <Announcement />
+      <Navigation />
+      <main className="font-montserrat min-h-screen">{children?.children}</main>
+      <Footer />
+    </div>
+  )
 }
 
 export default Template

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { StaticImage, GatsbyImage } from 'gatsby-plugin-image'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import Layout from '../components/Layout/index'
 
@@ -42,6 +42,7 @@ export default function CandidateTemplate({ pageContext }) {
         </Link>
         <div className="mt-8 md:mt-0 h-96 md:h-auto relative z-20">
           <img
+            alt="candidateImage"
             src={image.file.url}
             className={`h-full w-full object-cover object-top rounded-xl md:rounded-none`}
           />
@@ -50,6 +51,7 @@ export default function CandidateTemplate({ pageContext }) {
               <a
                 href={portfolioDrive}
                 target="_blank"
+                rel="noreferrer"
                 className="flex gap-2 justify-center"
               >
                 <p>Portfolio</p>

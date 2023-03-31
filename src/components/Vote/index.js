@@ -2,13 +2,13 @@ import React, { useEffect, useReducer } from 'react'
 
 import Layout from '../Layout/index'
 import { getRecords } from '../../services/airtable'
+import { StaticImage } from 'gatsby-plugin-image'
 
+import Loader from '../Elements/Loader'
 import ActiveTab from './ActiveTab'
 import { VoteReducer, initialState } from '../../context/VoteReducer'
 
 import useContentfulElectionPositions from './hooks/useContentfulElectionPositions'
-
-// const VoteContext = React.createContext()
 
 const Vote = () => {
   let positionsData = useContentfulElectionPositions()
@@ -31,18 +31,81 @@ const Vote = () => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     getData()
   }, [])
 
   return (
     <Layout>
-      {/* <VoteContext.Provider value={{ voteState, voteDispatch }}> */}
       {voteState?.votersData ? (
-        <div className="font-abc mt-20">
-          <div className="flex text-center justify-around mb-8">
-            <p className="bg-misaTeal">1 Check Eligbility</p>
-            <p className="ml-4">2 Vote</p>
-            <p className="ml-4">3 Submit</p>
+        <div className="font-abc my-10 sm:my-20">
+          <div className="flex flex-col sm:flex-row text-center justify-center mb-8">
+            <div
+              className={`text-misaTeal flex flex-col items-center
+            ${
+              voteState?.activeTab === 'VotingForm'
+                ? 'opacity-30 max-[900px]:hidden'
+                : voteState?.activeTab === 'Submit'
+                ? 'opacity-30 max-[900px]:hidden'
+                : voteState?.activeTab === 'Finish'
+                ? 'opacity-30 max-[900px]:hidden'
+                : ''
+            } 
+            `}
+            >
+              <h1 className="text-4xl font-extrabold">1</h1>
+              <StaticImage
+                quality={100}
+                className={`max-w-[60px] md:max-w-[100px] mt-2 text-center`}
+                src="../../../static/images/id-blue.png"
+              />
+              <p className="text-base">Check Eligibility</p>
+            </div>
+
+            <div className="border-t-2 border-[#D9E8EC] mx-8 mt-24 w-1/4 max-[900px]:hidden"></div>
+            <div
+              className={`text-misaTeal flex flex-col justify-center items-center
+              ${
+                voteState?.activeTab === 'Eligibility'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : voteState?.activeTab === 'Submit'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : voteState?.activeTab === 'Finish'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : ''
+              }  
+            `}
+            >
+              <h1 className="text-4xl font-extrabold">2</h1>
+              <StaticImage
+                quality={100}
+                className={`max-w-[60px] md:max-w-[80px] my-3 text-center`}
+                src="../../../static/images/checkbox-blue.png"
+              />
+              <p className="text-base">Vote</p>
+            </div>
+            <div className="border-t-2 border-[#D9E8EC] mx-8 mt-24 w-1/4 max-[900px]:hidden"></div>
+            <div
+              className={`text-misaTeal flex flex-col items-center
+              ${
+                voteState?.activeTab === 'Eligibility'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : voteState?.activeTab === 'VotingForm'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : voteState?.activeTab === 'Finish'
+                  ? 'opacity-30 max-[900px]:hidden'
+                  : ''
+              } 
+            `}
+            >
+              <h1 className="text-4xl font-extrabold">3</h1>
+              <StaticImage
+                quality={100}
+                className={`max-w-[60px] md:max-w-[100px] mt-3 text-center`}
+                src="../../../static/images/voting-ballot-blue.png"
+              />
+              <p className="text-base">Submit</p>
+            </div>
           </div>
 
           <ActiveTab
@@ -52,8 +115,11 @@ const Vote = () => {
             positionsData={positionsData}
           />
         </div>
-      ) : null}
-      {/* </VoteContext.Provider> */}
+      ) : (
+        <div className="m-auto text-center mt-20">
+          <Loader width="150px" color="#31ADAF" variant="primary" />
+        </div>
+      )}
     </Layout>
   )
 }

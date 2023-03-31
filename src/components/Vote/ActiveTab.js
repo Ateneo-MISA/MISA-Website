@@ -28,7 +28,11 @@ const ActiveTab = ({ activeTab, voteState, voteDispatch, positionsData }) => {
         />
       )
     case 'Finish':
-      return <FinishTab />
+      return (
+        <FinishTab
+          voteDispatch={voteDispatch}
+        />
+      )
     default:
       return <EligibilityTab />
   }

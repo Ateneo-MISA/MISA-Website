@@ -3,8 +3,6 @@ import React from 'react'
 import Layout from '../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
 
-import Button from '../Elements/Button'
-
 const AboutUs = () => {
   let dateToday = new Date().getFullYear()
   let currentMisaYear = dateToday - 1994

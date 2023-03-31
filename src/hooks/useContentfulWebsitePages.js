@@ -6,6 +6,8 @@ const ALL_CONTENFUL_WEBSITE_PAGES = graphql`
       nodes {
         name
         activeOnWebsite
+        navbarItem
+        path
       }
     }
   }

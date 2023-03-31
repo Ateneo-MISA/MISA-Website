@@ -6,6 +6,8 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF MF] [#82](https://github.com/ateneomisa/MISA-Website/issues/82) vote(feature): fix ux/ui bugs 230326
+- [KF MF] [#80](https://github.com/ateneomisa/MISA-Website/issues/80) vote(feature): add voting
 - [KF] [#76](https://github.com/Ateneo-MISA/MISA-Website/issues/76) vote(feature): fix hero text
 - [MD] [#72](https://github.com/Ateneo-MISA/MISA-Website/issues/72) vote(feature): add portfolio for candidates
 - [MD] [#69](https://github.com/Ateneo-MISA/MISA-Website/issues/69) vote(feature): add elections and candidates pages

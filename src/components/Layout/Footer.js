@@ -30,6 +30,7 @@ const Footer = () => {
                   src="/external-link.svg"
                   height="20"
                   width="20"
+                  alt="misaBot"
                 />
               </div>
             </Link>
