@@ -13,9 +13,12 @@ html * {
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
+/* swiperjs pagination bullet styling */
+.swiper-pagination-eservs-projects > .swiper-pagination-bullet {
+  background-color: #2097A2 !important;
 }
-body {
-  min-height: 100%;
+
+.swiper-pagination-eservs-projects > .swiper-pagination-bullet-active {
+  background-color: #2097A2 !important;
+  border: 4px solid #2097A2 !important;
 }
