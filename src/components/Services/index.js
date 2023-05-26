@@ -14,7 +14,6 @@ import useContentfulServicesProjects from './hooks/useContentfulServicesProjects
 
 const EServices = () => {
   const projects = useContentfulServicesProjects()
-  console.log('PROJECTS', projects)
 
   const services = [
     {
