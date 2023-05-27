@@ -9,12 +9,24 @@ import FAQDrawer from './FAQDrawer'
 
 import useContentfulMerch from './hooks/useContentfulMerch'
 import useContentfulMerchFAQ from './hooks/useContentfulMerchFAQ'
+import { Link } from 'gatsby'
 
 const Merch = () => {
+  const [selected, setSelected] = useState('A-Z')
   let allMerch = useContentfulMerch()
+
+  if (selected === 'A-Z') {
+    allMerch.sort((a, b) => a.name.localeCompare(b.name))
+  } else if (selected === 'Z-A') {
+    allMerch.sort((a, b) => b.name.localeCompare(a.name))
+  } else if (selected === '$$$ → $') {
+    allMerch.sort((a, b) => a?.price - b?.price)
+  } else if (selected === '$ → $$$') {
+    allMerch.sort((a, b) => b?.price - a?.price)
+  }
+
   let allMerchFAQ = useContentfulMerchFAQ()
 
-  const [selected, setSelected] = useState('A-Z')
   const options = ['A-Z', 'Z-A', '$$$ → $', '$ → $$$']
   return (
     <Layout>
@@ -62,19 +74,26 @@ const Merch = () => {
         <div className="mt-9">
           <div className="mb-16 flex flex-wrap gap-16 justify-center">
             {allMerch.map((merch) => {
+              const slug = merch?.name
+                .replace(/([a-z])([A-Z])/g, '$1-$2')
+                .replace(/[\s_]+/g, '-')
+                .toLowerCase()
+
               return (
-                <div>
-                  <img
-                    className="h-[400px] w-[400px]"
-                    src={merch?.photo?.file?.url}
-                  />
-                  <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
-                    <p className="text-2xl font-extrabold">{merch?.name}</p>
-                    <p className="text-2xl font-extrabold text-[#31ADAF]">
-                      ₱{merch?.price}
-                    </p>
+                <Link to={`/merch/${slug}`}>
+                  <div>
+                    <img
+                      className="h-[400px] w-[400px]"
+                      src={merch?.photo?.file?.url}
+                    />
+                    <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
+                      <p className="text-2xl font-extrabold">{merch?.name}</p>
+                      <p className="text-2xl font-extrabold text-[#31ADAF]">
+                        ₱{merch?.price}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               )
             })}
           </div>

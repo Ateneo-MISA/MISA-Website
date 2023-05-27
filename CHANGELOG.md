@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#92](https://github.com/ateneomisa/MISA-Website/issues/92) merch(feature): add individual product page
 - [KF] [#90](https://github.com/ateneomisa/MISA-Website/issues/90) merch(feature): add landing page
 - [MD] [#89](https://github.com/ateneomisa/MISA-Website/issues/89) services(feature): add services page
 - [KF] [#85](https://github.com/ateneomisa/MISA-Website/issues/85) vote(feature): add coming soon text in button
