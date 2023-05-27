@@ -26,6 +26,13 @@ const ALL_CONTENTFUL_MERCH = graphql`
             url
           }
         }
+        categories {
+          name
+        }
+        categoryName
+        description {
+          raw
+        }
       }
     }
   }

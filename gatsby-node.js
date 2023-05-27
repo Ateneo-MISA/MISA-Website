@@ -76,6 +76,64 @@ exports.createPages = async ({ graphql, actions }) => {
             })
           })
         }
+
+        if (allActivePages[i]?.name === 'Individual Products') {
+          const individualProductTemplate = path.resolve(
+            './src/templates/IndividualProduct.js'
+          )
+          const ALL_CONTENTFUL_MERCH = await graphql(`
+            query ContentfulMerch {
+              allContentfulMerch {
+                nodes {
+                  name
+                  price
+                  photo {
+                    gatsbyImage(
+                      aspectRatio: 1.5
+                      backgroundColor: ""
+                      breakpoints: 10
+                      cropFocus: CENTER
+                      fit: COVER
+                      formats: AUTO
+                      height: 130
+                      layout: FIXED
+                      outputPixelDensities: 1.5
+                      placeholder: DOMINANT_COLOR
+                      quality: 10
+                      sizes: ""
+                      width: 130
+                    )
+                    file {
+                      url
+                    }
+                  }
+                  categories {
+                    name
+                  }
+                  categoryName
+                  description {
+                    raw
+                  }
+                }
+              }
+            }
+          `)
+
+          const merch = ALL_CONTENTFUL_MERCH.data.allContentfulMerch.nodes
+          merch.map((product) => {
+            const { name } = product
+            const slug = name
+              .replace(/([a-z])([A-Z])/g, '$1-$2')
+              .replace(/[\s_]+/g, '-')
+              .toLowerCase()
+
+            createPage({
+              path: `/merch/${slug}`,
+              component: individualProductTemplate,
+              context: { product },
+            })
+          })
+        }
       }
       if (allActivePages[i]?.name === 'Specific Events') {
         const specificEventTemplate = path.resolve(
