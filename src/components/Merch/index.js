@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { Link } from 'gatsby'
 
 import Layout from '../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -9,9 +10,10 @@ import FAQDrawer from './FAQDrawer'
 
 import useContentfulMerch from './hooks/useContentfulMerch'
 import useContentfulMerchFAQ from './hooks/useContentfulMerchFAQ'
-import { Link } from 'gatsby'
+import { MerchContext } from './MerchContext'
 
 const Merch = () => {
+  const { cart } = useContext(MerchContext)
   const [selected, setSelected] = useState('A-Z')
   let allMerch = useContentfulMerch()
 
@@ -57,10 +59,15 @@ const Merch = () => {
               />
             </a>
 
-            <StaticImage
-              className="w-[50px] h-[50px] cursor-pointer"
-              src="../../../static/images/merchCart.png"
-            />
+            <Link className="relative" to="/merch/cart">
+              <StaticImage
+                className="w-[50px] h-[50px] cursor-pointer"
+                src="../../../static/images/merchCart.png"
+              />
+              <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#31ADAF] rounded-full flex items-center justify-center">
+                <p class="text-white text-center ">{cart?.length}</p>
+              </div>
+            </Link>
           </div>
         </div>
         <div className="mt-9 flex">

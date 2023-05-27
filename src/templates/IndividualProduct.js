@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 
 import Layout from '../components/Layout/index'
@@ -9,7 +9,10 @@ import Button from '../components/Elements/Button'
 
 import useContentfulMerch from '../components/Merch/hooks/useContentfulMerch'
 
+import { MerchContext } from '../components/Merch/MerchContext'
+
 const IndividualProduct = ({ pageContext }) => {
+  const { cart, addToCart } = useContext(MerchContext)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [quantity, setQuantity] = useState(0)
 
@@ -26,18 +29,38 @@ const IndividualProduct = ({ pageContext }) => {
     randomMerch.push(randomElement)
   }
 
+  let numberOfCurrentItemInCart = 0
+  for (let i = 0; i < cart.length; i++) {
+    if (pageContext?.product?.name === cart[i]?.name) {
+      numberOfCurrentItemInCart += 1
+    }
+  }
+
   return (
     <Layout>
       <div className="m-16">
-        <a href="/merch">
-          <div className="flex">
+        <div className="flex justify-between">
+          <Link to="/merch">
+            <div className="flex">
+              <StaticImage
+                className="w-[30px] h-[30px] mr-4"
+                src="../../static/images/merchBack.png"
+              />
+              <p className="text-[#31ADAF] text-lg">Back to merch</p>
+            </div>
+          </Link>
+
+          <Link className="relative" to="/merch/cart">
             <StaticImage
-              className="w-[30px] h-[30px] mr-4"
-              src="../../static/images/merchBack.png"
+              className="w-[50px] h-[50px]"
+              src="../../static/images/merchCart.png"
             />
-            <p className="text-[#31ADAF] text-lg">Back to merch</p>
-          </div>
-        </a>
+
+            <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#31ADAF] rounded-full flex items-center justify-center">
+              <p class="text-white text-center ">{numberOfCurrentItemInCart}</p>
+            </div>
+          </Link>
+        </div>
 
         <div className="mt-5 lg:flex gap-7">
           <img
@@ -101,6 +124,9 @@ const IndividualProduct = ({ pageContext }) => {
             </div>
 
             <Button
+              onClick={() =>
+                addToCart(quantity, pageContext?.product, selectedCategory)
+              }
               disabled={
                 quantity <= 0
                   ? true
