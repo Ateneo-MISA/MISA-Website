@@ -16,6 +16,7 @@ const Payment = () => {
           <p className="text-5xl font-extrabold">Merch Payment</p>
         </div>
         <iframe
+          title="Airtable Payment Form"
           className="airtable-embed w-full min-h-screen"
           src="https://airtable.com/embed/shre3nTO7P1ecSLHF?backgroundColor=purple"
         />

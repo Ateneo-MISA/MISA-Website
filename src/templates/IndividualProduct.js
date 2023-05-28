@@ -37,7 +37,7 @@ const IndividualProduct = ({ pageContext }) => {
 
       setRandomMerch(threeRandomProducts)
     }
-  }, [])
+  }, [randomMerch.length, allMerch])
 
   let numberOfCurrentItemInCart = 0
   for (let i = 0; i < cart.length; i++) {
@@ -79,6 +79,7 @@ const IndividualProduct = ({ pageContext }) => {
 
         <div className="mt-5 lg:flex gap-7">
           <img
+            alt="merchPhoto"
             className="lg:h-[600px] lg:w-[600px]"
             src={pageContext?.product?.photo?.file?.url}
           />
@@ -101,7 +102,7 @@ const IndividualProduct = ({ pageContext }) => {
                 <div className="flex flex-wrap gap-3">
                   {pageContext?.product?.categories?.map((category) => {
                     return (
-                      <div
+                      <button
                         className={`${
                           selectedCategory === category?.name
                             ? 'text-xl font-medium py-2 px-12 text-white border-2 border-md border-[#2097A2] bg-[#2097A2] rounded-md ease-in duration-150'
@@ -110,7 +111,7 @@ const IndividualProduct = ({ pageContext }) => {
                         onClick={() => setSelectedCategory(category?.name)}
                       >
                         {category?.name}
-                      </div>
+                      </button>
                     )
                   })}
                 </div>
@@ -120,21 +121,21 @@ const IndividualProduct = ({ pageContext }) => {
             <div className="mt-6">
               <p className="text-xl font-medium mb-3">Quantity</p>
               <div className="text-xl font-medium py-2 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] w-[200px] flex justify-around">
-                <p
+                <button
                   className="cursor-pointer"
                   onClick={() =>
                     quantity > 0 ? setQuantity(quantity - 1) : null
                   }
                 >
                   -
-                </p>
+                </button>
                 <p>{quantity}</p>
-                <p
+                <button
                   className="cursor-pointer"
                   onClick={() => setQuantity(quantity + 1)}
                 >
                   +
-                </p>
+                </button>
               </div>
             </div>
 
@@ -176,6 +177,7 @@ const IndividualProduct = ({ pageContext }) => {
                 <Link to={`/merch/${slug}`}>
                   <div>
                     <img
+                      alt="merchPhoto"
                       className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />

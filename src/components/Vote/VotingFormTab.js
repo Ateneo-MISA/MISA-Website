@@ -84,22 +84,13 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
               <div>
                 {specificPositionCandidates?.map((candidate) => {
                   return (
-                    <div
-                      role="button"
+                    <button
                       className={`flex flex-row group ease-in duration-100 items-center mt-5 py-0 rounded-xl ${
                         voteState[positionNameInState] ===
                         candidate?.airtableRecordId
                           ? 'bg-[#2097A2] text-white border-[#2097A2]'
                           : 'text-misaTeal cursor-pointer hover:bg-[#D9E8EC] hover:border-[#D9E8EC]'
                       }`}
-                      onKeyDown={() =>
-                        handleChooseCandidate({
-                          name: candidate?.name,
-                          position: candidate?.position?.title,
-                          airtableRecordId: candidate?.airtableRecordId,
-                        })
-                      }
-                      tabIndex={0}
                       onClick={() =>
                         handleChooseCandidate({
                           name: candidate?.name,
@@ -128,24 +119,17 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                           {candidate?.name}
                         </p>
                       </div>
-                    </div>
+                    </button>
                   )
                 })}
 
-                <div
+                <button
                   className={`flex flex-row mt-5 items-centers group ease-in duration-100 border-solid border-2 rounded-xl ${
                     voteState[positionNameInState] ===
                     getAbstainRecordID(positionNameInState)
                       ? 'bg-[#2097A2] text-white border-[#2097A2]'
                       : 'border-[#D9E8EC] text-misaTeal cursor-pointer hover:bg-[#D9E8EC] hover:border-[#D9E8EC]'
                   }`}
-                  onKeyDown={() =>
-                    handleChooseCandidate({
-                      name: 'Abstain',
-                      position: position?.title,
-                      airtableRecordId: getAbstainRecordID(positionNameInState),
-                    })
-                  }
                   onClick={() =>
                     handleChooseCandidate({
                       name: 'Abstain',
@@ -153,8 +137,6 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                       airtableRecordId: getAbstainRecordID(positionNameInState),
                     })
                   }
-                  role="button"
-                  tabIndex={0}
                 >
                   <div
                     className={`flex items-center px-6 py-6 ease-in duration-100 w-[135px] h-[135px] justify-center rounded-lg rounded-r-none ${
@@ -180,7 +162,7 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                   >
                     Abstain
                   </p>
-                </div>
+                </button>
               </div>
             </div>
           )

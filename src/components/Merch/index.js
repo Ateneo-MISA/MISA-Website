@@ -98,6 +98,7 @@ const Merch = () => {
                 <Link to={`/merch/${slug}`}>
                   <div>
                     <img
+                      alt="merchPhoto"
                       className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
