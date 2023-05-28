@@ -5,20 +5,17 @@ const FilterBar = ({ className, options, setSelected, selected }) => {
     <div className={`${className} flex gap-4 my-4 flex-wrap`}>
       {options.map((option, index) => {
         return (
-          <div
+          <button
             className={`${
               selected === option
                 ? 'bg-[#2096A1] text-white'
                 : 'text-[#2096A1] bg-[#D9E8EC]'
             } font-medium py-2 px-4 rounded-xl hover:cursor-pointer hover:bg-[#2096A1] hover:text-white duration-200`}
             onClick={() => setSelected(option)}
-            onKeyDown={() => setSelected(option)}
-            role="button"
-            tabIndex={0}
             key={index}
           >
             {option}
-          </div>
+          </button>
         )
       })}
     </div>

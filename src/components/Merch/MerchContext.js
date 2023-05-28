@@ -54,8 +54,6 @@ export const MerchContextProvider = ({ children }) => {
   const updateItemQuantity = (index, operation) => {
     if (operation === 'add') {
       let item = cart[index]
-      console.log(item)
-      console.log(cart)
       item.quantity += 1
       item.totalPrice = item.price * item.quantity
       let updatedCart = cart.map((cartItem) => {

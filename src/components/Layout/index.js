@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import React from 'react'
 
 import '../../../static/styles/variables.css'
 import '../../../static/styles/global.css'

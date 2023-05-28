@@ -29,7 +29,7 @@ const Complete = () => {
 
       setRandomMerch(threeRandomProducts)
     }
-  }, [])
+  }, [allMerch, randomMerch.length])
 
   return (
     <Layout>

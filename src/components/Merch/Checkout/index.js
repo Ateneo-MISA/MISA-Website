@@ -1,14 +1,20 @@
-import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState, useContext, useEffect } from 'react'
+import axios from 'axios'
 import { Link, navigate } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleUser,
+  faArrowLeftLong,
+} from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../../../components/Layout/index'
 import Button from '../../Elements/Button'
 
 import { MerchContext } from '../MerchContext'
 import { getRecords, createRecord } from '../../../services/airtable'
+
+const GATSBY_MERCH_SEND_EMAIL_WEBHOOK =
+  process.env.GATSBY_MERCH_SEND_EMAIL_WEBHOOK
 
 const Checkout = () => {
   const [loading, setLoading] = useState(false)
@@ -164,8 +170,38 @@ const Checkout = () => {
         },
       })
     }
-    emptyCart()
+
     setOrderNumber(orderNumber)
+
+    let contactInformationBody = `Full Name: ${fullName}<br>Email: ${email}<br>Contact Number: ${contactNumber}<br>Facebook Link: ${facebookLink}<br>Mode of Delivery: ${modeOfDelivery}<br>Address: ${
+      fullAddress || 'N/A'
+    }`
+
+    let orderBody = `Order Number: <b>${orderNumber}</b><br><br>${cart.map(
+      (item) => {
+        return `${item?.name} ${
+          item?.selectedCategory ? `(${item?.selectedCategory})` : ''
+        }: ${item?.quantity}pc${item?.quantity > 1 ? 's' : ''} - ₱${parseFloat(
+          item?.totalPrice
+        ).toFixed(2)}<br>`
+      }
+    )}<br>Shipping: ₱${
+      modeOfDelivery === 'ship'
+        ? withinMetroManila
+          ? parseFloat(54.0).toFixed(2)
+          : parseFloat(64.0).toFixed(2)
+        : parseFloat(0.0).toFixed(2)
+    }<br><br>Total Price: ₱${parseFloat(total).toFixed(2)}<br>`.replace(',', '')
+
+    await axios.post(GATSBY_MERCH_SEND_EMAIL_WEBHOOK, {
+      email,
+      fullName,
+      orderBody,
+      contactInformationBody,
+      orderNumber,
+    })
+
+    emptyCart()
     navigate('/merch/complete')
     setLoading(false)
   }
@@ -398,20 +434,23 @@ const Checkout = () => {
             </div>
 
             <div className="mt-8 flex justify-between">
-              <Link to="/merch/cart">
+              <Link
+                to="/merch/cart"
+                className="group text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
+              >
                 <div className="flex">
-                  <StaticImage
+                  <FontAwesomeIcon
                     className="w-[30px] h-[30px] mr-4"
-                    src="../../../../static/images/merchBack.png"
+                    icon={faArrowLeftLong}
                   />
-                  <p className="text-[#31ADAF] text-lg">Back to cart</p>
+                  <p className="text-lg">Back to cart</p>
                 </div>
               </Link>
 
               <Button
                 loading={loading}
                 onClick={handleSubmit}
-                className="w-1/3"
+                className="w-1/3 mb-12"
                 variant="primary"
                 disabled={checkIfConfirmButtonShouldBeDisabled()}
               >

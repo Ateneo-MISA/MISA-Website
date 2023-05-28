@@ -11,7 +11,6 @@ import Layout from '../../Layout/index'
 import Button from '../../Elements/Button'
 
 import { MerchContext } from '../MerchContext'
-import { update } from 'lodash'
 
 const Cart = () => {
   const [cartTotal, setCartTotal] = useState(0)
@@ -64,6 +63,7 @@ const Cart = () => {
                   <tr>
                     <td className="p-5 border-b-2 border-[#D9E8EC] flex">
                       <img
+                        alt="merchPhoto"
                         className="h-[200px] w-[200px]"
                         src={item?.photoURL}
                       />
@@ -82,7 +82,7 @@ const Cart = () => {
                     <td className="py-5 border-b-2 border-[#D9E8EC]">
                       <div className="flex">
                         <div className="text-xl font-medium py-2 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] w-[200px] flex justify-around">
-                          <p
+                          <button
                             className="cursor-pointer"
                             onClick={() =>
                               item?.quantity > 1
@@ -91,16 +91,16 @@ const Cart = () => {
                             }
                           >
                             -
-                          </p>
+                          </button>
                           <p>{item?.quantity}</p>
-                          <p
+                          <button
                             className="cursor-pointer"
                             onClick={() => updateItemQuantity(index, 'add')}
                           >
                             +
-                          </p>
+                          </button>
                         </div>
-                        <div
+                        <button
                           className="cursor-pointer"
                           onClick={() => deleteFromCart(index)}
                         >
@@ -108,7 +108,7 @@ const Cart = () => {
                             className="w-[30px] h-[30px] ml-2 mt-2"
                             src="../../../../static/images/trash.png"
                           />
-                        </div>
+                        </button>
                       </div>
                     </td>
                     <td className="py-5 border-b-2 border-[#D9E8EC] text-right">
@@ -138,6 +138,7 @@ const Cart = () => {
                   <div className="mt-6">
                     <div className="flex">
                       <img
+                        alt="merchPhoto"
                         src={item?.photoURL}
                         className="w-[100px] h-[100px]"
                       />
@@ -169,7 +170,7 @@ const Cart = () => {
                           <td className="border-b-2 border-[#D9E8EC] pb-6">
                             <div className="flex justify-center">
                               <div className="text-xl font-medium py-2 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] w-[100px] flex justify-around">
-                                <p
+                                <button
                                   className="cursor-pointer"
                                   onClick={() =>
                                     item?.quantity > 1
@@ -178,18 +179,18 @@ const Cart = () => {
                                   }
                                 >
                                   -
-                                </p>
+                                </button>
                                 <p>{item?.quantity}</p>
-                                <p
+                                <button
                                   className="cursor-pointer"
                                   onClick={() =>
                                     updateItemQuantity(index, 'add')
                                   }
                                 >
                                   +
-                                </p>
+                                </button>
                               </div>
-                              <div
+                              <button
                                 className="cursor-pointer"
                                 onClick={() => deleteFromCart(index)}
                               >
@@ -197,7 +198,7 @@ const Cart = () => {
                                   className="w-[30px] h-[30px] ml-2 mt-2"
                                   src="../../../../static/images/trash.png"
                                 />
-                              </div>
+                              </button>
                             </div>
                           </td>
                           <td className="border-b-2 border-[#D9E8EC] pb-6">
