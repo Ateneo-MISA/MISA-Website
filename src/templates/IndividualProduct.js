@@ -1,8 +1,12 @@
 import React from 'react'
-import { useState, useContext } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { useState, useContext, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faShoppingCart,
+  faArrowLeftLong,
+} from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../components/Layout/index'
 import Button from '../components/Elements/Button'
@@ -14,19 +18,26 @@ const IndividualProduct = ({ pageContext }) => {
   const { cart, addToCart } = useContext(MerchContext)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [quantity, setQuantity] = useState(0)
+  const [randomMerch, setRandomMerch] = useState([])
 
   let allMerch = useContentfulMerch()?.filter((product) => {
     return product?.name !== pageContext?.product?.name
   })
 
-  let allMerchCopy = allMerch.slice()
-  let randomMerch = []
+  useEffect(() => {
+    if (randomMerch.length === 0) {
+      let allMerchCopy = allMerch.slice()
+      let threeRandomProducts = []
 
-  while (randomMerch.length < 3 && allMerchCopy.length > 0) {
-    var randomIndex = Math.floor(Math.random() * allMerchCopy.length)
-    var randomElement = allMerchCopy.splice(randomIndex, 1)[0]
-    randomMerch.push(randomElement)
-  }
+      while (threeRandomProducts.length < 3 && allMerchCopy.length > 0) {
+        var randomIndex = Math.floor(Math.random() * allMerchCopy.length)
+        var randomElement = allMerchCopy.splice(randomIndex, 1)[0]
+        threeRandomProducts.push(randomElement)
+      }
+
+      setRandomMerch(threeRandomProducts)
+    }
+  }, [])
 
   let numberOfCurrentItemInCart = 0
   for (let i = 0; i < cart.length; i++) {
@@ -39,22 +50,28 @@ const IndividualProduct = ({ pageContext }) => {
     <Layout>
       <div className="m-16">
         <div className="flex justify-between">
-          <Link to="/merch">
+          <Link
+            to="/merch"
+            className="group text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
+          >
             <div className="flex">
-              <StaticImage
+              <FontAwesomeIcon
                 className="w-[30px] h-[30px] mr-4"
-                src="../../static/images/merchBack.png"
+                icon={faArrowLeftLong}
               />
-              <p className="text-[#31ADAF] text-lg">Back to merch</p>
+              <p className="text-lg">Back to merch</p>
             </div>
           </Link>
 
-          <Link className="relative" to="/merch/cart">
-            <StaticImage
+          <Link
+            className="relative text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150 group"
+            to="/merch/cart"
+          >
+            <FontAwesomeIcon
               className="w-[50px] h-[50px] cursor-pointer"
-              src="../../../static/images/merchCart.png"
+              icon={faShoppingCart}
             />
-            <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#31ADAF] rounded-full flex items-center justify-center">
+            <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#2097A2] group-hover:bg-[#31ADAF] rounded-full flex items-center justify-center">
               <p class="text-white text-center ">{numberOfCurrentItemInCart}</p>
             </div>
           </Link>
@@ -70,7 +87,7 @@ const IndividualProduct = ({ pageContext }) => {
               {pageContext?.product?.name}
             </p>
             <p className="mt-2 text-3xl font-extrabold text-[#31ADAF]">
-              ₱{pageContext?.product?.price}
+              ₱{parseFloat(pageContext?.product?.price).toFixed(2)}
             </p>
             <p className="mt-6 grid gap-4">
               {renderRichText(pageContext?.product?.description)}
@@ -159,13 +176,13 @@ const IndividualProduct = ({ pageContext }) => {
                 <Link to={`/merch/${slug}`}>
                   <div>
                     <img
-                      className="h-[400px] w-[400px]"
+                      className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
                     <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
                       <p className="text-2xl font-extrabold">{merch?.name}</p>
                       <p className="text-2xl font-extrabold text-[#31ADAF]">
-                        ₱{merch?.price}
+                        ₱{parseFloat(merch?.price).toFixed(2)}
                       </p>
                     </div>
                   </div>

@@ -1,6 +1,11 @@
 import React from 'react'
 import { useState, useContext } from 'react'
 import { Link } from 'gatsby'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faShoppingCart,
+  faCircleQuestion,
+} from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
@@ -22,9 +27,9 @@ const Merch = () => {
   } else if (selected === 'Z-A') {
     allMerch.sort((a, b) => b.name.localeCompare(a.name))
   } else if (selected === '$$$ → $') {
-    allMerch.sort((a, b) => a?.price - b?.price)
-  } else if (selected === '$ → $$$') {
     allMerch.sort((a, b) => b?.price - a?.price)
+  } else if (selected === '$ → $$$') {
+    allMerch.sort((a, b) => a?.price - b?.price)
   }
 
   let allMerchFAQ = useContentfulMerchFAQ()
@@ -53,25 +58,28 @@ const Merch = () => {
 
           <div className="flex">
             <a href="#FAQ">
-              <StaticImage
-                className="w-[50px] h-[50px] mr-9 cursor-pointer"
-                src="../../../static/images/merchFAQ.png"
+              <FontAwesomeIcon
+                className="w-[50px] h-[50px] mr-9 cursor-pointer text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
+                icon={faCircleQuestion}
               />
             </a>
 
-            <Link className="relative" to="/merch/cart">
-              <StaticImage
+            <Link
+              className="relative text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150 group"
+              to="/merch/cart"
+            >
+              <FontAwesomeIcon
                 className="w-[50px] h-[50px] cursor-pointer"
-                src="../../../static/images/merchCart.png"
+                icon={faShoppingCart}
               />
-              <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#31ADAF] rounded-full flex items-center justify-center">
+              <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#2097A2] group-hover:bg-[#31ADAF] rounded-full flex items-center justify-center">
                 <p class="text-white text-center ">{cart?.length}</p>
               </div>
             </Link>
           </div>
         </div>
         <div className="mt-9 flex">
-          <p className="my-4 mr-3">Sort By</p>
+          <p className="my-4 mr-3 mt-6">Sort By</p>
           <FilterBar
             options={options}
             setSelected={setSelected}
@@ -90,13 +98,13 @@ const Merch = () => {
                 <Link to={`/merch/${slug}`}>
                   <div>
                     <img
-                      className="h-[400px] w-[400px]"
+                      className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
                     <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
                       <p className="text-2xl font-extrabold">{merch?.name}</p>
                       <p className="text-2xl font-extrabold text-[#31ADAF]">
-                        ₱{merch?.price}
+                        ₱{parseFloat(merch?.price).toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -108,9 +116,9 @@ const Merch = () => {
 
         <div className="mt-9" id="FAQ">
           <div className="flex mb-5">
-            <StaticImage
-              className="w-[50px] h-[50px] mr-5"
-              src="../../../static/images/merchFAQ.png"
+            <FontAwesomeIcon
+              className="w-[50px] h-[50px] mr-5 text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
+              icon={faCircleQuestion}
             />
             <h1 className="text-5xl font-extrabold">MISA Merch FAQs</h1>
           </div>
