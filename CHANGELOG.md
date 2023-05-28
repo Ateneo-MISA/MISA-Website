@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#98](https://github.com/ateneomisa/MISA-Website/issues/98) merch(feature): add payment page
 - [KF] [#96](https://github.com/ateneomisa/MISA-Website/issues/96) merch(feature): add checkout pages and mechanics
 - [KF] [#94](https://github.com/ateneomisa/MISA-Website/issues/94) merch(feature): add cart page and mechanics
 - [KF] [#92](https://github.com/ateneomisa/MISA-Website/issues/92) merch(feature): add individual product page
