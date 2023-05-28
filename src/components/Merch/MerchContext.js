@@ -6,6 +6,7 @@ export const MerchContext = React.createContext()
 export const MerchContextProvider = ({ children }) => {
   // Define your global state or functions here
   const [cart, setCart] = useState([])
+  const [orderNumber, setOrderNumber] = useState(null)
 
   const addToCart = (quantity, product, selectedCategory) => {
     let sameItem = false
@@ -79,7 +80,14 @@ export const MerchContextProvider = ({ children }) => {
   // Make the global context and its values accessible to all child components
   return (
     <MerchContext.Provider
-      value={{ cart, addToCart, deleteFromCart, updateItemQuantity }}
+      value={{
+        cart,
+        addToCart,
+        deleteFromCart,
+        updateItemQuantity,
+        orderNumber,
+        setOrderNumber,
+      }}
     >
       {children}
     </MerchContext.Provider>
