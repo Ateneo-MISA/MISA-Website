@@ -1,6 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../../Layout/index'
 import Button from '../../Elements/Button'
@@ -10,17 +12,24 @@ import { MerchContext } from '../MerchContext'
 
 const Complete = () => {
   const { orderNumber } = useContext(MerchContext)
+  const [randomMerch, setRandomMerch] = useState([])
 
   let allMerch = useContentfulMerch()
 
-  let allMerchCopy = allMerch.slice()
-  let randomMerch = []
+  useEffect(() => {
+    if (randomMerch.length === 0) {
+      let allMerchCopy = allMerch.slice()
+      let threeRandomProducts = []
 
-  while (randomMerch.length < 3 && allMerchCopy.length > 0) {
-    var randomIndex = Math.floor(Math.random() * allMerchCopy.length)
-    var randomElement = allMerchCopy.splice(randomIndex, 1)[0]
-    randomMerch.push(randomElement)
-  }
+      while (threeRandomProducts.length < 3 && allMerchCopy.length > 0) {
+        var randomIndex = Math.floor(Math.random() * allMerchCopy.length)
+        var randomElement = allMerchCopy.splice(randomIndex, 1)[0]
+        threeRandomProducts.push(randomElement)
+      }
+
+      setRandomMerch(threeRandomProducts)
+    }
+  }, [])
 
   return (
     <Layout>
@@ -34,9 +43,9 @@ const Complete = () => {
           </div>
           <div>
             <div className="flex mt-5 lg:mt-0">
-              <StaticImage
-                class="w-[50px] h-[50px] mr-4"
-                src="../../../../static/images/merchFinished.png"
+              <FontAwesomeIcon
+                className="w-[50px] h-[50px] mr-4 text-[#2097A2]"
+                icon={faCheckCircle}
               />
               <p className="text-3xl lg:text-5xl font-extrabold text-[#2097A2]">
                 Thank you for purchasing!
@@ -93,7 +102,7 @@ const Complete = () => {
                   <div>
                     <img
                       alt="merch"
-                      className="h-[400px] w-[400px]"
+                      className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
                     <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">

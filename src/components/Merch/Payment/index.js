@@ -1,5 +1,6 @@
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faReceipt } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../../../components/Layout/index'
 
@@ -8,9 +9,9 @@ const Payment = () => {
     <Layout>
       <div className="m-12">
         <div className="flex">
-          <StaticImage
-            class="w-[50px] h-[50px] mr-4"
-            src="../../../../static/images/merchPayment.png"
+          <FontAwesomeIcon
+            className="w-[50px] h-[50px] mr-4 text-[#2097A2]"
+            icon={faReceipt}
           />
           <p className="text-5xl font-extrabold">Merch Payment</p>
         </div>

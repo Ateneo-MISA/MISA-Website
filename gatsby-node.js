@@ -127,6 +127,8 @@ exports.createPages = async ({ graphql, actions }) => {
               .replace(/[\s_]+/g, '-')
               .toLowerCase()
 
+            console.log(slug)
+
             createPage({
               path: `/merch/${slug}`,
               component: individualProductTemplate,

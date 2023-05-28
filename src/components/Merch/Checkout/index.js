@@ -1,6 +1,8 @@
 import { StaticImage } from 'gatsby-plugin-image'
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../../../components/Layout/index'
 import Button from '../../Elements/Button'
@@ -38,10 +40,9 @@ const Checkout = () => {
   const [facebookLink, setFacebookLink] = useState(null)
   const [fullAddress, setFullAddress] = useState(null)
   const [withinMetroManila, setWithinMetroManila] = useState(false)
-  const [modeOfPayment, setModeOfPayment] = useState(null)
   const [firstAcknowledgment, setFirstAcknowledgment] = useState(false)
   const [secondAcknowledgment, setSecondAcknowledgment] = useState(false)
-  const { cart, setOrderNumber } = useContext(MerchContext)
+  const { cart, emptyCart, setOrderNumber } = useContext(MerchContext)
 
   const timestamp = Date.now().toString()
   const randomNumber = Math.floor(Math.random() * 10000)
@@ -84,10 +85,6 @@ const Checkout = () => {
     setWithinMetroManila(!withinMetroManila)
   }
 
-  const handleModeOfPaymentChange = (event) => {
-    setModeOfPayment(event.target.value)
-  }
-
   const handleFirstAcknowledgmentChange = () => {
     setFirstAcknowledgment(!firstAcknowledgment)
   }
@@ -104,7 +101,6 @@ const Checkout = () => {
       contactNumber &&
       facebookLink &&
       modeOfDelivery &&
-      modeOfPayment &&
       firstAcknowledgment &&
       secondAcknowledgment
     ) {
@@ -138,7 +134,6 @@ const Checkout = () => {
         'Mode of Delivery': modeOfDelivery,
         'Full Address': fullAddress || 'N/A',
         'Within Metro Manila': withinMetroManila,
-        'Mode of Payment': modeOfPayment,
       },
     })
 
@@ -169,18 +164,19 @@ const Checkout = () => {
         },
       })
     }
+    emptyCart()
     setOrderNumber(orderNumber)
-    setLoading(false)
     navigate('/merch/complete')
+    setLoading(false)
   }
 
   return (
     <Layout>
       <div className="m-12">
         <div className="flex">
-          <StaticImage
-            className="w-[50px] h-[50px]"
-            src="../../../../static/images/merchUser.png"
+          <FontAwesomeIcon
+            className="w-[50px] h-[50px] text-[#2097A2]"
+            icon={faCircleUser}
           />
           <p className="text-3xl lg:text-5xl font-extrabold ml-5">
             Your Order Information
@@ -339,87 +335,6 @@ const Checkout = () => {
             </div>
 
             <div className="mt-5">
-              <p className="font-bold">Mode of Payment</p>
-              <label
-                htmlFor="Gcash"
-                className="flex items-center cursor-pointer mt-5"
-              >
-                <input
-                  id="Gcash"
-                  type="radio"
-                  name="modeOfDelivery"
-                  value="Gcash"
-                  className="hidden"
-                  checked={modeOfPayment === 'Gcash'}
-                  onChange={handleModeOfPaymentChange}
-                />
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
-                  {modeOfPayment === 'Gcash' && (
-                    <svg
-                      className="w-5 h-5 text-white fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.293 6.293l-10 10-4.293-4.293c-.39-.39-1.024-.39-1.414 0-.39.39-.39 1.024 0 1.414l5 5c.39.39 1.024.39 1.414 0l11-11c.39-.39.39-1.024 0-1.414-.39-.39-1.024-.39-1.414 0z" />
-                    </svg>
-                  )}
-                </div>
-                <span className="ml-2 text-gray-700">Gcash</span>
-              </label>
-
-              <label
-                htmlFor="BDO"
-                className="flex items-center cursor-pointer mt-5"
-              >
-                <input
-                  id="BDO"
-                  type="radio"
-                  name="modeOfDelivery"
-                  value="BDO"
-                  className="hidden"
-                  checked={modeOfPayment === 'BDO'}
-                  onChange={handleModeOfPaymentChange}
-                />
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
-                  {modeOfPayment === 'BDO' && (
-                    <svg
-                      className="w-5 h-5 text-white fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.293 6.293l-10 10-4.293-4.293c-.39-.39-1.024-.39-1.414 0-.39.39-.39 1.024 0 1.414l5 5c.39.39 1.024.39 1.414 0l11-11c.39-.39.39-1.024 0-1.414-.39-.39-1.024-.39-1.414 0z" />
-                    </svg>
-                  )}
-                </div>
-                <span className="ml-2 text-gray-700">BDO</span>
-              </label>
-
-              <label
-                htmlFor="BPI"
-                className="flex items-center cursor-pointer mt-5"
-              >
-                <input
-                  id="BPI"
-                  type="radio"
-                  name="modeOfDelivery"
-                  value="BPI"
-                  className="hidden"
-                  checked={modeOfPayment === 'BPI'}
-                  onChange={handleModeOfPaymentChange}
-                />
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
-                  {modeOfPayment === 'BPI' && (
-                    <svg
-                      className="w-5 h-5 text-white fill-current"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20.293 6.293l-10 10-4.293-4.293c-.39-.39-1.024-.39-1.414 0-.39.39-.39 1.024 0 1.414l5 5c.39.39 1.024.39 1.414 0l11-11c.39-.39.39-1.024 0-1.414-.39-.39-1.024-.39-1.414 0z" />
-                    </svg>
-                  )}
-                </div>
-                <span className="ml-2 text-gray-700">BPI</span>
-              </label>
-            </div>
-
-            <div className="mt-5">
               <p className="font-bold">Acknowledgments</p>
               <label
                 htmlFor="firstAcknowledgment"
@@ -518,13 +433,18 @@ const Checkout = () => {
                       />
                       <div className="ml-5">
                         <p>{item?.name}</p>
-                        <p className="mt-2">Size: {item?.selectedCategory}</p>
+                        {item?.selectedCategory ? (
+                          <p className="mt-2">Size: {item?.selectedCategory}</p>
+                        ) : null}
+
                         <p className="mt-2">{`${item?.quantity}pc${
                           item.quantity > 1 ? 's' : ''
                         }`}</p>
                       </div>
                     </div>
-                    <p className="font-medium text-xl">₱{item.totalPrice}</p>
+                    <p className="font-medium text-xl">
+                      ₱{parseFloat(item.totalPrice).toFixed(2)}
+                    </p>
                   </div>
                 )
               })}
@@ -533,7 +453,9 @@ const Checkout = () => {
             <div className="py-5 border-b-2 border-[#D9E8EC]">
               <div className="flex justify-between">
                 <p>Subtotal</p>
-                <p className="font-medium text-xl">₱{subTotal}</p>
+                <p className="font-medium text-xl">
+                  ₱{parseFloat(subTotal).toFixed(2)}
+                </p>
               </div>
 
               <div className="flex justify-between">
@@ -542,9 +464,9 @@ const Checkout = () => {
                   ₱
                   {modeOfDelivery === 'ship'
                     ? withinMetroManila
-                      ? 54
-                      : 64
-                    : 0}
+                      ? parseFloat(54.0).toFixed(2)
+                      : parseFloat(64.0).toFixed(2)
+                    : parseFloat(0.0).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -552,7 +474,9 @@ const Checkout = () => {
             <div className="pt-5">
               <div className="flex justify-between">
                 <p className="font-medium text-xl">Total</p>
-                <p className="font-medium text-xl">₱{total}</p>
+                <p className="font-medium text-xl">
+                  ₱{parseFloat(total).toFixed(2)}
+                </p>
               </div>
             </div>
           </div>

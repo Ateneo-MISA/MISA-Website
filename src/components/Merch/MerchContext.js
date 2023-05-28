@@ -54,10 +54,16 @@ export const MerchContextProvider = ({ children }) => {
   const updateItemQuantity = (index, operation) => {
     if (operation === 'add') {
       let item = cart[index]
+      console.log(item)
+      console.log(cart)
       item.quantity += 1
       item.totalPrice = item.price * item.quantity
       let updatedCart = cart.map((cartItem) => {
-        if (item.name === cartItem.name) return item
+        if (
+          item.name === cartItem.name &&
+          item.selectedCategory === cartItem.selectedCategory
+        )
+          return item
         return cartItem
       })
 
@@ -69,12 +75,20 @@ export const MerchContextProvider = ({ children }) => {
       item.quantity -= 1
       item.totalPrice = item.price * item.quantity
       let updatedCart = cart.map((cartItem) => {
-        if (item.name === cartItem.name) return item
+        if (
+          item.name === cartItem.name &&
+          item.selectedCategory === cartItem.selectedCategory
+        )
+          return item
         return cartItem
       })
 
       setCart(updatedCart)
     }
+  }
+
+  const emptyCart = () => {
+    setCart([])
   }
 
   // Make the global context and its values accessible to all child components
@@ -87,6 +101,7 @@ export const MerchContextProvider = ({ children }) => {
         updateItemQuantity,
         orderNumber,
         setOrderNumber,
+        emptyCart,
       }}
     >
       {children}
