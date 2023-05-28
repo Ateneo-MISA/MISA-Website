@@ -1,14 +1,13 @@
-import React, { useContext } from 'react'
-import { useState, useEffect } from 'react'
+import React from 'react'
+import { useState, useContext } from 'react'
 import { StaticImage } from 'gatsby-plugin-image'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
 
 import Layout from '../components/Layout/index'
 import Button from '../components/Elements/Button'
 
 import useContentfulMerch from '../components/Merch/hooks/useContentfulMerch'
-
 import { MerchContext } from '../components/Merch/MerchContext'
 
 const IndividualProduct = ({ pageContext }) => {
@@ -31,7 +30,7 @@ const IndividualProduct = ({ pageContext }) => {
 
   let numberOfCurrentItemInCart = 0
   for (let i = 0; i < cart.length; i++) {
-    if (pageContext?.product?.name === cart[i]?.name) {
+    if (cart[i]?.name === pageContext?.product?.name) {
       numberOfCurrentItemInCart += 1
     }
   }
@@ -52,10 +51,9 @@ const IndividualProduct = ({ pageContext }) => {
 
           <Link className="relative" to="/merch/cart">
             <StaticImage
-              className="w-[50px] h-[50px]"
-              src="../../static/images/merchCart.png"
+              className="w-[50px] h-[50px] cursor-pointer"
+              src="../../../static/images/merchCart.png"
             />
-
             <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#31ADAF] rounded-full flex items-center justify-center">
               <p class="text-white text-center ">{numberOfCurrentItemInCart}</p>
             </div>
@@ -124,9 +122,6 @@ const IndividualProduct = ({ pageContext }) => {
             </div>
 
             <Button
-              onClick={() =>
-                addToCart(quantity, pageContext?.product, selectedCategory)
-              }
               disabled={
                 quantity <= 0
                   ? true
@@ -135,6 +130,9 @@ const IndividualProduct = ({ pageContext }) => {
                     ? false
                     : true
                   : false
+              }
+              onClick={() =>
+                addToCart(quantity, pageContext?.product, selectedCategory)
               }
               variant="primary"
               className="w-full mt-6"

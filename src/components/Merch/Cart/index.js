@@ -35,7 +35,7 @@ const Cart = () => {
           <p className="text-4xl font-extrabold">Your Shopping Cart</p>
         </div>
 
-        <table className="mt-5 w-full">
+        <table className="mt-5 w-full hidden lg:table">
           <thead>
             <tr>
               <th className="border-b-2 border-[#D9E8EC] pb-5 text-[#2097A2] font-normal text-base w-1/2 text-left">
@@ -59,7 +59,7 @@ const Cart = () => {
                   <tr>
                     <td className="p-5 border-b-2 border-[#D9E8EC] flex">
                       <img
-                        className="lg:h-[200px] lg:w-[200px]"
+                        className="h-[200px] w-[200px]"
                         src={item?.photoURL}
                       />
                       <div className="flex justify-center ml-6 flex-col">
@@ -119,6 +119,80 @@ const Cart = () => {
           </tbody>
         </table>
 
+        <div className="mt-5 w-full table lg:hidden">
+          {cart.map((item, index) => {
+            return (
+              <div className="mt-6">
+                <div className="flex">
+                  <img src={item?.photoURL} className="w-[100px] h-[100px]" />
+                  <div className="flex justify-center ml-6 flex-col">
+                    <p className="text-2xl font-extrabold">{item?.name}</p>
+                    <p>Size: {item?.selectedCategory}</p>
+                  </div>
+                </div>
+
+                <table className="w-full mt-6">
+                  <thead>
+                    <tr>
+                      <th className="w-1/3 text-[#2097A2] font-normal text-base text-left">
+                        PRICE
+                      </th>
+                      <th className="w-1/3 text-[#2097A2] font-normal text-base text-center">
+                        QUANTITY
+                      </th>
+                      <th className="w-1/3 text-[#2097A2] font-normal text-base text-right">
+                        TOTAL
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border-b-2 border-[#D9E8EC] pb-6">
+                        <p className="text-left">{item?.price}</p>
+                      </td>
+                      <td className="border-b-2 border-[#D9E8EC] pb-6">
+                        <div className="flex justify-center">
+                          <div className="text-xl font-medium py-2 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] w-[100px] flex justify-around">
+                            <p
+                              className="cursor-pointer"
+                              onClick={() =>
+                                item?.quantity > 1
+                                  ? updateItemQuantity(index, 'subtract')
+                                  : null
+                              }
+                            >
+                              -
+                            </p>
+                            <p>{item?.quantity}</p>
+                            <p
+                              className="cursor-pointer"
+                              onClick={() => updateItemQuantity(index, 'add')}
+                            >
+                              +
+                            </p>
+                          </div>
+                          <div
+                            className="cursor-pointer"
+                            onClick={() => deleteFromCart(index)}
+                          >
+                            <StaticImage
+                              className="w-[30px] h-[30px] ml-2 mt-2"
+                              src="../../../../static/images/trash.png"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="border-b-2 border-[#D9E8EC] pb-6">
+                        <p className="text-right"> {item?.totalPrice}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )
+          })}
+        </div>
+
         <div className="mt-5 text-right">
           <p className="text-2xl font-extrabold">
             SUBTOTAL <span className="text-4xl ml-2">P{cartTotal}</span>
@@ -137,9 +211,15 @@ const Cart = () => {
             </div>
           </Link>
 
-          <Button className="w-1/6" variant="primary">
-            Check out
-          </Button>
+          {cart.length > 0 ? (
+            <Link to="/merch/checkout">
+              <Button variant="primary">Check out</Button>
+            </Link>
+          ) : (
+            <Button variant="primary" disabled="true">
+              Check out
+            </Button>
+          )}
         </div>
       </div>
     </Layout>

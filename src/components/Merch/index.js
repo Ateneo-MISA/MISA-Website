@@ -37,12 +37,12 @@ const Merch = () => {
         className="w-full"
       />
       <div className="m-14">
-        <div className="lg:flex justify-between">
-          <div className="lg:flex">
+        <div className="xl:flex justify-between">
+          <div className="xl:flex">
             <h1 className="text-5xl font-extrabold">MISA Merch 2023: Wave 3</h1>
-            <div className="lg:flex border-2 border-solid border-[#31ADAF] py-2 px-5 rounded-lg lg:ml-10 lg:text-left text-center lg:my-0 my-8">
+            <div className="xl:flex border-2 border-solid border-[#31ADAF] py-2 px-5 rounded-lg xl:ml-10 xl:text-left text-center xl:my-0 my-8">
               <StaticImage
-                className="w-[30px] h-[30px] lg:mr-2"
+                className="w-[30px] h-[30px] xl:mr-2"
                 src="../../../static/images/merchHourglass.png"
               />
               <p className="text-xl text-[#31ADAF]">
@@ -78,7 +78,7 @@ const Merch = () => {
             selected={selected}
           />
         </div>
-        <div className="mt-9">
+        <div className="mt-9 border-b-2 border-[#D9E8EC]">
           <div className="mb-16 flex flex-wrap gap-16 justify-center">
             {allMerch.map((merch) => {
               const slug = merch?.name
@@ -104,7 +104,6 @@ const Merch = () => {
               )
             })}
           </div>
-          <hr />
         </div>
 
         <div className="mt-9" id="FAQ">
