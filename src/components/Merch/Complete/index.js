@@ -106,10 +106,10 @@ const Complete = () => {
                   <div>
                     <img
                       alt="merch"
-                      className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
+                      className="sm:h-[400px] sm:w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
-                    <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
+                    <div className="sm:h-[125px] sm:w-[400px] text-center py-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
                       <p className="text-2xl font-extrabold">{merch?.name}</p>
                       <p className="text-2xl font-extrabold text-[#31ADAF]">
                         ₱{merch?.price}

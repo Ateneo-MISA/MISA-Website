@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#106](https://github.com/ateneomisa/MISA-Website/issues/106) app(feature): add dynamic content integration and universal components
 - [KF] [#104](https://github.com/ateneomisa/MISA-Website/issues/104) merch(feature): add bundle features
 - [KF] [#102](https://github.com/ateneomisa/MISA-Website/issues/102) merch(feature): add checkout email
 - [KF] [#100](https://github.com/ateneomisa/MISA-Website/issues/100) merch(feature): fix ui issues 230528

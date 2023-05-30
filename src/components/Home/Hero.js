@@ -20,7 +20,7 @@ const Hero = () => {
   return (
     <div className={`${styles.hero} font-abc`}>
       <div
-        className={`flex flex-col md:flex-row lg:flex-row pt-20 lg:ml-20 pb-20 lg:pb-10`}
+        className={`flex flex-col md:flex-row lg:flex-row pt-20 lg:ml-20 pb-20 lg:pb-10 lg:h-[650px]`}
       >
         <div className="flex-initial justify-center text-center">
           <StaticImage

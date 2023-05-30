@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { useState, useContext } from 'react'
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,9 +16,14 @@ import FAQDrawer from './FAQDrawer'
 
 import useContentfulMerch from './hooks/useContentfulMerch'
 import useContentfulMerchFAQ from './hooks/useContentfulMerchFAQ'
+import useContentfulDynamicContent from '../../hooks/useContentfulDynamicContent'
 import { MerchContext } from './MerchContext'
 
 const Merch = () => {
+  const dynamicContent = useContentfulDynamicContent()?.filter((content) => {
+    return content?.name === 'MISA Merch Details'
+  })[0]
+
   const { cart } = useContext(MerchContext)
   const [selected, setSelected] = useState('A-Z')
   let allMerch = useContentfulMerch()
@@ -37,21 +43,28 @@ const Merch = () => {
   const options = ['A-Z', 'Z-A', '$$$ → $', '$ → $$$']
   return (
     <Layout>
-      <StaticImage
-        src="../../../static/images/merchHero.png"
+      <img
+        src={dynamicContent?.image?.file?.url}
+        alt="merchHero"
         className="w-full"
       />
       <div className="m-14">
         <div className="xl:flex justify-between">
           <div className="xl:flex">
-            <h1 className="text-5xl font-extrabold">MISA Merch 2023: Wave 3</h1>
+            <h1 className="text-5xl font-extrabold">
+              <span className="text-[#31ADAF]">MISA Merch</span>{' '}
+              {dynamicContent?.content?.content}
+            </h1>
             <div className="xl:flex border-2 border-solid border-[#31ADAF] py-2 px-5 rounded-lg xl:ml-10 xl:text-left text-center xl:my-0 my-8">
               <StaticImage
                 className="w-[30px] h-[30px] xl:mr-2"
                 src="../../../static/images/merchHourglass.png"
               />
               <p className="text-xl text-[#31ADAF]">
-                UNTIL MAY 15, 2023 11:59PM
+                UNTIL{' '}
+                {moment(dynamicContent?.date)
+                  .format('MMMM DD, YYYY h:mm a')
+                  .toUpperCase()}
               </p>
             </div>
           </div>
@@ -99,10 +112,10 @@ const Merch = () => {
                   <div>
                     <img
                       alt="merchPhoto"
-                      className="h-[400px] w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
+                      className="sm:h-[400px] sm:w-[400px] border-r-2 border-b-2 border-l-2 border-t-2 rounded-tr-md rounded-tl-md border-[#D9E8EC]"
                       src={merch?.photo?.file?.url}
                     />
-                    <div className="h-[125px] w-[400px] text-center pt-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
+                    <div className="sm:h-[125px] sm:w-[400px] text-center py-8 px-14 border-r-2 border-b-2 border-l-2 rounded-b-md border-[#D9E8EC]">
                       <p className="text-2xl font-extrabold">{merch?.name}</p>
                       <p className="text-2xl font-extrabold text-[#31ADAF]">
                         ₱{parseFloat(merch?.price).toFixed(2)}

@@ -20,7 +20,7 @@ const Button = ({
           : variant === 'secondary'
           ? 'bg-[#D9E8EC] text-[#2097A2] hover:bg-white hover:text-[#2097A2]'
           : variant === 'tertiary'
-          ? 'border-2 border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-black'
+          ? 'border-2 border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white'
           : ''
       } ${
         disabled
