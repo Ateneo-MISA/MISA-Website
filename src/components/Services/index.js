@@ -92,7 +92,7 @@ const EServices = () => {
       <div className="flex-col lg:flex px-6 md:px-12 lg:px-24 pb-64 py-8 lg:py-12 xl:py-24 bg-navbarBlack font-abc relative overflow-hidden">
         <div className="mr-0 lg:mr-36 text-white w-full lg:w-1/2 items-center text-center lg:text-left">
           <h1 className="text-5xl mb-6 font-extrabold">eServices</h1>
-          <p className="text-xl my-6 font-extralight italic text-[#D9E8EC]">
+          <p className="text-xl my-6 italic text-[#D9E8EC]">
             eServices is a cluster under MISA that provides IT solutions to
             clients within and outside the organization. In line with MISA's
             vision of social transformation through information management, it

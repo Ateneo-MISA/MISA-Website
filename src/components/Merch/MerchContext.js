@@ -8,39 +8,58 @@ export const MerchContextProvider = ({ children }) => {
   const [cart, setCart] = useState([])
   const [orderNumber, setOrderNumber] = useState(null)
 
-  const addToCart = (quantity, product, selectedCategory) => {
-    let sameItem = false
-    for (let i = 0; i < cart.length; i++) {
-      if (
-        product?.name === cart[i]?.name &&
-        selectedCategory === cart[i]?.selectedCategory
-      ) {
-        let item = cart[i]
-        item.quantity = quantity
-        item.totalPrice = quantity * item.price
-
-        let updatedCart = cart.map((cartItem) => {
-          if (item.name === cartItem.name) return item
-          return cartItem
-        })
-
-        setCart(updatedCart)
-        sameItem = true
-        break
-      }
-    }
-
-    if (!sameItem) {
+  const addToCart = (
+    quantity,
+    product,
+    selectedCategory,
+    bundle,
+    bundleItems
+  ) => {
+    if (bundle) {
       let subItem = {
         name: product?.name,
+        bundle: true,
         price: product?.price,
         quantity: quantity,
-        selectedCategory: selectedCategory,
         totalPrice: product?.price * quantity,
         photoURL: product?.photo?.file?.url,
+        bundleItems: bundleItems,
+      }
+      setCart([...cart, subItem])
+    } else {
+      let sameItem = false
+      for (let i = 0; i < cart.length; i++) {
+        if (
+          product?.name === cart[i]?.name &&
+          selectedCategory === cart[i]?.selectedCategory
+        ) {
+          let item = cart[i]
+          item.quantity = quantity
+          item.totalPrice = quantity * item.price
+
+          let updatedCart = cart.map((cartItem) => {
+            if (item.name === cartItem.name) return item
+            return cartItem
+          })
+
+          setCart(updatedCart)
+          sameItem = true
+          break
+        }
       }
 
-      setCart([...cart, subItem])
+      if (!sameItem) {
+        let subItem = {
+          name: product?.name,
+          price: product?.price,
+          quantity: quantity,
+          selectedCategory: selectedCategory,
+          totalPrice: product?.price * quantity,
+          photoURL: product?.photo?.file?.url,
+        }
+
+        setCart([...cart, subItem])
+      }
     }
 
     navigate('/merch/cart')

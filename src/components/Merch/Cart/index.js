@@ -1,10 +1,10 @@
-import { StaticImage } from 'gatsby-plugin-image'
 import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faShoppingCart,
   faArrowLeftLong,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
 import Layout from '../../Layout/index'
@@ -72,6 +72,18 @@ const Cart = () => {
                         {item?.selectedCategory ? (
                           <p>Size: {item?.selectedCategory}</p>
                         ) : null}
+                        {item?.bundleItems
+                          ? item?.bundleItems.map((bundleItem) => {
+                              return (
+                                <div>
+                                  {bundleItem?.name}{' '}
+                                  {bundleItem?.categoryName
+                                    ? `(${bundleItem?.categoryName}: ${bundleItem?.selectedCategory})`
+                                    : null}
+                                </div>
+                              )
+                            })
+                          : null}
                       </div>
                     </td>
                     <td className="py-5 border-b-2 border-[#D9E8EC]">
@@ -101,12 +113,12 @@ const Cart = () => {
                           </button>
                         </div>
                         <button
-                          className="cursor-pointer"
+                          className="cursor-pointer text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
                           onClick={() => deleteFromCart(index)}
                         >
-                          <StaticImage
+                          <FontAwesomeIcon
                             className="w-[30px] h-[30px] ml-2 mt-2"
-                            src="../../../../static/images/trash.png"
+                            icon={faTrash}
                           />
                         </button>
                       </div>
@@ -144,7 +156,24 @@ const Cart = () => {
                       />
                       <div className="flex justify-center ml-6 flex-col">
                         <p className="text-2xl font-extrabold">{item?.name}</p>
-                        <p>Size: {item?.selectedCategory}</p>
+                        {item?.category ? (
+                          <p>
+                            {item?.category}: {item?.selectedCategory}
+                          </p>
+                        ) : null}
+
+                        {item?.bundleItems
+                          ? item?.bundleItems.map((bundleItem) => {
+                              return (
+                                <div>
+                                  {bundleItem?.name}{' '}
+                                  {bundleItem?.categoryName
+                                    ? `(${bundleItem?.categoryName}: ${bundleItem?.selectedCategory})`
+                                    : null}
+                                </div>
+                              )
+                            })
+                          : null}
                       </div>
                     </div>
 
@@ -171,7 +200,7 @@ const Cart = () => {
                             <div className="flex justify-center">
                               <div className="text-xl font-medium py-2 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] w-[100px] flex justify-around">
                                 <button
-                                  className="cursor-pointer"
+                                  className="cursor-pointer text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
                                   onClick={() =>
                                     item?.quantity > 1
                                       ? updateItemQuantity(index, 'subtract')
@@ -182,7 +211,7 @@ const Cart = () => {
                                 </button>
                                 <p>{item?.quantity}</p>
                                 <button
-                                  className="cursor-pointer"
+                                  className="cursor-pointer text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
                                   onClick={() =>
                                     updateItemQuantity(index, 'add')
                                   }
@@ -191,12 +220,12 @@ const Cart = () => {
                                 </button>
                               </div>
                               <button
-                                className="cursor-pointer"
+                                className="cursor-pointer text-[#2097A2] hover:text-[#31ADAF] ease-in duration-150"
                                 onClick={() => deleteFromCart(index)}
                               >
-                                <StaticImage
+                                <FontAwesomeIcon
                                   className="w-[30px] h-[30px] ml-2 mt-2"
-                                  src="../../../../static/images/trash.png"
+                                  icon={faTrash}
                                 />
                               </button>
                             </div>

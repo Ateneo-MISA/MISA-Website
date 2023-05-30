@@ -114,6 +114,26 @@ exports.createPages = async ({ graphql, actions }) => {
                   description {
                     raw
                   }
+                  name
+                  bundle
+                  numberOfBundleItems
+                  defaultBundleItems {
+                    name
+                    categoryName
+                    categories {
+                      name
+                    }
+                  }
+                  bundleChoices {
+                    name
+                    choices {
+                      name
+                      categoryName
+                      categories {
+                        name
+                      }
+                    }
+                  }
                 }
               }
             }
