@@ -1,4 +1,5 @@
 import React from 'react'
+import { StaticImage } from 'gatsby-plugin-image'
 import { useState, useContext, useEffect } from 'react'
 import { Link } from 'gatsby'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
@@ -16,6 +17,9 @@ import { MerchContext } from '../components/Merch/MerchContext'
 
 const IndividualProduct = ({ pageContext }) => {
   const { cart, addToCart } = useContext(MerchContext)
+  const [bundleItems, setBundleItems] = useState(
+    pageContext?.product?.defaultBundleItems
+  )
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [quantity, setQuantity] = useState(0)
   const [randomMerch, setRandomMerch] = useState([])
@@ -43,6 +47,86 @@ const IndividualProduct = ({ pageContext }) => {
   for (let i = 0; i < cart.length; i++) {
     if (cart[i]?.name === pageContext?.product?.name) {
       numberOfCurrentItemInCart += 1
+    }
+  }
+
+  const setBundleItemCategory = (categoryName, index) => {
+    for (let i = 0; i < bundleItems.length; i++) {
+      if (i === index) {
+        let updatedBundleItem = bundleItems[i]
+        updatedBundleItem.selectedCategory = categoryName
+
+        let updatedBundleItems = bundleItems.map((bundleItem) => {
+          if (updatedBundleItem?.name === bundleItem?.name)
+            return updatedBundleItem
+          return bundleItem
+        })
+
+        setBundleItems(updatedBundleItems)
+        break
+      }
+    }
+  }
+
+  const addChoiceToBundleItems = (option, choiceName) => {
+    let currentChoiceAlreadyMade = false
+    let currentIndexOfChoice
+    for (let i = 0; i < bundleItems.length; i++) {
+      if (bundleItems[i]?.choiceName === choiceName) {
+        currentChoiceAlreadyMade = true
+        currentIndexOfChoice = i
+        break
+      }
+    }
+
+    if (currentChoiceAlreadyMade) {
+      let updatedBundleItems = bundleItems.filter((bundleItem, index) => {
+        return index !== currentIndexOfChoice
+      })
+
+      updatedBundleItems.push({
+        ...option,
+        choiceName: choiceName,
+      })
+      setBundleItems(updatedBundleItems)
+    } else {
+      let finalChoiceItem = {
+        ...option,
+        choiceName: choiceName,
+      }
+      setBundleItems([...bundleItems, finalChoiceItem])
+    }
+  }
+
+  const checkIfAddToCartButtonShouldBeDisabled = () => {
+    if (pageContext?.product?.bundle) {
+      if (quantity <= 0) {
+        return true
+      } else {
+        if (bundleItems.length !== pageContext?.product?.numberOfBundleItems) {
+          return true
+        } else {
+          for (let i = 0; i < bundleItems.length; i++) {
+            if (
+              bundleItems[i]?.categoryName &&
+              !bundleItems[i]?.selectedCategory
+            ) {
+              return true
+            }
+          }
+          return false
+        }
+      }
+    } else {
+      if (quantity <= 0) {
+        return true
+      } else {
+        if (pageContext?.product?.categoryName && !selectedCategory) {
+          return true
+        } else {
+          return false
+        }
+      }
     }
   }
 
@@ -94,6 +178,80 @@ const IndividualProduct = ({ pageContext }) => {
               {renderRichText(pageContext?.product?.description)}
             </p>
 
+            {pageContext?.product?.bundleChoices ? (
+              <div>
+                {pageContext?.product?.bundleChoices.map((bundleChoice) => {
+                  return (
+                    <div>
+                      <p className="text-xl font-medium mb-3 mt-5">
+                        {bundleChoice?.name} Choice
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        {bundleChoice?.choices.map((option) => {
+                          return (
+                            <button
+                              className={`${
+                                bundleItems.filter((bundleItem) => {
+                                  return bundleItem?.name === option?.name
+                                })[0]?.name === option?.name
+                                  ? 'text-xl font-medium py-2 px-12 text-white border-2 border-md border-[#2097A2] bg-[#2097A2] rounded-md ease-in duration-150'
+                                  : 'text-xl font-medium py-2 px-12 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] hover:bg-[#31ADAF] hover:text-white ease-in duration-150 cursor-pointer'
+                              }`}
+                              onClick={() =>
+                                addChoiceToBundleItems(
+                                  option,
+                                  bundleChoice?.name
+                                )
+                              }
+                            >
+                              {option?.name}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : null}
+
+            {pageContext?.product?.bundle ? (
+              <div className="mt-5">
+                {bundleItems.map((defaultBundleItem, index) => {
+                  if (defaultBundleItem?.categoryName) {
+                    return (
+                      <div className="mt-5">
+                        <p className="text-xl font-medium mb-3 mt-5">
+                          {defaultBundleItem?.categoryName} for{' '}
+                          {defaultBundleItem?.name}
+                        </p>
+
+                        <div className="flex flex-wrap gap-3">
+                          {defaultBundleItem?.categories.map((category) => {
+                            return (
+                              <button
+                                className={`${
+                                  defaultBundleItem?.selectedCategory ===
+                                  category?.name
+                                    ? 'text-xl font-medium py-2 px-12 text-white border-2 border-md border-[#2097A2] bg-[#2097A2] rounded-md ease-in duration-150'
+                                    : 'text-xl font-medium py-2 px-12 text-[#31ADAF] border-2 rounded-md border-[#31ADAF] hover:bg-[#31ADAF] hover:text-white ease-in duration-150 cursor-pointer'
+                                }`}
+                                onClick={() =>
+                                  setBundleItemCategory(category?.name, index)
+                                }
+                              >
+                                {category?.name}
+                              </button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  }
+                })}
+              </div>
+            ) : null}
+
             {pageContext?.product?.categoryName ? (
               <div className="mt-6">
                 <p className="text-xl font-medium mb-3">
@@ -140,17 +298,15 @@ const IndividualProduct = ({ pageContext }) => {
             </div>
 
             <Button
-              disabled={
-                quantity <= 0
-                  ? true
-                  : pageContext?.product?.categoryName
-                  ? selectedCategory
-                    ? false
-                    : true
-                  : false
-              }
+              disabled={checkIfAddToCartButtonShouldBeDisabled()}
               onClick={() =>
-                addToCart(quantity, pageContext?.product, selectedCategory)
+                addToCart(
+                  quantity,
+                  pageContext?.product,
+                  selectedCategory,
+                  pageContext?.product?.bundle,
+                  bundleItems
+                )
               }
               variant="primary"
               className="w-full mt-6"
@@ -160,13 +316,17 @@ const IndividualProduct = ({ pageContext }) => {
           </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-16 relative">
+          <StaticImage
+            className="max-w-[150px] absolute left-[-125px] top-[-100px]"
+            src="../../../../static/images/merchMISABot.png"
+          />
           <p className="text-4xl font-extrabold mb-7">
             You may also like{' '}
             <span className="text-[#31ADAF]">MISABot's faves!</span>
           </p>
 
-          <div className="mb-16 flex flex-wrap gap-16 justify-center">
+          <div className="mb-16 flex flex-wrap gap-12 justify-center">
             {randomMerch.map((merch) => {
               const slug = merch?.name
                 .replace(/([a-z])([A-Z])/g, '$1-$2')

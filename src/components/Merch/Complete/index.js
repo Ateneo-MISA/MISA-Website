@@ -84,13 +84,17 @@ const Complete = () => {
           </div>
         </div>
 
-        <div className="mt-24">
+        <div className="mt-24 relative">
+          <StaticImage
+            className="max-w-[150px] absolute left-[-70px] top-[-100px]"
+            src="../../../../static/images/merchMISABot.png"
+          />
           <p className="text-4xl font-extrabold mb-7 ml-12">
             You may also like{' '}
             <span className="text-[#31ADAF]">MISABot's faves!</span>
           </p>
 
-          <div className="mb-16 flex flex-wrap gap-8 md:gap-16 justify-center">
+          <div className="mb-16 flex flex-wrap gap-12 justify-center">
             {randomMerch.map((merch) => {
               const slug = merch?.name
                 .replace(/([a-z])([A-Z])/g, '$1-$2')

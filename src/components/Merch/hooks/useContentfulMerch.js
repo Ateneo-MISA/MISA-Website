@@ -33,6 +33,26 @@ const ALL_CONTENTFUL_MERCH = graphql`
         description {
           raw
         }
+        name
+        bundle
+        numberOfBundleItems
+        defaultBundleItems {
+          name
+          categoryName
+          categories {
+            name
+          }
+        }
+        bundleChoices {
+          name
+          choices {
+            name
+            categoryName
+            categories {
+              name
+            }
+          }
+        }
       }
     }
   }

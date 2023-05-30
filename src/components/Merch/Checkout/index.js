@@ -158,6 +158,7 @@ const Checkout = () => {
           break
         }
       }
+
       await createRecord({
         base: 'merchBase',
         tableName: 'Subitems',
@@ -169,6 +170,31 @@ const Checkout = () => {
           Product: [productID],
         },
       })
+
+      if (cart[i]?.bundle) {
+        for (let k = 0; k < cart[i]?.bundleItems.length; k++) {
+          let productID
+
+          for (let l = 0; l < productsData.length; l++) {
+            if (productsData[l]?.Name === cart[i]?.bundleItems[k]?.name) {
+              productID = productsData[l]?.RecordID
+              break
+            }
+          }
+
+          await createRecord({
+            base: 'merchBase',
+            tableName: 'Subitems',
+            record: {
+              Name: cart[i]?.bundleItems[k]?.name,
+              Size: cart[i]?.bundleItems[k]?.selectedCategory || 'N/A',
+              Quantity: cart[i]?.quantity,
+              Order: [createdRecordID],
+              Product: [productID],
+            },
+          })
+        }
+      }
     }
 
     setOrderNumber(orderNumber)
@@ -473,8 +499,23 @@ const Checkout = () => {
                       <div className="ml-5">
                         <p>{item?.name}</p>
                         {item?.selectedCategory ? (
-                          <p className="mt-2">Size: {item?.selectedCategory}</p>
+                          <p className="mt-2">
+                            {item?.categoryName}: {item?.selectedCategory}
+                          </p>
                         ) : null}
+
+                        {item?.bundleItems
+                          ? item?.bundleItems.map((bundleItem) => {
+                              return (
+                                <div>
+                                  {bundleItem?.name}{' '}
+                                  {bundleItem?.categoryName
+                                    ? `(${bundleItem?.categoryName}: ${bundleItem?.selectedCategory})`
+                                    : null}
+                                </div>
+                              )
+                            })
+                          : null}
 
                         <p className="mt-2">{`${item?.quantity}pc${
                           item.quantity > 1 ? 's' : ''

@@ -87,7 +87,7 @@ const Merch = () => {
           />
         </div>
         <div className="mt-9 border-b-2 border-[#D9E8EC]">
-          <div className="mb-16 flex flex-wrap gap-16 justify-center">
+          <div className="mb-16 flex flex-wrap gap-12 justify-center">
             {allMerch.map((merch) => {
               const slug = merch?.name
                 .replace(/([a-z])([A-Z])/g, '$1-$2')
