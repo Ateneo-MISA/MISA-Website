@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
 
@@ -10,12 +11,13 @@ const Footer = () => {
   })[0]?.activeOnWebsite
 
   return (
-    <footer>
+    <footer className="">
       <div className="bg-[#D9E8EC] h-[120px] flex justify-center items-center gap-x-4 shadow-[inset_0px_0px_10px_5px_rgba(0,0,0,0.1)] z-0">
         <StaticImage
           src="../../../static/images/misabothead.png"
           quality={100}
           height={200}
+          width={300}
         />
         <div>
           <p className="font-extrabold text-3xl font-montserrat">
@@ -38,7 +40,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-[#282828] h-[300px] flex justify-center shadow-[0px_20px_0px_0px_rgba(0,0,0,0.3)] z-10 relative">
+      <div className="bg-[#282828] h-[300px] flex justify-center shadow-[0px_20px_0px_0px_rgba(0,0,0,0.3)] z-10 relative px-6 sm:px-0">
         <div className="grid place-content-center">
           <div className="flex justify-center">
             <StaticImage
@@ -118,8 +120,8 @@ const Footer = () => {
             </Link>
           </div>
           <p className="font-light text-lg text-[#949494] text-center font-montserrat">
-            © 2022 Ateneo Management Information Systems Association -
-            MISAvengers
+            © {moment().format('YYYY')} Ateneo Management Information Systems
+            Association - MISAvengers
           </p>
         </div>
       </div>

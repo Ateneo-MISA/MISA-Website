@@ -10,14 +10,28 @@ import {
 import Layout from '../../../components/Layout/index'
 import Button from '../../Elements/Button'
 
+import useContentfulDynamicContent from '../../../hooks/useContentfulDynamicContent'
 import { MerchContext } from '../MerchContext'
 import { getRecords, createRecord } from '../../../services/airtable'
+import { merchCheckoutValidationSchema } from '../../../utils/merchCheckoutValidationSchema'
+import FormInput from '../../Elements/FormInput'
 
 const GATSBY_MERCH_SEND_EMAIL_WEBHOOK =
   process.env.GATSBY_MERCH_SEND_EMAIL_WEBHOOK
 
 const Checkout = () => {
+  const dynamicContentFirstAcknowledgment =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISA Merch Checkout First Acknowledgment'
+    })[0]
+
+  const dynamicContentSecondAcknowledgment =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISA Merch Checkout Second Acknowledgment'
+    })[0]
+
   const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState([])
   const [productsData, setProductsData] = useState(null)
   const getData = async () => {
     let orders = await getRecords({
@@ -126,110 +140,130 @@ const Checkout = () => {
 
   const handleSubmit = async () => {
     setLoading(true)
-    await createRecord({
-      base: 'merchBase',
-      tableName: 'Orders',
-      record: {
-        'Order Number': orderNumber,
-        'Total Price': total,
-        Status: 'Unpaid',
-        'Full Name': fullName,
-        Email: email,
-        'Contact Number': contactNumber,
-        'Facebook Link': facebookLink,
-        'Mode of Delivery': modeOfDelivery,
-        'Full Address': fullAddress || 'N/A',
-        'Within Metro Manila': withinMetroManila,
-      },
-    })
+    try {
+      await merchCheckoutValidationSchema.validate(
+        {
+          FullName: fullName,
+          Email: email,
+          ContactNumber: contactNumber,
+          FacebookLink: facebookLink,
+        },
+        { abortEarly: false }
+      )
 
-    let newMerchData = await getData()
-
-    let createdRecordID = newMerchData.filter((order) => {
-      return order['Order Number'] === orderNumber
-    })[0]?.RecordID
-
-    let productID
-
-    for (let i = 0; i < cart.length; i++) {
-      for (let j = 0; j < productsData.length; j++) {
-        if (productsData[j]?.Name === cart[i]?.name) {
-          productID = productsData[j]?.RecordID
-          break
-        }
-      }
+      setErrors([])
 
       await createRecord({
         base: 'merchBase',
-        tableName: 'Subitems',
+        tableName: 'Orders',
         record: {
-          Name: cart[i]?.name,
-          Size: cart[i]?.selectedCategory || 'N/A',
-          Quantity: cart[i]?.quantity,
-          Order: [createdRecordID],
-          Product: [productID],
+          'Order Number': orderNumber,
+          'Total Price': total,
+          Status: 'Unpaid',
+          'Full Name': fullName,
+          Email: email,
+          'Contact Number': contactNumber,
+          'Facebook Link': facebookLink,
+          'Mode of Delivery': modeOfDelivery,
+          'Full Address': fullAddress || 'N/A',
+          'Within Metro Manila': withinMetroManila,
         },
       })
 
-      if (cart[i]?.bundle) {
-        for (let k = 0; k < cart[i]?.bundleItems.length; k++) {
-          let productID
+      let newMerchData = await getData()
 
-          for (let l = 0; l < productsData.length; l++) {
-            if (productsData[l]?.Name === cart[i]?.bundleItems[k]?.name) {
-              productID = productsData[l]?.RecordID
-              break
-            }
+      let createdRecordID = newMerchData.filter((order) => {
+        return order['Order Number'] === orderNumber
+      })[0]?.RecordID
+
+      let productID
+
+      for (let i = 0; i < cart.length; i++) {
+        for (let j = 0; j < productsData.length; j++) {
+          if (productsData[j]?.Name === cart[i]?.name) {
+            productID = productsData[j]?.RecordID
+            break
           }
+        }
 
-          await createRecord({
-            base: 'merchBase',
-            tableName: 'Subitems',
-            record: {
-              Name: cart[i]?.bundleItems[k]?.name,
-              Size: cart[i]?.bundleItems[k]?.selectedCategory || 'N/A',
-              Quantity: cart[i]?.quantity,
-              Order: [createdRecordID],
-              Product: [productID],
-            },
-          })
+        await createRecord({
+          base: 'merchBase',
+          tableName: 'Subitems',
+          record: {
+            Name: cart[i]?.name,
+            Size: cart[i]?.selectedCategory || 'N/A',
+            Quantity: cart[i]?.quantity,
+            Order: [createdRecordID],
+            Product: [productID],
+          },
+        })
+
+        if (cart[i]?.bundle) {
+          for (let k = 0; k < cart[i]?.bundleItems.length; k++) {
+            let productID
+
+            for (let l = 0; l < productsData.length; l++) {
+              if (productsData[l]?.Name === cart[i]?.bundleItems[k]?.name) {
+                productID = productsData[l]?.RecordID
+                break
+              }
+            }
+
+            await createRecord({
+              base: 'merchBase',
+              tableName: 'Subitems',
+              record: {
+                Name: cart[i]?.bundleItems[k]?.name,
+                Size: cart[i]?.bundleItems[k]?.selectedCategory || 'N/A',
+                Quantity: cart[i]?.quantity,
+                Order: [createdRecordID],
+                Product: [productID],
+              },
+            })
+          }
         }
       }
+
+      setOrderNumber(orderNumber)
+
+      let contactInformationBody = `Full Name: ${fullName}<br>Email: ${email}<br>Contact Number: ${contactNumber}<br>Facebook Link: ${facebookLink}<br>Mode of Delivery: ${modeOfDelivery}<br>Address: ${
+        fullAddress || 'N/A'
+      }`
+
+      let orderBody = `Order Number: <b>${orderNumber}</b><br><br>${cart.map(
+        (item) => {
+          return `${item?.name} ${
+            item?.selectedCategory ? `(${item?.selectedCategory})` : ''
+          }: ${item?.quantity}pc${
+            item?.quantity > 1 ? 's' : ''
+          } - ₱${parseFloat(item?.totalPrice).toFixed(2)}<br>`
+        }
+      )}<br>Shipping: ₱${
+        modeOfDelivery === 'ship'
+          ? withinMetroManila
+            ? parseFloat(54.0).toFixed(2)
+            : parseFloat(64.0).toFixed(2)
+          : parseFloat(0.0).toFixed(2)
+      }<br><br>Total Price: ₱${parseFloat(total).toFixed(2)}<br>`.replace(
+        ',',
+        ''
+      )
+
+      await axios.post(GATSBY_MERCH_SEND_EMAIL_WEBHOOK, {
+        email,
+        fullName,
+        orderBody,
+        contactInformationBody,
+        orderNumber,
+      })
+
+      emptyCart()
+      navigate('/merch/complete')
+      setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      setErrors(error.inner)
     }
-
-    setOrderNumber(orderNumber)
-
-    let contactInformationBody = `Full Name: ${fullName}<br>Email: ${email}<br>Contact Number: ${contactNumber}<br>Facebook Link: ${facebookLink}<br>Mode of Delivery: ${modeOfDelivery}<br>Address: ${
-      fullAddress || 'N/A'
-    }`
-
-    let orderBody = `Order Number: <b>${orderNumber}</b><br><br>${cart.map(
-      (item) => {
-        return `${item?.name} ${
-          item?.selectedCategory ? `(${item?.selectedCategory})` : ''
-        }: ${item?.quantity}pc${item?.quantity > 1 ? 's' : ''} - ₱${parseFloat(
-          item?.totalPrice
-        ).toFixed(2)}<br>`
-      }
-    )}<br>Shipping: ₱${
-      modeOfDelivery === 'ship'
-        ? withinMetroManila
-          ? parseFloat(54.0).toFixed(2)
-          : parseFloat(64.0).toFixed(2)
-        : parseFloat(0.0).toFixed(2)
-    }<br><br>Total Price: ₱${parseFloat(total).toFixed(2)}<br>`.replace(',', '')
-
-    await axios.post(GATSBY_MERCH_SEND_EMAIL_WEBHOOK, {
-      email,
-      fullName,
-      orderBody,
-      contactInformationBody,
-      orderNumber,
-    })
-
-    emptyCart()
-    navigate('/merch/complete')
-    setLoading(false)
   }
 
   return (
@@ -251,33 +285,41 @@ const Checkout = () => {
         </p>
 
         <div className="mt-4 flex flex-col lg:flex-row">
-          <div className="lg:border-r-2 border-[#D9E8EC] lg:pr-12 w-full lg:w-[60%] order-2 lg:order-1 lg:mt-0 mt-12">
+          <div className="lg:border-r-2 border-[#D9E8EC] lg:pr-12 w-full lg:w-[70%] order-2 lg:order-1 lg:mt-0 mt-12">
             <div>
               <p className="font-bold">Contact Information</p>
               <div className="flex flex-col">
-                <input
-                  className="border-[3px] border-[#D9E8EC] rounded-lg pl-6 py-4 mt-4"
+                <FormInput
+                  name="FullName"
                   placeholder="Full Name"
-                  onChange={handleFullNameChange}
                   value={fullName}
+                  onChange={handleFullNameChange}
+                  errors={errors}
                 />
-                <input
-                  className="border-[3px] border-[#D9E8EC] rounded-lg pl-6 py-4 mt-4"
+
+                <FormInput
+                  name="Email"
                   placeholder="Email"
-                  onChange={handleEmailChange}
                   value={email}
+                  onChange={handleEmailChange}
+                  errors={errors}
                 />
-                <input
-                  className="border-[3px] border-[#D9E8EC] rounded-lg pl-6 py-4 mt-4"
-                  placeholder="Contact Number"
+
+                <FormInput
+                  name="ContactNumber"
+                  type="number"
+                  placeholder="Contact Number (09991234567)"
                   onChange={handleContactNumberChange}
                   value={contactNumber}
+                  errors={errors}
                 />
-                <input
-                  className="border-[3px] border-[#D9E8EC] rounded-lg pl-6 py-4 mt-4"
+
+                <FormInput
+                  name="FacebookLink"
                   placeholder="Facebook Link"
                   onChange={handleFacebookLinkChange}
                   value={facebookLink}
+                  errors={errors}
                 />
               </div>
             </div>
@@ -298,7 +340,7 @@ const Checkout = () => {
                     checked={modeOfDelivery === 'pickup'}
                     onChange={handleModeOfDeliveryChange}
                   />
-                  <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
+                  <div className="w-[30px] h-[30px] flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
                     {modeOfDelivery === 'pickup' && (
                       <svg
                         className="w-5 h-5 text-white fill-current"
@@ -324,7 +366,7 @@ const Checkout = () => {
                     checked={modeOfDelivery === 'ship'}
                     onChange={handleModeOfDeliveryChange}
                   />
-                  <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
+                  <div className="w-[30PX] h-[30PX] flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
                     {modeOfDelivery === 'ship' && (
                       <svg
                         className="w-5 h-5 text-white fill-current"
@@ -353,7 +395,7 @@ const Checkout = () => {
                         checked={withinMetroManila}
                         onChange={handleWithinMetroManilaChange}
                       />
-                      <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
+                      <div className="w-[30PX] h-[30PX] flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
                         {withinMetroManila && (
                           <svg
                             className="w-5 h-5 text-white fill-current"
@@ -404,14 +446,14 @@ const Checkout = () => {
               >
                 <input
                   id="firstAcknowledgment"
-                  type="radio"
+                  type="checkbox"
                   name="firstAcknowledgment"
                   value="firstAcknowledgment"
                   className="hidden"
                   checked={firstAcknowledgment}
                   onChange={handleFirstAcknowledgmentChange}
                 />
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
+                <div className="w-[30px] h-[30px] flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
                   {firstAcknowledgment && (
                     <svg
                       className="w-5 h-5 text-white fill-current"
@@ -422,11 +464,13 @@ const Checkout = () => {
                   )}
                 </div>
                 <span className="ml-2 text-gray-700">
-                  I acknowledge that my items are pre-orders (You will be
-                  informed via email once your items has been shipped out; ETA:
-                  First two weeks of May)
+                  I acknowledge that my items are pre-orders.
                 </span>
               </label>
+
+              <p className="mt-2">
+                {dynamicContentFirstAcknowledgment?.content?.content}
+              </p>
 
               <label
                 htmlFor="secondAcknowledgment"
@@ -434,14 +478,14 @@ const Checkout = () => {
               >
                 <input
                   id="secondAcknowledgment"
-                  type="radio"
+                  type="checkbox"
                   name="secondAcknowledgment"
                   value="secondAcknowledgment"
                   className="hidden"
                   checked={secondAcknowledgment}
                   onChange={handleSecondAcknowledgmentChange}
                 />
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
+                <div className="w-[30PX] h-[30PX] flex items-center justify-center border border-gray-400 rounded-md bg-gray-200 border-opacity-50">
                   {secondAcknowledgment && (
                     <svg
                       className="w-5 h-5 text-white fill-current"
@@ -453,11 +497,22 @@ const Checkout = () => {
                 </div>
                 <span className="ml-2 text-gray-700">
                   My payment will be done within the week of the purchase date.
-                  (Otherwise your order will be cancelled; Payment can be done
-                  in the next step or in a separate page of the site of May)
                 </span>
               </label>
             </div>
+
+            <p className="mt-2">
+              {dynamicContentSecondAcknowledgment?.content?.content}
+            </p>
+
+            {errors.length > 0 ? (
+              <div className="mt-12 bg-[#feecf0] rounded-md p-8">
+                <p className="text-[#d43c52]">
+                  You may have missed some required fields. Please scan through
+                  the form and check if your information is complete and valid.
+                </p>
+              </div>
+            ) : null}
 
             <div className="mt-8 flex justify-between">
               <Link
@@ -476,7 +531,7 @@ const Checkout = () => {
               <Button
                 loading={loading}
                 onClick={handleSubmit}
-                className="w-1/3 mb-12"
+                className="mb-12"
                 variant="primary"
                 disabled={checkIfConfirmButtonShouldBeDisabled()}
               >

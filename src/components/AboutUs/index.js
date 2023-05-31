@@ -2,6 +2,7 @@ import React from 'react'
 
 import Layout from '../Layout/index'
 import { StaticImage } from 'gatsby-plugin-image'
+import Hero from '../Elements/Hero'
 
 const AboutUs = () => {
   let dateToday = new Date().getFullYear()
@@ -10,50 +11,33 @@ const AboutUs = () => {
   return (
     <Layout>
       {/* first frame */}
-      <div className="flex-none lg:flex pl-24 pt-24 bg-navbarBlack font-abc">
-        <div className="overflow-hidden lg:max-h-[551px] text-white w-full pr-24 lg:pr-0 items-center text-left pb-28 relative">
-          <StaticImage
-            className="absolute right-[-100px] bottom-[-100px] max-w-[275px] md:max-w-[320px] lg:max-w-[460px]"
-            src="../../../static/images/misahexagons.png"
-          />
-          <div className="w-full lg:w-2/3">
-            <h1 className="text-5xl mb-6 font-extrabold text-center lg:text-left">
-              Who <span className="text-misaAlternateTeal">MISA</span> is
-            </h1>
-            <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
-              We are the{' '}
-              <span className="text-misaAlternateTeal">
-                Management Information Systems Association (MISA)
-              </span>
-              , the Ateneo Loyola Schools’ premier information management
-              organization which serves as a home for MIS majors and like-minded
-              IT enthusiasts.
-            </p>
-            <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
-              Founded in 1994, it is now on its {currentMisaYear}th year of
-              pursuing its main advocacy –{' '}
-              <span className="text-misaAlternateTeal">
-                social transformation through information management.
-              </span>
-            </p>
-
-            {/* uncomment when clusters are done */}
-            {/* <Button
-              variant="primary"
-              className="items-center text-center mb-28"
-            >
-              See Our Clusters
-            </Button> */}
-          </div>
-          {/* 
-          <div className="block lg:hidden">
-            <StaticImage
-              className="w-4/6"
-              src="../../../static/images/misahexagons.png"
-            />
-          </div> */}
+      <Hero>
+        <div className="md:w-2/3">
+          <h1 className="text-5xl mb-6 font-extrabold">
+            Who <span className="text-misaAlternateTeal">MISA</span> is
+          </h1>
+          <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
+            We are the{' '}
+            <span className="text-misaAlternateTeal">
+              Management Information Systems Association (MISA)
+            </span>
+            , the Ateneo Loyola Schools’ premier information management
+            organization which serves as a home for MIS majors and like-minded
+            IT enthusiasts.
+          </p>
+          <p className="text-xl mb-6 font-normal italic text-[#D9E8EC]">
+            Founded in 1994, it is now on its {currentMisaYear}th year of
+            pursuing its main advocacy –{' '}
+            <span className="text-misaAlternateTeal">
+              social transformation through information management.
+            </span>
+          </p>
         </div>
-      </div>
+        <StaticImage
+          className="absolute right-[-100px] bottom-[-100px] max-w-[275px] md:max-w-[320px] lg:max-w-[460px]"
+          src="../../../static/images/misahexagons.png"
+        />
+      </Hero>
 
       {/* second frame */}
       <div className="flex-none lg:flex py-24 px-20 font-abc">

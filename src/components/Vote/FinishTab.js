@@ -1,9 +1,18 @@
 import React, { useEffect } from 'react'
+import moment from 'moment'
 
 import { StaticImage } from 'gatsby-plugin-image'
 import Button from '../Elements/Button'
 
+import useContentfulDynamicContent from '../../hooks/useContentfulDynamicContent'
+
 const FinishTab = ({ voteDispatch }) => {
+  const dynamicContentResults = useContentfulDynamicContent()?.filter(
+    (content) => {
+      return content?.name === 'MISAlalan Results Date'
+    }
+  )[0]
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -22,7 +31,8 @@ const FinishTab = ({ voteDispatch }) => {
 
         <p className="italic mt-4 text-xl">Your vote has been submitted.</p>
         <p className="italic mt-4 text-xl">
-          Stay tuned for the MISAlalan 2023 Results on April 14, 2023!
+          Stay tuned for the MISAlalan {moment().format('YYYY')} Results on{' '}
+          {moment(dynamicContentResults?.date).format('MMMM DD, YYYY')}!
         </p>
 
         <a href="../elections">

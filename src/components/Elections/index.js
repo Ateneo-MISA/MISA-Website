@@ -1,16 +1,57 @@
 import React, { useState } from 'react'
+import moment from 'moment'
 
 import Layout from '../Layout'
 import Button from '../Elements/Button'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
+import useContentfulDynamicContent from '../../hooks/useContentfulDynamicContent'
 import useElectionCandidates from './hooks/useContentfulElectionCandidates'
 import useContentfulWebsitePages from '../../hooks/useContentfulWebsitePages'
 import useContentfulElectionPositions from './hooks/useContentfulElectionPositions'
 
 import FilterBar from '../Elements/FilterBar'
+import Hero from '../Elements/Hero'
 
 const Elections = () => {
+  const dynamicContentApplicationDeadline =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISAlalan Application Deadline'
+    })[0]
+
+  const dynamicContentCampaignPeriodStartDate =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISAlalan Campaign Period Start Date'
+    })[0]
+
+  const dynamicContentCampaignPeriodEndDate =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISAlalan Campaign Period End Date'
+    })[0]
+
+  const dynamicContentMitingDeAvance = useContentfulDynamicContent()?.filter(
+    (content) => {
+      return content?.name === 'MISAlalan Miting de Avance'
+    }
+  )[0]
+
+  const dynamicContentResults = useContentfulDynamicContent()?.filter(
+    (content) => {
+      return content?.name === 'MISAlalan Results Date'
+    }
+  )[0]
+
+  const dynamicContentElectionsStartDate =
+    useContentfulDynamicContent()?.filter((content) => {
+      return content?.name === 'MISAlalan Elections Start Date'
+    })[0]
+
+  const dynamicContentElectionsEndDate = useContentfulDynamicContent()?.filter(
+    (content) => {
+      return content?.name === 'MISAlalan Elections End Date'
+    }
+  )[0]
+
   let electionPositions = useContentfulElectionPositions().sort((a, b) => {
     return a?.orderOnWebsite - b?.orderOnWebsite
   })
@@ -46,10 +87,11 @@ const Elections = () => {
 
   return (
     <Layout>
-      <div className="bg-navbarBlack min-h-96 text-white p-8 pt-12 pb-24 md:p-16 relative overflow-hidden font-abc">
+      <Hero>
         <div className="md:w-2/3">
-          <h1 className="text-4xl font-bold">
-            <span className="text-misaTeal">MISA</span>lalan 2023
+          <h1 className="text-5xl font-bold">
+            <span className="text-misaTeal">MISA</span>lalan{' '}
+            {moment().format('YYYY')}
           </h1>
           <div className="grid gap-6 italic font-normal text-xl py-8 text-[#D9E8EC]">
             <p>
@@ -84,11 +126,12 @@ const Elections = () => {
           className={`max-w-[120px] md:max-w-[320px] lg:max-w-[460px] absolute bottom-0 right-0`}
           src="../../../static/images/ballothexagon.png"
         />
-      </div>
+      </Hero>
+
       <div className="p-8 lg:p-12">
         <div className="bg-[#DCE7EB] rounded-xl h-full md:h-[80vh] p-8 md:p-12 md:pb-36 flex flex-col justify-around relative">
           <h2 className="text-misaTeal text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            MISAlalan 2023 Timeline
+            MISAlalan {moment().format('YYYY')} Timeline
           </h2>
           <ol class="border-misaTeal mt-8 md:mt-0 flex flex-col gap-8 sm:gap-16 md:grid md:grid-cols-[1fr_2fr_2fr_2fr_1fr] h-full border-l-[8px] md:h-auto md:gap-6 md:border-l-0 md:border-t-[16px] -mx-8 md:-mx-12 !w-full md:w-3/4 md:relative mb-12 sm:mb-0">
             <li className="hidden md:block">{/* adds empty space */}</li>
@@ -99,7 +142,9 @@ const Elections = () => {
                   Application Deadline
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
-                  Mar 8, 8PM
+                  {moment(dynamicContentApplicationDeadline?.date).format(
+                    'MMM DD, h:mm a'
+                  )}
                 </p>
               </li>
             </div>
@@ -110,7 +155,13 @@ const Elections = () => {
                   Campaign Period
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
-                  Mar 20 - 24
+                  {moment(dynamicContentCampaignPeriodStartDate?.date).format(
+                    'MMM DD'
+                  )}{' '}
+                  -{' '}
+                  {moment(dynamicContentCampaignPeriodEndDate?.date).format(
+                    'DD'
+                  )}
                 </p>
               </li>
             </div>
@@ -121,7 +172,9 @@ const Elections = () => {
                   Miting de Avance
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
-                  Mar 29, 2PM
+                  {moment(dynamicContentMitingDeAvance?.date).format(
+                    'MMM DD, h:mm a'
+                  )}
                 </p>
               </li>
             </div>
@@ -147,14 +200,23 @@ const Elections = () => {
                   Elections
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
-                  Mar 31 - Apr 12
+                  {moment(dynamicContentElectionsStartDate?.date).format(
+                    'MMM DD'
+                  )}{' '}
+                  -{' '}
+                  {moment(dynamicContentElectionsEndDate?.date).format(
+                    'MMM DD'
+                  )}
                 </p>
               </li>
             </div>
           </ol>
           <div className="absolute bottom-0 md:bottom-32 lg:bottom-24 right-0 flex items-center gap-2 sm:gap-0">
             <p className="flex flex-col text-right font-bold">
-              Results? <span className="text-misaTeal">April 14.</span>
+              Results?{' '}
+              <span className="text-misaTeal">
+                {moment(dynamicContentResults?.date).format('MMMM DD')}.
+              </span>
             </p>
             <div className="relative">
               <StaticImage
@@ -222,7 +284,8 @@ const Elections = () => {
         <div className="text-white text-center pb-8">
           <h2 className="text-4xl font-bold">Ready to Vote?</h2>
           <span className="font-normal text-xl italic">
-            Follow these three steps to participate in the MISAlalan 2023!
+            Follow these three steps to participate in the MISAlalan{' '}
+            {moment().format('YYYY')}!
           </span>
         </div>
         <div className="flex flex-col md:flex-row gap-6 md:gap-0 items-center justify-center px-8 md:px-4 lg:px-16">

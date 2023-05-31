@@ -4,6 +4,7 @@ import Layout from '../Layout'
 import { StaticImage } from 'gatsby-plugin-image'
 import { Link } from 'gatsby'
 import Button from '../Elements/Button'
+import Hero from '../Elements/Hero'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
@@ -88,9 +89,8 @@ const EServices = () => {
 
   return (
     <Layout>
-      {/* first frame */}
-      <div className="flex-col lg:flex px-6 md:px-12 lg:px-24 pb-64 py-8 lg:py-12 xl:py-24 bg-navbarBlack font-abc relative overflow-hidden">
-        <div className="mr-0 lg:mr-36 text-white w-full lg:w-1/2 items-center text-center lg:text-left">
+      <Hero>
+        <div className="md:w-2/3">
           <h1 className="text-5xl mb-6 font-extrabold">eServices</h1>
           <p className="text-xl my-6 italic text-[#D9E8EC]">
             eServices is a cluster under MISA that provides IT solutions to
@@ -109,10 +109,10 @@ const EServices = () => {
           </a>
         </div>
         <StaticImage
-          className={`max-w-md lg:max-w-2xl xl:max-w-3xl absolute -bottom-52 lg:-bottom-60 -right-24 lg:-right-48`}
-          src="../../static/images/eservices-hexagons.png"
+          className={`max-w-xs lg:max-w-2xl xl:max-w-3xl absolute -bottom-52 lg:-bottom-60 -right-24 lg:-right-48`}
+          src="../../../static/images/eservices-hexagons.png"
         />
-      </div>
+      </Hero>
 
       {/* second frame */}
 
