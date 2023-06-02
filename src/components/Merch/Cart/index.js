@@ -70,7 +70,9 @@ const Cart = () => {
                       <div className="flex justify-center ml-6 flex-col">
                         <p className="text-2xl font-extrabold">{item?.name}</p>
                         {item?.selectedCategory ? (
-                          <p>Size: {item?.selectedCategory}</p>
+                          <p>
+                            {item?.categoryName}: {item?.selectedCategory}
+                          </p>
                         ) : null}
                         {item?.bundleItems
                           ? item?.bundleItems.map((bundleItem) => {
@@ -156,9 +158,9 @@ const Cart = () => {
                       />
                       <div className="flex justify-center ml-6 flex-col">
                         <p className="text-2xl font-extrabold">{item?.name}</p>
-                        {item?.category ? (
+                        {item?.categoryName ? (
                           <p>
-                            {item?.category}: {item?.selectedCategory}
+                            {item?.categoryName}: {item?.selectedCategory}
                           </p>
                         ) : null}
 
@@ -194,7 +196,9 @@ const Cart = () => {
                       <tbody>
                         <tr>
                           <td className="border-b-2 border-[#D9E8EC] pb-6">
-                            <p className="text-left">{item?.price}</p>
+                            <p className="text-left">
+                              ₱{parseFloat(item?.price).toFixed(2)}
+                            </p>
                           </td>
                           <td className="border-b-2 border-[#D9E8EC] pb-6">
                             <div className="flex justify-center">
@@ -231,7 +235,9 @@ const Cart = () => {
                             </div>
                           </td>
                           <td className="border-b-2 border-[#D9E8EC] pb-6">
-                            <p className="text-right"> {item?.totalPrice}</p>
+                            <p className="text-right">
+                              ₱{parseFloat(item?.totalPrice).toFixed(2)}
+                            </p>
                           </td>
                         </tr>
                       </tbody>
