@@ -15,6 +15,9 @@ const Payment = () => {
           />
           <p className="text-5xl font-extrabold">Merch Payment</p>
         </div>
+        <p className="mt-2">
+          Please wait for the form to load to upload your proof of payment.
+        </p>
         <iframe
           title="Airtable Payment Form"
           className="airtable-embed w-full min-h-screen"

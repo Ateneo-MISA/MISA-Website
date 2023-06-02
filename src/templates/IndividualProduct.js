@@ -16,13 +16,15 @@ import useContentfulMerch from '../components/Merch/hooks/useContentfulMerch'
 import { MerchContext } from '../components/Merch/MerchContext'
 
 const IndividualProduct = ({ pageContext }) => {
-  const { cart, addToCart } = useContext(MerchContext)
+  const { cart, addToCart, updateQuantityOfItemAlreadyInCart } =
+    useContext(MerchContext)
   const [bundleItems, setBundleItems] = useState(
     pageContext?.product?.defaultBundleItems
   )
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [quantity, setQuantity] = useState(0)
   const [randomMerch, setRandomMerch] = useState([])
+  const [itemIsAlreadyInCart, setItemIsAlreadyInCart] = useState(false)
 
   let allMerch = useContentfulMerch()?.filter((product) => {
     return product?.name !== pageContext?.product?.name
@@ -41,13 +43,36 @@ const IndividualProduct = ({ pageContext }) => {
 
       setRandomMerch(threeRandomProducts)
     }
+    checkIfItemIsAlreadyInCart()
   }, [randomMerch.length, allMerch])
 
-  let numberOfCurrentItemInCart = 0
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i]?.name === pageContext?.product?.name) {
-      numberOfCurrentItemInCart += 1
+  // check if item is already in cart
+  const checkIfItemIsAlreadyInCart = () => {
+    let checker = false
+
+    if (pageContext?.product?.bundle) {
+      for (let i = 0; i < cart?.length; i++) {
+        if (
+          cart[i]?.name === pageContext?.product?.name &&
+          JSON.stringify(cart[i]?.bundleItems) === JSON.stringify(bundleItems)
+        ) {
+          checker = true
+          break
+        }
+      }
+    } else {
+      for (let i = 0; i < cart?.length; i++) {
+        if (
+          cart[i]?.name === pageContext?.product?.name &&
+          cart[i]?.selectedCategory === selectedCategory
+        ) {
+          checker = true
+          break
+        }
+      }
     }
+
+    setItemIsAlreadyInCart(checker)
   }
 
   const setBundleItemCategory = (categoryName, index) => {
@@ -156,7 +181,7 @@ const IndividualProduct = ({ pageContext }) => {
               icon={faShoppingCart}
             />
             <div class="absolute right-0 top-0 w-[21px] h-[21px] bg-[#2097A2] group-hover:bg-[#31ADAF] rounded-full flex items-center justify-center">
-              <p class="text-white text-center ">{numberOfCurrentItemInCart}</p>
+              <p class="text-white text-center ">{cart?.length}</p>
             </div>
           </Link>
         </div>
@@ -298,22 +323,48 @@ const IndividualProduct = ({ pageContext }) => {
               </div>
             </div>
 
-            <Button
-              disabled={checkIfAddToCartButtonShouldBeDisabled()}
-              onClick={() =>
-                addToCart(
-                  quantity,
-                  pageContext?.product,
-                  selectedCategory,
-                  pageContext?.product?.bundle,
-                  bundleItems
-                )
-              }
-              variant="primary"
-              className="w-full mt-6"
-            >
-              Add to Cart
-            </Button>
+            {itemIsAlreadyInCart ? (
+              <p className="text-lg mt-5">
+                This item is already in your cart. Clicking the button below
+                will only update the quantity of said item.
+              </p>
+            ) : null}
+
+            {itemIsAlreadyInCart ? (
+              <Button
+                disabled={quantity > 0 ? false : true}
+                onClick={() =>
+                  updateQuantityOfItemAlreadyInCart(
+                    quantity,
+                    pageContext?.product,
+                    selectedCategory,
+                    pageContext?.product?.bundle,
+                    bundleItems
+                  )
+                }
+                variant="primary"
+                className="w-full mt-6"
+              >
+                Update Quantity
+              </Button>
+            ) : (
+              <Button
+                disabled={checkIfAddToCartButtonShouldBeDisabled()}
+                onClick={() =>
+                  addToCart(
+                    quantity,
+                    pageContext?.product,
+                    selectedCategory,
+                    pageContext?.product?.bundle,
+                    bundleItems
+                  )
+                }
+                variant="primary"
+                className="w-full mt-6"
+              >
+                Add to Cart
+              </Button>
+            )}
           </div>
         </div>
 
