@@ -7,6 +7,7 @@ const ALL_CONTENFUL_WEBSITE_PAGES = graphql`
         name
         activeOnWebsite
         navbarItem
+        navbarOrder
         path
       }
     }
