@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allContentfulWebsitePages {
         nodes {
           name
+          navbarOrder
           activeOnWebsite
           path
           outerFolderName
