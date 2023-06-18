@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#112](https://github.com/ateneomisa/MISA-Website/issues/112) home page(feature): add website pages carousel
 - [KF] [#110](https://github.com/ateneomisa/MISA-Website/issues/110) contact us(feature): add contact us page
 - [KF] [#108](https://github.com/ateneomisa/MISA-Website/issues/108) merch(feature): fix QA issues 230602
 - [KF] [#106](https://github.com/ateneomisa/MISA-Website/issues/106) app(feature): add dynamic content integration and universal components

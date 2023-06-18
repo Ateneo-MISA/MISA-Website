@@ -15,10 +15,21 @@ html * {
 
 /* swiperjs pagination bullet styling */
 .swiper-pagination-eservs-projects > .swiper-pagination-bullet {
-  background-color: #2097A2 !important;
+  background-color: #2097a2 !important;
 }
 
 .swiper-pagination-eservs-projects > .swiper-pagination-bullet-active {
-  background-color: #2097A2 !important;
-  border: 4px solid #2097A2 !important;
+  background-color: #2097a2 !important;
+  border: 4px solid #2097a2 !important;
+}
+
+.swiper-pagination-home > .swiper-pagination-bullet {
+  border: 4px solid white !important;
+  background-color: transparent !important;
+  margin: 0 8px;
+}
+
+.swiper-pagination-home > .swiper-pagination-bullet-active {
+  border: 4px solid white !important;
+  background-color: white !important;
 }
