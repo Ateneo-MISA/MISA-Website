@@ -21,6 +21,8 @@ const Button = ({
           ? 'bg-[#D9E8EC] text-[#2097A2] hover:bg-white hover:text-[#2097A2]'
           : variant === 'tertiary'
           ? 'border-2 border-misaTeal text-misaTeal hover:bg-misaTeal hover:text-white'
+          : variant === 'quaternary'
+          ? 'border-2 border-white text-white bg-transparent hover:bg-white hover:text-black'
           : ''
       } ${
         disabled
