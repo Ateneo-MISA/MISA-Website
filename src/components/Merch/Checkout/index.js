@@ -126,7 +126,7 @@ const Checkout = () => {
     ) {
       if (modeOfDelivery === 'ship') {
         if (fullAddress) {
-          return false
+          return true
         } else {
           return true
         }
