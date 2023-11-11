@@ -126,9 +126,9 @@ const Checkout = () => {
     ) {
       if (modeOfDelivery === 'ship') {
         if (fullAddress) {
-          return true
-        } else {
           return false
+        } else {
+          return true
         }
       } else {
         return false
@@ -137,7 +137,6 @@ const Checkout = () => {
       return true
     }
   }
-
   const handleSubmit = async () => {
     setLoading(true)
     try {
