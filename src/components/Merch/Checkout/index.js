@@ -406,7 +406,7 @@ const Checkout = () => {
                         )}
                       </div>
                       <span className="ml-2 text-gray-700">
-                        Within Metro Manila (Please take note that you as the buyer, will be responsible for booking the courier once your order is ready. You are also responsible for shouldering the delivery fee of your selected courier.)
+                        Within Metro Manila
                       </span>
                     </label>
                     <textarea
@@ -430,7 +430,7 @@ const Checkout = () => {
                 </p>
               ) : (
                 <div className="mt-5">
-                  <p>Shipping fees may vary according to your location.</p>
+                  <p>Shipping fees may vary according to your location.  (Please take note that you as the buyer, will be responsible for booking the courier once your order is ready. You are also responsible for shouldering the delivery fee of your selected courier.)</p>
                 </div>
               )}
             </div>
@@ -493,7 +493,7 @@ const Checkout = () => {
                   )}
                 </div>
                 <span className="ml-2 text-gray-700">
-                  My payment will be done within the week of the purchase date. I agree that the data I shared thorugh this order can be used by the organization for matters related to my purchase.
+                  My payment will be done within the week of the purchase date.
                 </span>
               </label>
             </div>
