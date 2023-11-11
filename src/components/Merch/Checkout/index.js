@@ -66,7 +66,7 @@ const Checkout = () => {
 
   const timestamp = Date.now().toString()
   const randomNumber = Math.floor(Math.random() * 10000)
-  const orderNumber = timestamp + randomNumber.toString().padStart(4, '0')
+  const orderNumber = (timestamp + randomNumber.toString().padStart(4, '0')).substring(0, 11);
 
   let subTotal = 0
   for (let i = 0; i < cart.length; i++) {
