@@ -19,7 +19,7 @@ const Navigation = () => {
     .filter((page) => {
       return page?.activeOnWebsite && page?.navbarItem
     })
-    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => a?.navbarOrder - b?.navbarOrder)
 
   return (
     <nav
@@ -27,7 +27,7 @@ const Navigation = () => {
       role="navigation"
       aria-label="Main"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div>
           <Link
             activeClassName="text-red3"
@@ -35,7 +35,7 @@ const Navigation = () => {
             to="/"
           >
             <StaticImage
-              className="mx-6 my-6 ml-8 w-[143px] h-[25px]"
+              className="mx-6 ml-8 w-[143px] h-[25px]"
               src="../../../static/images/navbarlogo.png"
               quality={100}
             />
@@ -43,17 +43,27 @@ const Navigation = () => {
         </div>
 
         {!isMobileNavbarOpen ? (
-          <div className="hidden md:flex font-abc my-6 right-0">
+          <div className="hidden md:flex gap-14 font-abc my-6 right-0">
             {navbarItems.map((navbarItem) => {
               return (
-                <Link
-                  to={`/${navbarItem?.path}`}
-                  activeClassName="text-misaTeal"
+                <button
+                  className={`py-2 ${
+                    navbarItem?.name === 'Contact Us'
+                      ? 'bg-misaTeal rounded-md mr-6 px-8 text-white hover:bg-[#31ADAF]'
+                      : 'hover:text-misaTeal'
+                  }`}
                 >
-                  <p className="mx-12 hover:text-misaTeal duration-150 ease-in">
-                    {navbarItem?.name}
-                  </p>
-                </Link>
+                  <Link
+                    to={`/${navbarItem?.path}`}
+                    activeClassName={`${
+                      navbarItem?.name === 'Contact Us'
+                        ? 'text-white'
+                        : 'text-misaTeal'
+                    }`}
+                  >
+                    <p className="duration-150 ease-in">{navbarItem?.name}</p>
+                  </Link>
+                </button>
               )
             })}
           </div>

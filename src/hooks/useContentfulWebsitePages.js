@@ -7,7 +7,19 @@ const ALL_CONTENFUL_WEBSITE_PAGES = graphql`
         name
         activeOnWebsite
         navbarItem
+        navbarOrder
         path
+        homeCarouselTitle
+        homeCarouselSubtitle
+        homeCarouselImage {
+          gatsbyImage(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
+          resize(height: 630, width: 1200) {
+            src
+          }
+          file {
+            url
+          }
+        }
       }
     }
   }

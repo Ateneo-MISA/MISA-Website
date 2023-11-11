@@ -6,6 +6,19 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [KF] [#112](https://github.com/ateneomisa/MISA-Website/issues/112) home page(feature): add website pages carousel
+- [KF] [#110](https://github.com/ateneomisa/MISA-Website/issues/110) contact us(feature): add contact us page
+- [KF] [#108](https://github.com/ateneomisa/MISA-Website/issues/108) merch(feature): fix QA issues 230602
+- [KF] [#106](https://github.com/ateneomisa/MISA-Website/issues/106) app(feature): add dynamic content integration and universal components
+- [KF] [#104](https://github.com/ateneomisa/MISA-Website/issues/104) merch(feature): add bundle features
+- [KF] [#102](https://github.com/ateneomisa/MISA-Website/issues/102) merch(feature): add checkout email
+- [KF] [#100](https://github.com/ateneomisa/MISA-Website/issues/100) merch(feature): fix ui issues 230528
+- [KF] [#98](https://github.com/ateneomisa/MISA-Website/issues/98) merch(feature): add payment page
+- [KF] [#96](https://github.com/ateneomisa/MISA-Website/issues/96) merch(feature): add checkout pages and mechanics
+- [KF] [#94](https://github.com/ateneomisa/MISA-Website/issues/94) merch(feature): add cart page and mechanics
+- [KF] [#92](https://github.com/ateneomisa/MISA-Website/issues/92) merch(feature): add individual product page
+- [KF] [#90](https://github.com/ateneomisa/MISA-Website/issues/90) merch(feature): add landing page
+- [MD] [#89](https://github.com/ateneomisa/MISA-Website/issues/89) services(feature): add services page
 - [KF] [#85](https://github.com/ateneomisa/MISA-Website/issues/85) vote(feature): add coming soon text in button
 - [KF MF] [#82](https://github.com/ateneomisa/MISA-Website/issues/82) vote(feature): fix ux/ui bugs 230326
 - [KF MF] [#80](https://github.com/ateneomisa/MISA-Website/issues/80) vote(feature): add voting
