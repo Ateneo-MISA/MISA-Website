@@ -128,7 +128,7 @@ const Checkout = () => {
         if (fullAddress) {
           return true
         } else {
-          return true
+          return false
         }
       } else {
         return false
