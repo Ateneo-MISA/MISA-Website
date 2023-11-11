@@ -75,7 +75,7 @@ const Checkout = () => {
 
   let total = 0
   total =
-    subTotal + (modeOfDelivery === 'ship' ? (withinMetroManila ? 54 : 64) : 0)
+    subTotal + (modeOfDelivery === 'ship' ? (withinMetroManila ? 0 : 0) : 0)
 
   const handleFullNameChange = (event) => {
     setFullName(event.target.value)
@@ -316,7 +316,7 @@ const Checkout = () => {
 
                 <FormInput
                   name="FacebookLink"
-                  placeholder="Facebook Link"
+                  placeholder="Facebook Link (www.facebook.com/Ateneo.MISA)"
                   onChange={handleFacebookLinkChange}
                   value={facebookLink}
                   errors={errors}
@@ -406,8 +406,7 @@ const Checkout = () => {
                         )}
                       </div>
                       <span className="ml-2 text-gray-700">
-                        Within Metro Manila (Please ensure this is correct to
-                        pay the correct shipping fee.)
+                        Within Metro Manila (Please take note that you as the buyer, will be responsible for booking the courier once your order is ready. You are also responsible for shouldering the delivery fee of your selected courier.)
                       </span>
                     </label>
                     <textarea
@@ -431,9 +430,7 @@ const Checkout = () => {
                 </p>
               ) : (
                 <div className="mt-5">
-                  <p>Shipping fees: </p>
-                  <p>Metro Manila - ₱54.00 </p>
-                  <p>Nationwide - ₱64.00</p>
+                  <p>Shipping fees may vary according to your location.</p>
                 </div>
               )}
             </div>
@@ -464,7 +461,7 @@ const Checkout = () => {
                   )}
                 </div>
                 <span className="ml-2 text-gray-700">
-                  I acknowledge that my items are pre-orders.
+                  I acknowledge that my items are pre-orders. 
                 </span>
               </label>
 
@@ -496,7 +493,7 @@ const Checkout = () => {
                   )}
                 </div>
                 <span className="ml-2 text-gray-700">
-                  My payment will be done within the week of the purchase date.
+                  My payment will be done within the week of the purchase date. I agree that the data I shared thorugh this order can be used by the organization for matters related to my purchase.
                 </span>
               </label>
             </div>

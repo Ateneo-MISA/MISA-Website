@@ -18,7 +18,7 @@ export const merchCheckoutValidationSchema = Yup.object().shape({
   FacebookLink: Yup.string()
     .matches(
       /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/,
-      'Please enter a valid Facebook link.'
+      'Please enter a valid Facebook link in this format: www.facebook.com/Ateneo.MISA'
     )
     .required(REQUIRED_MESSAGE)
     .nullable(),
