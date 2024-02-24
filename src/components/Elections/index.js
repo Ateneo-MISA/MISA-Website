@@ -143,7 +143,7 @@ const Elections = () => {
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
                   {moment(dynamicContentApplicationDeadline?.date).format(
-                    'MMM DD, h:mm a'
+                    'MMM DD'
                   )}
                 </p>
               </li>
@@ -160,25 +160,25 @@ const Elections = () => {
                   )}{' '}
                   -{' '}
                   {moment(dynamicContentCampaignPeriodEndDate?.date).format(
-                    'DD'
+                    'MMM DD'
                   )}
                 </p>
               </li>
             </div>
             <div className="relative md:text-center">
-              <li className="md:absolute flex flex-col gap-4 md:gap-12 items-start md:items-center ml-8 md:ml-0 -top-7 right-0">
+              <li className="md:absolute flex flex-col gap-4 md:gap-12 items-start md:items-center ml-8 md:ml-0 -top-7 right-0.5">
                 <div class="absolute -left-2 md:relative h-[20px] w-[20px] md:h-[40px] md:w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
                 <h4 class="text-xl font-bold md:absolute md:-top-20">
-                  Miting de Avance
+                  MDA
                 </h4>
                 <p class="mt-2 border-[1px] border-misaTeal text-misaTeal px-2 rounded-lg uppercase italic">
                   {moment(dynamicContentMitingDeAvance?.date).format(
-                    'MMM DD, h:mm a'
+                    'MMM DD'
                   )}
                 </p>
               </li>
             </div>
-            <div className="hidden md:block relative text-right flex-grow">
+            {/* <div className="hidden md:block relative text-right flex-grow">
               <li className="md:absolute flex md:flex-col gap-4 md:gap-12 items-center md:items-end -top-7 -right-14">
                 <StaticImage
                   className={`max-w-[64px] text-center`}
@@ -192,8 +192,8 @@ const Elections = () => {
                   src="../../../static/images/ballot-box.png"
                 />
               </li>
-            </div>
-            <div className="relative md:hidden md:text-center">
+            </div> */}
+            <div className="relative md:text-center">
               <li className="md:absolute flex flex-col gap-4 md:gap-12 items-start md:items-center ml-8 md:ml-0 -top-7 right-0">
                 <div class="absolute -left-2 md:relative h-[20px] w-[20px] md:h-[40px] md:w-[40px] rounded-full bg-misaAlternateTeal md:ml-0 md:mr-0"></div>
                 <h4 class="text-xl font-bold md:absolute md:-top-20">
