@@ -24,4 +24,4 @@ npm run build
 
 # Considerations
 * **Make sure there is one of every entity with every field filled in Contentful.** The site will fail to build if this is not satisfied. Placeholder values will do for this case.
-* **Make sure that your yarn version is 1.19.1** The site will fail to load gatsby files and configurations during the npm run dev.
+* **Make sure that your yarn version is 1.19.1** The site will fail to load gatsby files and configurations during the npm run dev if this is not satisfied.
