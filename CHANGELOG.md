@@ -6,6 +6,7 @@ Changelog Format
 - [Initials of Dev] [#issue number](issue link on GitHub) {issue title}
 -->
 
+- [JA] [#115](https://github.com/Ateneo-MISA/MISA-Website/pull/117) elections(feature): MISAlalan 2024 update
 - [KF] [#112](https://github.com/ateneomisa/MISA-Website/issues/112) home page(feature): add website pages carousel
 - [KF] [#110](https://github.com/ateneomisa/MISA-Website/issues/110) contact us(feature): add contact us page
 - [KF] [#108](https://github.com/ateneomisa/MISA-Website/issues/108) merch(feature): fix QA issues 230602
