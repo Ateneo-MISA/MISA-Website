@@ -60,7 +60,7 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
         Check Eligibility
       </h2>
       <p className="my-4 italic text-center text-xl">
-        Please enter your ID number and OBF email to check if you are eligible
+        Please enter your ID number and student email to check if you are eligible
         for voting.
       </p>
 
@@ -76,7 +76,7 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
         <input
           className="w-full min-[1000px]:w-1/2 box-border border-[3px] rounded-[20px] px-6 py-8 my-5 text-xl mr-5"
           type="text"
-          placeholder="OBF Email"
+          placeholder="Student Email"
           onChange={handleVoterEmailChange}
           value={voteState?.voterEmail}
           disabled={voteState?.voterIsEligible}

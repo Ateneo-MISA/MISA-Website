@@ -297,7 +297,7 @@ const Elections = () => {
               src="../../../static/images/id-icon.png"
             />
             <p className="font-normal text-xl italic">
-              Prepare ID number and OBF email to check eligibility
+              Prepare ID number and student email to check eligibility
             </p>
           </div>
           <hr className="w-48 border-4 -mx-16 hidden md:block" />
