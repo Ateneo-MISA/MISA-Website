@@ -3,6 +3,7 @@ Before setting up, make sure to have the following API keys:
 * Contentful Space ID
 * Contentful Management Key
 * Contentful Delivery Key
+* Airtable Base ID
 * Airtable Personal Access Token
 
 Credentials to these accounts are in the eServices masterfile.
@@ -11,6 +12,8 @@ Credentials to these accounts are in the eServices masterfile.
 npm i --legacy-peer-deps
 npm run setup
 ```
+
+After the above step, edit the created .env files to include the variables `GATSBY_AIRTABLE_API_KEY`, `GATSBY_AIRTABLE_VOTING_BASE_ID`, and `GATSBY_AIRTABLE_MERCH_BASE_ID`.
 
 # Usage
 Dev Bundle
