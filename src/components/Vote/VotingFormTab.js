@@ -91,12 +91,13 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                           ? 'bg-[#2097A2] text-white border-[#2097A2]'
                           : 'text-misaTeal cursor-pointer hover:bg-[#D9E8EC] hover:border-[#D9E8EC]'
                       }`}
-                      onClick={() =>
+                      onClick={(e) => {
+                        e.preventDefault()
                         handleChooseCandidate({
                           name: candidate?.name,
                           position: candidate?.position?.title,
                           airtableRecordId: candidate?.airtableRecordId,
-                        })
+                        })}
                       }
                     >
                       <img
@@ -130,12 +131,13 @@ const VotingFormTab = ({ voteState, voteDispatch }) => {
                       ? 'bg-[#2097A2] text-white border-[#2097A2]'
                       : 'border-[#D9E8EC] text-misaTeal cursor-pointer hover:bg-[#D9E8EC] hover:border-[#D9E8EC]'
                   }`}
-                  onClick={() =>
+                  onClick={(e) => {
+                    e.preventDefault();
                     handleChooseCandidate({
                       name: 'Abstain',
                       position: position?.title,
                       airtableRecordId: getAbstainRecordID(positionNameInState),
-                    })
+                    })}
                   }
                 >
                   <div

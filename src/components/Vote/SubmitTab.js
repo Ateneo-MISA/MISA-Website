@@ -58,9 +58,9 @@ const SubmitTab = ({ voteState, voteDispatch }) => {
       },
     })
 
-    await axios.post(GATSBY_VOTING_SEND_EMAIL_WEBHOOK, {
-      ...voteState?.currentVoterData,
-    })
+    // await axios.post(GATSBY_VOTING_SEND_EMAIL_WEBHOOK, {
+    //   ...voteState?.currentVoterData,
+    // })
 
     voteDispatch({
       type: `SET_ACTIVE_TAB`,
