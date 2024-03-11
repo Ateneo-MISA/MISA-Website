@@ -103,8 +103,8 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
             </p>
           ) : voteState?.voterIsEligible ? (
             <p className="text-[#2097A2]">
-              Congratulations! You are eligible for voting. Please wait for
-              the official voting period to cast your vote.
+              Congratulations! You are eligible for voting. Please click on the
+              button below to begin voting.
             </p>
           ) : (
             <p className="text-[#FF0000]">
@@ -117,7 +117,7 @@ const EligibilityTab = ({ voteState, voteDispatch }) => {
 
       <div className="flex w-full mt-20 pb-40 justify-center">
         {voteState?.voterIsEligible ? (
-          <Button disabled variant="primary" onClick={handleProceedToVotingForm}>
+          <Button variant="primary" onClick={handleProceedToVotingForm}>
             Next
           </Button>
         ) : null}
